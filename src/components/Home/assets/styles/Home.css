@@ -1,0 +1,94 @@
+/* Home.css */
+.home {
+  font-family: 'Noto Sans', sans-serif;
+  padding: 20px;
+  background-color: #F8EDE3;
+}
+
+.hero {
+  background: url('URL_DE_IMAGEN_BANNER') no-repeat center center;
+  background-size: cover;
+  padding: 100px 20px;
+  color: white;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+}
+
+.shop-now-btn {
+  padding: 10px 20px;
+  background-color: #C5705D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Categorías */
+.categories {
+  margin: 40px 0;
+}
+
+.category-list {
+  display: flex;
+  gap: 20px;
+}
+
+.category-card {
+  background-color: #DFD3C3;
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1;
+  text-align: center;
+}
+
+/* Productos destacados */
+.featured-products {
+  margin: 40px 0;
+}
+
+.product-list {
+  display: flex;
+  gap: 20px;
+}
+
+.product-card {
+  background-color: white;
+  border: 1px solid #D0B8A8;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Testimonios */
+.testimonials {
+  margin: 40px 0;
+  text-align: center;
+}
+
+blockquote {
+  font-style: italic;
+}
+
+/* Llamada a la acción */
+.call-to-action {
+  background-color: #D0B8A8;
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.sign-up-btn {
+  padding: 10px 20px;
+  background-color: #C5705D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

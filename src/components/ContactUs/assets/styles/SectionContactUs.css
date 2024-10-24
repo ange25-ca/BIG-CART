@@ -1,0 +1,71 @@
+/* ContactUs.css */
+.contact-us {
+    font-family: 'Noto Sans', sans-serif;
+    padding: 20px;
+    background-color: #F8EDE3;
+  }
+  
+  /* Información de contacto */
+  .contact-info {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .info-item {
+    background-color: #DFD3C3;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  /* Formulario de contacto */
+  .contact-form {
+    margin: 40px 0;
+  }
+  
+  .contact-form form {
+    display: grid;
+    grid-gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .contact-form label {
+    font-weight: bold;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    padding: 10px;
+    border: 1px solid #D0B8A8;
+    border-radius: 5px;
+  }
+  
+  /* Botón de envío */
+  .contact-form button {
+    padding: 10px 20px;
+    background-color: #C5705D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Redes sociales */
+  .social-media {
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .social-icons a {
+    margin: 0 10px;
+    color: #C5705D;
+    font-size: 1.5rem;
+  }
+  
