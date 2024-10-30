@@ -8,14 +8,14 @@ const Navbar: React.FC = () => {
   const location = useLocation();
 
   // Estado para controlar la apertura/cierre del menú móvil
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
-  const isActive = (path: string) => {
+  const isActive = (path: string): string => {
     return location.pathname === path ? 'active' : '';
   };
 
   // Función para alternar el menú móvil
-  const toggleMobileMenu = () => {
+  const toggleMobileMenu = (): void => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
@@ -35,27 +35,27 @@ const Navbar: React.FC = () => {
         <Link to="/" className="navbar-brand">
           <img
             src={logoImagePath}
-            width="280"
-            height="130"
+            width="220"
+            height="156"
             className="navbar-logo"
             alt="Brand Logo"
           />
         </Link>
         <div className="navbar-search-cart">
-          <ul className="navbar-nav">
-            <li className={`nav-item ${isActive("/")}`}>
-              <Link to="/" className="nav-link">Inicio</Link>
-            </li>
-            <li className={`nav-item ${isActive("/about-us")}`}>
-              <Link to="/about-us" className="nav-link">Nosotros</Link>
-            </li>
-            <li className={`nav-item ${isActive("/products")}`}>
-              <Link to="/products" className="nav-link">Productos</Link>
-            </li>
-            <li className={`nav-item ${isActive("/contactus")}`}>
-              <Link to="/contactus" className="nav-link">Contáctenos</Link>
-            </li>
-          </ul>
+        <ul className="navbar-nav-web">
+          <li className="nav-item">
+            <Link to="/" className={`nav-link ${isActive("/")}`}>Inicio</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/about-us" className={`nav-link ${isActive("/about-us")}`}>Nosotros</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/products" className={`nav-link ${isActive("/products")}`}>Productos</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/contactus" className={`nav-link ${isActive("/contactus")}`}>Contáctenos</Link>
+          </li>
+        </ul>
           <div className="btn-cart">
             <Link to="/Cart">
               <img src={iconCart} width="25" height="25" alt="Cart Icon" />

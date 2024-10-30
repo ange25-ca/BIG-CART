@@ -8,14 +8,14 @@ const CatalogsProducts: React.FC = () => {
 
   // Cargar los productos desde el archivo JSON
   useEffect(() => {
-    fetch('/data/products.json')  // Ruta relativa del archivo JSON
+    fetch('/public/products.json') //ruta public
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error al cargar productos');
         }
         return response.json();
       })
-      .then((data) => setProducts(data)) // Actualizar el estado con los productos
+      .then((data) => setProducts(data)) // asigno los productos acutalizando el estado de productos
       .catch((error) => console.error('Error al cargar productos:', error));
   }, []);
 

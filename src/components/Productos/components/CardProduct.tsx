@@ -1,5 +1,6 @@
 import React from 'react';
 import { Product } from '../interfaces/Product';
+import '../assets/styles/CardProduct.css';
 
 interface ProductProps {
   product: Product;

@@ -3,8 +3,9 @@
   width: 100%;
   background: linear-gradient(90deg, #091057, #024CAA);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 10;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 /* Primer div (contacto y autenticación) */
@@ -42,6 +43,41 @@
   color: #EC8305;
 }
 
+/* Ajustes para el menú toggle */
+.menu-toggle {
+  display: none; 
+  cursor: pointer;
+  position: absolute;
+  top: 32px;
+  left: 13px; 
+  z-index: 11;
+}
+
+.menu-icon {
+  width: 30px;
+  height: 2px;
+  background-color: #DBD3D3;
+  position: relative;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+  content: "";
+  width: 30px;
+  height: 2px;
+  background-color: #DBD3D3;
+  position: absolute;
+  left: 0;
+}
+
+.menu-icon::before {
+  top: -8px;
+}
+
+.menu-icon::after {
+  top: 8px;
+}
+
 /* Segundo div (logo, búsqueda y carrito) */
 .navbar-middle {
   display: flex;
@@ -50,6 +86,37 @@
   padding: 10px 38px;
   background-color: #3586FF;
   gap: 20px;
+  height: 125px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.navbar-nav-web {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+.nav-item {
+  margin: 0 15px; 
+}
+
+.nav-link {
+  display: block;
+  padding: 10px 20px; 
+  color: #fff; 
+  background-color: transparent; 
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #EC8305; 
+  color: #fff; 
 }
 
 .navbar-brand {
@@ -90,82 +157,17 @@
 
 .btn-cart img {
   margin-left: 20px;
-}
-
-/* Tercer div (navegación principal) */
-.navbar-bottom {
-  background-color: #091057;
-  padding: 15px 20px;
-  border-bottom: 1px solid #024CAA;
-  display: flex;
-  justify-content: center;
-  transition: position 0.3s ease;
-}
-
-.navbar-nav {
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-item {
-  margin-left: 2rem;
-}
-
-.nav-link {
-  text-decoration: none;
-  font-size: 1.1rem;
-  color: #DBD3D3;
-  transition: color 0.3s, background-color 0.3s;
-  padding: 8px 15px;
-  border-radius: 5px;
-}
-
-.nav-link:hover {
-  color: #EC8305;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.nav-item.active {
-  background-color: #EC8305;
-  border-radius: 6px;
-  padding: 5px;
-}
-
-/* Estilos para el menú móvil */
-.menu-toggle {
-  display: none;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.menu-icon {
-  width: 30px;
-  height: 2px;
-  background-color: #DBD3D3;
-  position: relative;
+.btn-cart img:hover {
+  transform: scale(1.1);
 }
 
-.menu-icon::before,
-.menu-icon::after {
-  content: "";
-  width: 30px;
-  height: 2px;
-  background-color: #DBD3D3;
-  position: absolute;
-  left: 0;
-}
-
-.menu-icon::before {
-  top: -8px;
-}
-
-.menu-icon::after {
-  top: 8px;
-}
-
-/* Menú desplegable en móvil */
+/* Menú desplegable en móvil (solo cuando el toggle esté activo) */
 .navbar-mobile-menu {
   position: fixed;
   top: 0;
@@ -213,7 +215,13 @@
 
 .navbar-mobile-menu .nav-link {
   font-size: 1.5rem;
-  padding: 10px;
+  padding: 15px;
+  color: #DBD3D3;
+}
+.nav-link:hover,
+.nav-link.active {
+  background-color: #EC8305; 
+  color: #fff; 
 }
 
 /* Estilos responsivos */

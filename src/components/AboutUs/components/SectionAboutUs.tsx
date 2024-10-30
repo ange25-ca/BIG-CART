@@ -1,4 +1,9 @@
 import '../assets/styles/SectionAboutUs.css';
+import imgPesc from '../assets/img/fish-image-pesca.jpg';
+import imgAten from '../assets/img/antecion-cliente.jpeg';
+import imgCap from '../assets/img/capacitacion.webp';
+import imgEntre from '../assets/img/entrega-cliente.jpg';
+import imgTratos from '../assets/img/tratos-grandes.webp';
 
 const AboutUs = () => {
   return (
@@ -36,7 +41,7 @@ const AboutUs = () => {
             </p>
           </div>
           <div className="image-content">
-            <img src="URL_DE_TU_IMAGEN" alt="Nuestra Historia" />
+            <img src={imgPesc} alt="Nuestra Historia" />
           </div>
         </div>
 
@@ -60,7 +65,7 @@ const AboutUs = () => {
               <span>- María López</span>
             </div>
             <div className="testimonial">
-              <p>"Excelente atención y rapidez en las entregas. Recomiendo totalmente."</p>
+              <p>"Gran variedad de productos y precios competitivos. Siempre encuentro lo que necesito para mi negocio."</p>
               <span>- Carlos Gómez</span>
             </div>
           </div>
@@ -91,9 +96,10 @@ const AboutUs = () => {
         <div className="section gallery">
           <h2>Nuestros Momentos Destacados</h2>
           <div className="gallery-container">
-            <img src="URL_IMAGEN_1" alt="Evento 1" />
-            <img src="URL_IMAGEN_2" alt="Evento 2" />
-            <img src="URL_IMAGEN_3" alt="Evento 3" />
+            <img src={imgAten} alt="Atención" />
+            <img src={imgCap} alt="Capacitaciones" />
+            <img src={imgEntre} alt="Entregas" />
+            <img src={imgTratos} alt="Tratos cerrados" />
           </div>
         </div>
         {/* Sección de valores corporativos */}
@@ -109,6 +115,11 @@ const AboutUs = () => {
               <i className="icon fa fa-star"></i>
               <h3>Calidad</h3>
               <p>Siempre buscamos la excelencia en todo lo que hacemos.</p>
+            </div>
+            <div className="value-item">
+              <i className="icon fa fa-lightbulb"></i>
+              <h3>Innovación</h3>
+              <p>Creamos nuevas oportunidades para el crecimiento.</p>
             </div>
             <div className="value-item">
               <i className="icon fa fa-lightbulb"></i>

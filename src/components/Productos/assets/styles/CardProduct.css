@@ -6,6 +6,7 @@
     text-align: center;
     transition: transform 0.3s ease;
     position: relative;
+    color: black;
   }
   
   .card:hover {
