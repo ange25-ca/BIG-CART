@@ -20,6 +20,7 @@ html, body {
   height: 100%;
   overflow-x: hidden; /* Evita el desbordamiento horizontal */
   box-sizing: border-box;
+  background-color: #FFFFFF;
 }
 
 body {
