@@ -1,55 +1,171 @@
-/* Estilo general para el nav con paleta de colores */
+/* Estilo general para el nav */
 .navbar {
   width: 100%;
-  background: linear-gradient(90deg, #091057, #024CAA);
+  background-color: #3686FF;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
+  padding: 10px 0;
 }
 
-/* Primer div (contacto y autenticación) */
-.navbar-top {
+.navbar-middle {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #091057;
-  color: #DBD3D3;
-  border-bottom: 1px solid #024CAA;
-  flex-wrap: wrap;
+  padding: 10px 38px;
+  background-color: #3586FF;
+  height: 125px;
 }
 
-.contact-info {
-  display: flex;
-  gap: 15px;
-  color: #DBD3D3;
-}
-
-.auth-links {
-  display: flex;
-  gap: 15px;
-}
-
-.auth-links .nav-link {
-  font-size: 1rem;
+.navbar-brand {
   text-decoration: none;
+  font-size: 1.5rem;
   color: #DBD3D3;
+}
+/* Icono de hamburguesa */
+.hamburger-icon {
+  width: 25px;
+  height: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.hamburger-icon span {
+  display: block;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Animación a "X" cuando el menú esté abierto */
+.hamburger-icon.open span:nth-child(1) {
+  transform: rotate(45deg);
+  position: relative;
+  top: 8px;
+}
+
+.hamburger-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-icon.open span:nth-child(3) {
+  transform: rotate(-45deg);
+  position: relative;
+  top: -8px;
+}
+
+/* Dropdown */
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  background-color: transparent;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
   font-weight: bold;
-  transition: color 0.3s ease;
+  outline: none; /* Elimina el borde de enfoque */
 }
 
-.auth-links .nav-link:hover {
-  color: #EC8305;
+.dropdown-toggle:focus {
+  outline: none; /* Asegura que el borde no aparezca cuando esté enfocado */
+}
+/* Estilos del botón del carrito */
+.btn-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Ajustes para el menú toggle */
+.btn-cart.active {
+  width: 35px; /* Tamaño más pequeño del círculo */
+  height: 35px;
+  background-color: #EC8305; /* Color de fondo del círculo activo */
+  border-radius: 50%;
+  transform: scale(1.1);
+}
+
+.btn-cart img {
+    margin-left: 2px;
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #3066be;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.dropdown-menu.open {
+  display: block;
+}
+
+.nav-item {
+  margin: 5px 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  display: block;
+  padding: 10px 20px;
+  color: #DBD3D3;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: #EC8305;
+  color: white;
+}
+
+/* Carrito */
+.btn-cart img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.btn-cart img:hover {
+  transform: scale(1.1);
+}
+
+/* Menú móvil */
 .menu-toggle {
-  display: none; 
+  display: none;
   cursor: pointer;
   position: absolute;
   top: 32px;
-  left: 13px; 
+  left: 13px;
   z-index: 11;
 }
 
@@ -78,96 +194,6 @@
   top: 8px;
 }
 
-/* Segundo div (logo, búsqueda y carrito) */
-.navbar-middle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 38px;
-  background-color: #3586FF;
-  gap: 20px;
-  height: 125px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-.navbar-nav-web {
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-}
-
-.nav-item {
-  margin: 0 15px; 
-}
-
-.nav-link {
-  display: block;
-  padding: 10px 20px; 
-  color: #fff; 
-  background-color: transparent; 
-  transition: background-color 0.3s ease;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.nav-link:hover,
-.nav-link.active {
-  background-color: #EC8305; 
-  color: #fff; 
-}
-
-.navbar-brand {
-  text-decoration: none;
-  font-size: 1.5rem;
-  color: #DBD3D3;
-}
-
-.navbar-search-cart {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.navbar-search-input {
-  padding: 0.6rem;
-  border: 1px solid #DBD3D3;
-  border-radius: 20px;
-  width: 220px;
-  background-color: #091057;
-  color: #DBD3D3;
-}
-
-.navbar-search-btn {
-  padding: 0.4rem 1.2rem;
-  background-color: #EC8305;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.navbar-search-btn:hover {
-  background-color: #024CAA;
-  color: #FFFFFF;
-}
-
-.btn-cart img {
-  margin-left: 20px;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.btn-cart img:hover {
-  transform: scale(1.1);
-}
-
-/* Menú desplegable en móvil (solo cuando el toggle esté activo) */
 .navbar-mobile-menu {
   position: fixed;
   top: 0;
@@ -218,16 +244,10 @@
   padding: 15px;
   color: #DBD3D3;
 }
-.nav-link:hover,
-.nav-link.active {
-  background-color: #EC8305; 
-  color: #fff; 
-}
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
-  .navbar-middle,
-  .navbar-bottom {
+  .navbar-middle {
     display: none;
   }
 
@@ -237,14 +257,5 @@
 
   .navbar-mobile-menu .nav-item {
     margin-bottom: 20px;
-  }
-
-  .navbar-search-input {
-    width: 100%;
-  }
-
-  .navbar-search-btn {
-    width: 100%;
-    text-align: center;
   }
 }
