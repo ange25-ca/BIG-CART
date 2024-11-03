@@ -26,6 +26,7 @@ const Navbar: React.FC = () => {
         <div className="contact-info"></div>
         <div className="auth-links">
           <Link to="/login" className="nav-link">Iniciar Sesión</Link>
+          <Link to="/SignUp" className="nav-link">Crear Cuenta</Link>
           <Link to="/account" className="nav-link">Mi Cuenta</Link>
         </div>
       </div>
