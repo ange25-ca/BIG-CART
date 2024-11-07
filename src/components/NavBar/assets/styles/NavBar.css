@@ -23,6 +23,7 @@
   font-size: 1.5rem;
   color: #DBD3D3;
 }
+
 /* Icono de hamburguesa */
 .hamburger-icon {
   width: 25px;
@@ -38,7 +39,6 @@
   height: 3px;
   background-color: white;
   border-radius: 2px;
-  transition: all 0.3s ease;
 }
 
 /* Animación a "X" cuando el menú esté abierto */
@@ -81,6 +81,7 @@
 .dropdown-toggle:focus {
   outline: none; /* Asegura que el borde no aparezca cuando esté enfocado */
 }
+
 /* Estilos del botón del carrito */
 .btn-cart {
   display: flex;
@@ -98,14 +99,13 @@
 }
 
 .btn-cart img {
-    margin-left: 2px;
-    margin-top: 5px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+  margin-left: 2px;
+  margin-top: 5px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
-
 
 .dropdown-menu {
   display: none;
@@ -247,15 +247,29 @@ ul {
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
+  .navbar{
+    padding: 31px;
+  }
   .navbar-middle {
-    display: none;
+    display: none /* Oculta el navbar middle en móvil */
   }
 
   .menu-toggle {
-    display: block;
+    display: block; /* Muestra el icono de menú en móvil */
   }
 
   .navbar-mobile-menu .nav-item {
     margin-bottom: 20px;
+  }
+
+  /* Menú desplegable en móvil */
+  .navbar-mobile-menu.active {
+    display: flex; /* Asegura que el menú móvil se muestre al activarse */
+  }
+
+  /* Asegúrate de que las nav-links ocupen el 100% del ancho */
+  .navbar-mobile-menu .nav-link {
+    width: 100%;
+    text-align: center; /* Centra el texto en el menú móvil */
   }
 }

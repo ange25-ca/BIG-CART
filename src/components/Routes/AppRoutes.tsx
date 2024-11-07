@@ -18,7 +18,7 @@ const routes = [
     { path: "/about-us", element: <AboutUs /> },
     { path: "/login", element: <Login /> },
     { path: "/cart", element: <Cart /> },
-    { path: "/products", element: <CatalogsProducts /> },
+    { path: "/productos", element: <CatalogsProducts /> },
     { path: "/contactus", element: <ContactUs/> },
     { path: "/login", element: <Login/> },
     {path: "/account", element: <UserProfile/>},

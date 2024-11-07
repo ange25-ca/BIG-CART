@@ -6,7 +6,7 @@ import back_login from '../../Control/assets/img/back_login.svg';
 import send_login from '../../Control/assets/img/user_login.svg';
 //import { loginUser } from '../../Controller/loginController';
 import { encryptData } from '../../Middlewares/encryption';
-import axiosInstance from '../../../../axiosConfig';
+import axiosInstance from '../../../Api/axiosConfig';
 
 // Definir el esquema de validación usando Zod
 const loginSchema = z.object({
