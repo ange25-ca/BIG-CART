@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
                 <Link to="/about-us" className={`nav-link ${isActive("/about-us")}`} onClick={closeDropdown}>Nosotros</Link>
               </li>
               <li className="nav-item">
-                <Link to="/products" className={`nav-link ${isActive("/products")}`} onClick={closeDropdown}>Productos</Link>
+                <Link to="/productos" className={`nav-link ${isActive("/productos")}`} onClick={closeDropdown}>Productos</Link>
               </li>
               <li className="nav-item">
                 <Link to="/contactus" className={`nav-link ${isActive("/contactus")}`} onClick={closeDropdown}>Contáctenos</Link>
