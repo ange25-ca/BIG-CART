@@ -36,7 +36,7 @@ function Login() {
             // Cifrar los datos
             const encryptedUsername = await encryptData(formData.username);
             const encryptedPassword = await encryptData(formData.password);
-    
+
             if (!encryptedUsername || !encryptedPassword) {
                 throw new Error('Error de cifrado: Username o Password no definidos');
             }
@@ -48,7 +48,6 @@ function Login() {
                     password: encryptedPassword,
                 },
             });
-    
             // Procesar la respuesta
             const result = response.data;
             console.log("Login frontend", result);

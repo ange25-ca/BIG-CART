@@ -4,6 +4,7 @@ import '../../Control/assets/styles/signUp.css';
 import back_login from '../../Control/assets/img/back_login.svg';
 import send_login from '../../Control/assets/img/user_login.svg';
 import axiosInstance from '../../../../axiosConfig';
+import { encryptData } from '../../Middlewares/encryption';
 
 // Definir el esquema de validación usando Zod
 const SignUpSchema = z.object({
@@ -48,8 +49,28 @@ function SignUp() {
             setFormErrors(null);
             console.log('Datos válidos:', result.data);
             try {
-                // Enviar los datos al servidor
-                const response = await axiosInstance.post('/user/signUpUsuario', result.data);
+                // Cifrar los datos sensibles (password y username)
+                const encryptedUsername = await encryptData(formData.username);
+                const encryptedLastname = await encryptData(formData.lastname);
+                //El campo de Edad se convierte en string para poder cifrarlo
+                const encrypytedAge = await encryptData(formData.age.toString());
+                const encrypytedEmail = await encryptData(formData.email);
+                const encrypytedPhonenumber = await encryptData(formData.phonenumber);
+                const encrypytedAddress = await encryptData(formData.address);
+                const encryptedPassword = await encryptData(formData.password);
+                
+                // Enviar los datos como un objeto
+                const response = await axiosInstance.post('/user/SignUpUsuario', {
+                    dataSegura: {
+                    username: encryptedUsername,
+                    lastname: encryptedLastname,
+                    age: encrypytedAge,
+                    email: encrypytedEmail,
+                    phonenumber: encrypytedPhonenumber,
+                    address: encrypytedAddress,
+                    password: encryptedPassword,
+                },
+            });
                 console.log('Respuesta del servidor:', response.data);
                 setSignupSuccess(true);
                 setServerError(null);
