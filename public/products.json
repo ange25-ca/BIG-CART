@@ -5,7 +5,7 @@
       "price": 298.19,
       "oldPrice": 321.45,
       "sales": 8300,
-      "imageUrl": "https://example.com/escurridor.jpg",
+      "imageUrl": "../src/components/Productos/assets/img/plasticos.jpg",
       "category": "Cocina",
       "rating": 4.5,
       "isBestSeller": true
