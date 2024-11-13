@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
 import '../../Control/assets/styles/login.css';
-import cart_login from '../../Control/assets/img/big_login.svg';
-import back_login from '../../Control/assets/img/back_login.svg';
-import send_login from '../../Control/assets/img/user_login.svg';
-//import { loginUser } from '../../Controller/loginController';
 import { encryptData } from '../../Middlewares/encryption';
 import axiosInstance from '../../../Api/axiosConfig';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { IoMdArrowBack } from 'react-icons/io';
+import { AiOutlineSend } from 'react-icons/ai';
 
 // Definir el esquema de validación usando Zod
 const loginSchema = z.object({
@@ -30,6 +30,8 @@ function Login() {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
     };
+    
+    // Función para regresar a la página principal
 
     const handleLogin = async () => {
         try {
@@ -55,11 +57,16 @@ function Login() {
             // Manejo de éxito en el inicio de sesión
             setLoginSuccess(true);
         } catch (error) {
-            console.error("Error al cifrar o enviar datos:", error);
             setServerError("Error al iniciar sesión. Inténtalo de nuevo.");
             setLoginSuccess(false);
         }
     }; 
+
+    const navigate = useNavigate();
+    // Función para regresar a la página principal
+    const handleGoBack = () => {
+        navigate('/'); // Redirige a la página principal
+    };
     
     return (
         <form className='FormLogin' onSubmit={(event) => event.preventDefault()}>
@@ -100,16 +107,16 @@ function Login() {
                 {serverError && <span className="error">{serverError}</span>}
                 {loginSuccess && <span className="success">Inicio de sesión exitoso</span>}
                 <div className='buttonAction'>
-                    <button className='go-back' type='button' onClick={() => {/* Manejar el regreso */} }>
-                        <img src={back_login} alt="Back" />
+                    <button className='button_go-back' type='button' onClick={handleGoBack}> {/* Manejar el regreso */}
+                        <IoMdArrowBack size={24} />
                     </button>
-                    <button className='send' type='button' onClick={handleLogin}>
-                        <img src={send_login} alt="Send" />
+                    <button className='button_Send' type='button' onClick={handleLogin}>
+                        <AiOutlineSend size={24} />
                     </button>
                 </div>
-            </div>
-            <div className='cart_login'>
-                <img src={cart_login} alt="Login" className='cart-login' />
+                <div className="no-account">
+                    <p>Don´t have an account? <Link to="/SignUp">Get BigCart account now</Link></p>
+                </div>
             </div>
         </form>
     );

@@ -3,7 +3,7 @@ import { z } from 'zod';
 import '../../Control/assets/styles/signUp.css';
 import back_login from '../../Control/assets/img/back_login.svg';
 import send_login from '../../Control/assets/img/user_login.svg';
-import axiosInstance from '../../../../axiosConfig';
+import axiosInstance from '../../../Api/axiosConfig';
 import { encryptData } from '../../Middlewares/encryption';
 
 // Definir el esquema de validación usando Zod
