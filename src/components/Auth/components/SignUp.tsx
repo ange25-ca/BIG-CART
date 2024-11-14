@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
 import '../../Control/assets/styles/signUp.css';
-import back_login from '../../Control/assets/img/back_login.svg';
-import send_login from '../../Control/assets/img/user_login.svg';
 import axiosInstance from '../../../Api/axiosConfig';
 import { encryptData } from '../../Middlewares/encryption';
+import { Link } from 'react-router-dom';
+import { TiThumbsUp } from 'react-icons/ti';
 
 // Definir el esquema de validación usando Zod
 const SignUpSchema = z.object({
@@ -90,114 +90,121 @@ function SignUp() {
                 </div>
                 {/* Nombre */}
                 <div className='name'>
-                    <label htmlFor='username'>Nombre</label>
+                    <label htmlFor='username'></label>
                     <input
                         type='text'
                         id='username'
                         name='username'
                         value={formData.username}
                         onChange={handleChange}
+                        placeholder='Username'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'username') && (
-                        <span>{formErrors.find((issue) => issue.path[0] === 'username')?.message}</span>
+                        <span className='error'>{formErrors.find((issue) => issue.path[0] === 'username')?.message}</span>
                     )}
                 </div>
                 {/* Apellido */}
                 <div className='lastname'>
-                    <label htmlFor='lastname'>Apellido</label>
+                    <label htmlFor='lastname'></label>
                     <input
                         type='text'
                         id='lastname'
                         name='lastname'
                         value={formData.lastname}
                         onChange={handleChange}
+                        placeholder='Lastname'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'lastname') && (
-                        <span>{formErrors.find((issue) => issue.path[0] === 'lastname')?.message}</span>
+                        <span className='error'>{formErrors.find((issue) => issue.path[0] === 'lastname')?.message}</span>
                     )}
                 </div>
                 {/* Edad */}
                 <div className='age'>
-                    <label htmlFor='age'>Edad</label>
+                    <label htmlFor='age'></label>
                     <input
                         type='number'
                         id='age'
                         name='age'
                         value={formData.age}
                         onChange={handleChange}
+                        placeholder='Age'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'age') && (
-                        <span>{formErrors.find((issue) => issue.path[0] === 'age')?.message}</span>
+                        <span className='error'>{formErrors.find((issue) => issue.path[0] === 'age')?.message}</span>
                     )}
                 </div>
                 {/* Email */}
                 <div className='email'>
-                    <label htmlFor='email'>Email</label>
+                    <label htmlFor='email'></label>
                     <input
                         type='email'
                         id='email'
                         name='email'
                         value={formData.email}
                         onChange={handleChange}
+                        placeholder='Email'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'email') && (
-                        <span>{formErrors.find((issue) => issue.path[0] === 'email')?.message}</span>
+                        <span className='error'>{formErrors.find((issue) => issue.path[0] === 'email')?.message}</span>
                     )}
                 </div>
                 {/* Teléfono */}
                 <div className='phonenumber'>
-                    <label htmlFor='phonenumber'>Teléfono</label>
+                    <label htmlFor='phonenumber'></label>
                     <input
                         type='text'
                         id='phonenumber'
                         name='phonenumber'
                         value={formData.phonenumber}
                         onChange={handleChange}
+                        placeholder='Phone number'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'phonenumber') && (
-                        <span>{formErrors.find((issue) => issue.path[0] === 'phonenumber')?.message}</span>
+                        <span className='error'>{formErrors.find((issue) => issue.path[0] === 'phonenumber')?.message}</span>
                     )}
                 </div>
                 {/* Dirección */}
                 <div className='address'>
-                    <label htmlFor='address'>Dirección</label>
+                    <label htmlFor='address'></label>
                     <input
                         type='text'
                         id='address'
                         name='address'
                         value={formData.address}
                         onChange={handleChange}
+                        placeholder='Address'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'address') && (
-                        <span>{formErrors.find((issue) => issue.path[0] === 'address')?.message}</span>
+                        <span className='error'>{formErrors.find((issue) => issue.path[0] === 'address')?.message}</span>
                     )}
                 </div>
                 {/* Contraseña */}
                 <div className='password'>
-                    <label htmlFor='password'>Contraseña</label>
+                    <label htmlFor='password'></label>
                     <input
                         type='password'
                         id='password'
                         name='password'
                         value={formData.password}
                         onChange={handleChange}
+                        placeholder='Password'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'password') && (
-                        <span>{formErrors.find((issue) => issue.path[0] === 'password')?.message}</span>
+                        <span className='error'>{formErrors.find((issue) => issue.path[0] === 'password')?.message}</span>
                     )}
                 </div>
                 {serverError && <span className="error">{serverError}</span>}
                 {signupSuccess && <span className="success">Registro exitoso</span>}
                 {/* Botones de acción */}
                 <div className='buttonAction'>
-                    <button className='go-back' type='button'>
-                        <img src={back_login} alt="Back" />
-                    </button>
-                    <button className='send' type='submit'>
-                        <img src={send_login} alt="Send" />
+                    <button className='button-send' type='submit'> Completed
+                        <TiThumbsUp size={20}/>
                     </button>
                 </div>
-            </div>
+                <div className="no-account">
+                    <p>You already have an account ? <Link to="/login">Login in BigCart</Link></p>
+                </div>
+                </div>
         </form>
     );
 }
