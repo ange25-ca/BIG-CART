@@ -1,12 +1,10 @@
+//import '../../Control/assets/styles/login.css';
+import '../../Control/assets/styles/login.css'
 import React, { useState } from 'react';
 import { z } from 'zod';
-import '../../Control/assets/styles/login.css';
 import { encryptData } from '../../Middlewares/encryption';
 import axiosInstance from '../../../Api/axiosConfig';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { IoMdArrowBack } from 'react-icons/io';
-import { AiOutlineSend } from 'react-icons/ai';
 
 // Definir el esquema de validación usando Zod
 const loginSchema = z.object({
@@ -32,7 +30,6 @@ function Login() {
     };
     
     // Función para regresar a la página principal
-
     const handleLogin = async () => {
         try {
             // Cifrar los datos
@@ -62,12 +59,6 @@ function Login() {
         }
     }; 
 
-    const navigate = useNavigate();
-    // Función para regresar a la página principal
-    const handleGoBack = () => {
-        navigate('/'); // Redirige a la página principal
-    };
-    
     return (
         <form className='FormLogin' onSubmit={(event) => event.preventDefault()}>
             <div className='ContentFormLogin'>
@@ -75,31 +66,33 @@ function Login() {
                     <h1>LOGIN IN</h1>
                 </div>
                 <div className='name'>
-                    <label htmlFor='username'>User</label>
+                    <label htmlFor='username'></label>
                     <input
                         type='text'
                         id='username'
                         name='username'
                         value={formData.username}
                         onChange={handleChange}
+                        placeholder='Username'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'username') && (
-                        <span>
+                        <span className='error'>
                             {formErrors.find((issue) => issue.path[0] === 'username')?.message}
                         </span>
                     )}
                 </div>
                 <div className='password'>
-                    <label htmlFor='password'>Password</label>
+                    <label htmlFor='password'></label>
                     <input
                         type='password'
                         id='password'
                         name='password'
                         value={formData.password}
                         onChange={handleChange}
+                        placeholder='Password'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'password') && (
-                        <span>
+                        <span className='error'>
                             {formErrors.find((issue) => issue.path[0] === 'password')?.message}
                         </span>
                     )}
@@ -107,11 +100,8 @@ function Login() {
                 {serverError && <span className="error">{serverError}</span>}
                 {loginSuccess && <span className="success">Inicio de sesión exitoso</span>}
                 <div className='buttonAction'>
-                    <button className='button_go-back' type='button' onClick={handleGoBack}> {/* Manejar el regreso */}
-                        <IoMdArrowBack size={24} />
-                    </button>
                     <button className='button_Send' type='button' onClick={handleLogin}>
-                        <AiOutlineSend size={24} />
+                        Enviar 
                     </button>
                 </div>
                 <div className="no-account">
