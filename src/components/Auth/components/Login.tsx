@@ -5,6 +5,8 @@ import { z } from 'zod';
 import { encryptData } from '../../Middlewares/encryption';
 import axiosInstance from '../../../Api/axiosConfig';
 import { Link } from 'react-router-dom';
+import { setUserId } from '../../../redux/userSlices';
+import { useDispatch } from 'react-redux';
 
 // Definir el esquema de validación usando Zod
 const loginSchema = z.object({
@@ -23,6 +25,9 @@ function Login() {
     const [formErrors] = useState<z.ZodIssue[] | null>(null);
     const [serverError, setServerError] = useState<string | null>(null);
     const [loginSuccess, setLoginSuccess] = useState<boolean | null>(null);
+
+    // Se llama al dispatch
+    const dispatch = useDispatch();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
@@ -49,10 +54,16 @@ function Login() {
             });
             // Procesar la respuesta
             const result = response.data;
-            console.log("Login frontend", result);
             
-            // Manejo de éxito en el inicio de sesión
-            setLoginSuccess(true);
+            // Despachar el ID del usuario al store de Redux
+            if (result && result.userId) { 
+            // Se supone que userID es la clave de en la respuesta 
+                dispatch(setUserId(result.userId));
+                setLoginSuccess(true);
+            } else {
+                setServerError("Error: No se recibió el ID de usuario.");
+                setLoginSuccess(false);
+            }
         } catch (error) {
             setServerError("Error al iniciar sesión. Inténtalo de nuevo.");
             setLoginSuccess(false);
