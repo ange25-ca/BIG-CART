@@ -1,10 +1,111 @@
 /* General */
+main {
+  height: 100vh; /* O la altura de la pantalla */
+  overflow-y: scroll; /* Siempre permitir el scroll vertical */
+}
 .home {
   font-family: 'Noto Sans', sans-serif;
   padding: 0;
   background-color: #ffffff;
   overflow-x: hidden;
 }
+/* Estilos para la sección de ofertas especiales */
+.special-offers {
+  width: 100%;
+  padding: 20px;
+  background-color: transparent; /* Color de fondo suave */
+  text-align: center;
+  margin-bottom: 85px !important;
+}
+
+.special-offers h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+.special-offers img {
+  width: 1500px;
+}
+
+/* Estilos para el contenedor del carrusel */
+.offer-list {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 2500px;
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+/* Ajustes para cada imagen en el carrusel */
+.carousel-item img {
+  width: 1500px;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Ajustes para que se vea como un carrusel horizontal */
+.carousel {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Ocultar el contenido fuera del contenedor para una experiencia de carrusel */
+.carousel-item {
+  min-width: 100%;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 0;
+  display: inline-block;
+}
+
+.carousel-item.active {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+  z-index: 2;
+}
+
+/* Botones de navegación manual */
+.carousel-buttons {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.carousel-buttons button {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 9999999;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-buttons button.active {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.carousel-buttons button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .special-offers h2 {
+    font-size: 1.5rem;
+  }
+
+  .offer-list {
+    padding: 10px;
+  }
+}
+
 
 @keyframes fadeInLeft {
   0% {
@@ -144,7 +245,7 @@
 
 
 /* Productos destacados */
-.featured-products, .special-offers {
+.featured-products {
   padding: 60px 20px;
   text-align: center;
   animation: fadeInLeft 1.5s ease-in-out;
@@ -247,6 +348,7 @@ h3 {
   margin: 15px 0;
   color: #555;
 }
+
 
 /* Animación para bienvenida */
 @keyframes fadeInWelcome {

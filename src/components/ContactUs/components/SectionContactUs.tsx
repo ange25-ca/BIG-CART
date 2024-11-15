@@ -1,66 +1,76 @@
+
+import { FaHeadset, FaEnvelopeOpenText, FaMapMarkedAlt } from 'react-icons/fa';
+import SocialBar from '../../Control/components/SocialBar';  // Importamos el componente SocialBar
 import '../assets/styles/SectionContactUs.css';
 
-const ContactUs = () => {
-  return (
-    <div className="contact-us">
-      {/* Información de contacto */}
-      <section className="contact-info">
-        <h1>Contáctanos</h1>
-        <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
-        <div className="info-grid">
-          <div className="info-item">
-            <h2>Dirección</h2>
-            <p>Calle Principal 123, Ciudad, País</p>
-          </div>
-          <div className="info-item">
-            <h2>Teléfono</h2>
-            <p>+1 (123) 456-7890</p>
-          </div>
-          <div className="info-item">
-            <h2>Email</h2>
-            <p>contacto@tuecommerce.com</p>
-          </div>
-        </div>
-      </section>
+const ContactSection = () => {
+    return (
+        <>
+            {/* Insertamos SocialBar arriba o en la parte deseada */}
+            <SocialBar />
 
-      {/* Formulario de contacto */}
-      <section className="contact-form">
-        <h2>Envíanos un Mensaje</h2>
-        <form>
-          <label htmlFor="name">Nombre</label>
-          <input type="text" id="name" name="name" placeholder="Tu nombre" required />
+            <section className="contact_us">
+                <div className="container">
+                    <div className="contact_inner">
+                        <div className="contact_form_section">
+                            <div className="contact_form_inner">
+                                <div className="contact_field">
+                                    <h1>Contáctanos</h1>
+                                    <p>
+                                        Nos encantaría saber de ti. Si tienes alguna pregunta, sugerencia o necesitas asistencia, por favor, completa el formulario a continuación.
+                                        Con gusto nos pondremos en contacto contigo lo antes posible.Solo debes proporcionar tu nombre, correo electrónico y el mensaje con tus inquietudes o comentarios.
+                                    </p>
+                                    <h3>¡Esperamos poder ayudarte pronto!</h3>
 
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Tu email" required />
+                                    <input type="text" className="form-control" placeholder="Nombres" />
+                                    <input type="text" className="form-control" placeholder="Correo" />
+                                    <textarea id="form-control-textarea" placeholder="Mensaje"></textarea>
+                                    <button className="contact_form_submit"> Enviar </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="contact_info_sec">
+                            <h4>Información de contacto</h4>
+                            <div className="info_single">
+                                <FaHeadset />
+                                <span>+52 8009 054294</span>
+                            </div>
+                            <div className="info_single">
+                                <FaEnvelopeOpenText />
+                                <span>bigcart213@bigcart.com.mx</span>
+                            </div>
+                            <div className="info_single">
+                                <FaMapMarkedAlt />
+                                <span>Calle 60 No. 488, Centro, 97000 Mérida, Yucatán, MX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-          <label htmlFor="message">Mensaje</label>
-          <textarea id="message" name="message" placeholder="Escribe tu mensaje" required></textarea>
-
-          <button type="submit">Enviar</button>
-        </form>
-      </section>
-
-      {/* Mapa de Google */}
-      <section className="map-container">
-        <h2>Nuestra Ubicación</h2>
-        <iframe
-          title="Ubicación de Google Maps"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.417239904124!2d144.963057915316!3d-37.8141079797517!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf5775fd9cbb06f0!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1614862565768!5m2!1sen!2sau"
-          loading="lazy"
-        ></iframe>
-      </section>
-
-      {/* Redes sociales */}
-      <section className="social-media">
-        <h2>Síguenos en Redes Sociales</h2>
-        <div className="social-icons">
-          <a href="#"><i className="fa fa-facebook"></i></a>
-          <a href="#"><i className="fa fa-instagram"></i></a>
-          <a href="#"><i className="fa fa-twitter"></i></a>
-        </div>
-      </section>
-    </div>
-  );
+            <section className="map_sec">
+                <div className="container">
+                    <div className="map_inner">
+                        <h2>Encuéntranos en Google Maps</h2>
+                        <p>
+                            En el corazón de Mérida, justo en el Parque Santa Lucía, una de las zonas más emblemáticas de la ciudad. Estamos ubicados en la Calle 60, a pocos pasos de la plaza principal.
+                        </p>
+                        <div className="map_bind">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.469031462957!2d-89.6224415!3d20.9699994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f5671610e9f8b57%3A0x217fceceddec1611!2sC.%2060%20488%2C%20Parque%20Santa%20Lucia%2C%20Centro%2C%2097000%20M%C3%A9rida%2C%20Yucat%C3%A1n!5e0!3m2!1ses!2smx!4v1602921234567!5m2!1ses!2smx"
+                                width="100%"
+                                height="450"
+                                frameBorder="0"
+                                allowFullScreen
+                                aria-hidden="false"
+                                tabIndex={0}
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </>
+    );
 };
 
-export default ContactUs;
+export default ContactSection;
