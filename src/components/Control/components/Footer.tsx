@@ -57,8 +57,8 @@ const Footer = () => {
         <div className="footer__section">
           <h4>Contacto</h4>
           <p>Calle 60 No. 488, Centro, 97000 Mérida, Yucatán, MX</p>
-          <p>big_cart_213@bigcart.com.mx</p>
-          <p>+52 234 567 88</p>
+          <p>bigcart213@bigcart.com.mx</p>
+          <p>+52 8009 054294</p>
         </div>
       </div>
       <div className="footer__bottom">

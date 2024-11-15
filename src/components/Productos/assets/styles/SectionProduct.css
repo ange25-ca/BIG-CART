@@ -1,3 +1,8 @@
+main {
+  height: 100vh; /* O la altura de la pantalla */
+  overflow-y: scroll; /* Siempre permitir el scroll vertical */
+}
+
 .products-section {
     margin: 20px;
     padding: 20px;

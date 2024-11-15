@@ -2,8 +2,8 @@ import '../assets/styles/CarouselClientes.css';
 import image1 from '../assets/img/tecnomundo.png';
 import image2 from '../assets/img/Walmart-Logo.png';
 import image3 from '../assets/img/extra-logo.png';
-import image4 from '../assets/img/OXXO-Logo.png';
-import image6 from '../assets/img/plza de la tec.png';
+import image4 from '../assets/img/Logo-Duero-Mayoreo_big.png';
+import image6 from '../assets/img/Aliexpress_logo.svg.png';
 import image7 from '../assets/img/frikiplaza-png.png';
 
 const images = [image1, image2, image3, image4, image6, image7, image1, image2, image3, image4, image6, image7];
