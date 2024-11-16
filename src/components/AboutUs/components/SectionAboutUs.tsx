@@ -1,7 +1,6 @@
 import '../assets/styles/SectionAboutUs.css';
-import imgPesc from '../assets/img/fish-image-pesca.jpg';
+import imgPesc from '../assets/img/ecommer-ourhistory.jpg';
 import imgAten from '../assets/img/antecion-cliente.jpeg';
-import imgCap from '../assets/img/capacitacion.webp';
 import imgEntre from '../assets/img/entrega-cliente.jpg';
 import imgTratos from '../assets/img/tratos-grandes.webp';
 
@@ -12,21 +11,21 @@ const AboutUs = () => {
         <h1 className="title">Sobre Nosotros</h1>
 
         <div className="section mission">
-          <h2>Nuestra Misión</h2>
+          <h2>Misión</h2>
           <p>
             En BigCart, nuestra misión es ofrecer productos de alta calidad al mejor precio para ayudar a nuestros clientes a alcanzar el éxito en su negocio. Nos comprometemos a brindar un servicio excepcional y a garantizar la satisfacción del cliente en cada etapa del proceso.
           </p>
         </div>
 
         <div className="section vision">
-          <h2>Nuestra Visión</h2>
+          <h2>Visión</h2>
           <p>
             Queremos ser líderes en el sector de ventas al por mayor, conocidos por nuestra innovación, integridad y dedicación a la excelencia. Buscamos crear un futuro sostenible y continuar expandiendo nuestras operaciones para llegar a más mercados.
           </p>
         </div>
 
         <div className="section team">
-          <h2>Nuestro Equipo</h2>
+          <h2>Equipo</h2>
           <p>
             Contamos con un equipo dinámico y diverso, formado por profesionales apasionados por lo que hacen. Cada miembro aporta una perspectiva única, trabajando juntos para ofrecer la mejor experiencia a nuestros clientes.
           </p>
@@ -57,15 +56,15 @@ const AboutUs = () => {
           <h2>Testimonios de Nuestros Clientes</h2>
           <div className="testimonials-grid">
             <div className="testimonial">
-              <p>"El mejor servicio al cliente que he experimentado. Los productos son de excelente calidad y siempre llegan a tiempo."</p>
+              <p>"Gran variedad de productos y un proceso de compra muy ágil. Me encanta que cumplan con los tiempos de entrega, lo que facilita mucho nuestra planificación de logística."</p>
               <span>- Juan Pérez</span>
             </div>
             <div className="testimonial">
-              <p>"Gran variedad de productos y precios competitivos. Siempre encuentro lo que necesito para mi negocio."</p>
+              <p>"Excelente servicio y atención personalizada. Siempre están dispuestos a ayudarnos a encontrar justo lo que necesitamos, ¡y los productos son totalmete de calidad!"</p>
               <span>- María López</span>
             </div>
             <div className="testimonial">
-              <p>"Gran variedad de productos y precios competitivos. Siempre encuentro lo que necesito para mi negocio."</p>
+              <p>"Precios competitivos y una logística impecable. Desde que comenzamos a trabajar con ellos, nuestro negocio ha ganado en eficiencia y hemos reducido tiempos de espera."</p>
               <span>- Carlos Gómez</span>
             </div>
           </div>
@@ -97,7 +96,7 @@ const AboutUs = () => {
           <h2>Nuestros Momentos Destacados</h2>
           <div className="gallery-container">
             <img src={imgAten} alt="Atención" />
-            <img src={imgCap} alt="Capacitaciones" />
+            <img src={imgEntre} alt="Capacitaciones" />
             <img src={imgEntre} alt="Entregas" />
             <img src={imgTratos} alt="Tratos cerrados" />
           </div>
@@ -108,22 +107,22 @@ const AboutUs = () => {
           <div className="values-grid">
             <div className="value-item">
               <i className="icon fa fa-heart"></i>
-              <h3>Compromiso</h3>
+              <h3>Calidad y Eficiencia</h3>
               <p>Nos dedicamos a servir con integridad y pasión.</p>
             </div>
             <div className="value-item">
               <i className="icon fa fa-star"></i>
-              <h3>Calidad</h3>
+              <h3>Orientación al Cliente</h3>
               <p>Siempre buscamos la excelencia en todo lo que hacemos.</p>
             </div>
             <div className="value-item">
               <i className="icon fa fa-lightbulb"></i>
-              <h3>Innovación</h3>
+              <h3>Innovación y Adaptabilidad</h3>
               <p>Creamos nuevas oportunidades para el crecimiento.</p>
             </div>
             <div className="value-item">
               <i className="icon fa fa-lightbulb"></i>
-              <h3>Innovación</h3>
+              <h3>Calidad y Eficiencia</h3>
               <p>Creamos nuevas oportunidades para el crecimiento.</p>
             </div>
           </div>
