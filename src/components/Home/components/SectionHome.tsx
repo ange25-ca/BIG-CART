@@ -1,5 +1,6 @@
 import '../assets/styles/Home.css';
 import TapeClientes from './CarouselClientes';
+import CarouselPromotions from '../components/CarouselPromotions';
 import { Link } from 'react-router-dom';
 import imgElect from '../../Productos/assets/img/elect.jpg';
 import imgHog from '../../Productos/assets/img/hogar.webp';
@@ -7,8 +8,7 @@ import imgJug from '../../Productos/assets/img/plasticos.jpg';
 import product1 from '../assets/img/llaves.jpg';
 import product2 from '../assets/img/amazon-fire.webp';
 import product3 from '../assets/img/plumas-2.webp';
-import imgAudi from '../assets/img/audifonos.webp';
-import imgTiburon from '../assets/img/tiburoncin.jpg';
+
 
 const Home = () => {
   return (
@@ -113,29 +113,13 @@ const Home = () => {
       </section>
 
       {/* Ofertas Especiales */}
-      <section className="special-offers">
-        <h2>Ofertas Especiales</h2>
-        <div className="offer-list">
-          <div className="offer-card">
-            <img src={imgAudi} alt="Oferta 1" />
-            <div className="offer-details">
-              <h3>Audífonos realme</h3>
-              <p className="old-price">$49.99</p>
-              <p className="new-price">$29.99</p>
-              <button className="buy-now-btn">Comprar Ahora</button>
-            </div>
+        <section className="special-offers">
+          <h2>Ofertas Especiales</h2>
+          <div className="offer-list">
+            <CarouselPromotions />
           </div>
-          <div className="offer-card">
-            <img src={imgTiburon} alt="Oferta 2" />
-            <div className="offer-details">
-              <h3>Sandalías de tiburón</h3>
-              <p className="old-price">$59.99</p>
-              <p className="new-price">$39.99</p>
-              <button className="buy-now-btn">Comprar Ahora</button>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+
 
       {/* Llamada a la acción */}
       <section className="call-to-action">
