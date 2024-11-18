@@ -117,9 +117,9 @@ function Login() {
                         Enviar 
                     </button>
                 </div>
-            </div>
-            <div className="no-account">
+                <div className="no-account">
                     <p>Don´t have an account? <Link to="/SignUp">Get BigCart account now</Link></p>
+            </div>
             </div>
         </form>
     );
