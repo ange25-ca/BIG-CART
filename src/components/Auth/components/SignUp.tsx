@@ -133,7 +133,7 @@ function SignUp() {
                         <span className='error'>{formErrors.find((issue) => issue.path[0] === 'age')?.message}</span>
                     )}
                 </div>
-                {/* Email */}
+                {/* Gmail */}
                 <div className='email'>
                     <label htmlFor='email'></label>
                     <input
@@ -142,7 +142,7 @@ function SignUp() {
                         name='email'
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder='Email'
+                        placeholder='Gmail'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'email') && (
                         <span className='error'>{formErrors.find((issue) => issue.path[0] === 'email')?.message}</span>
