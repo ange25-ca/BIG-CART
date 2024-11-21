@@ -1,5 +1,4 @@
-//import '../../Control/assets/styles/login.css';
-import '../../Control/assets/styles/login.css'
+import '../assets/login.css'
 import React, { useState } from 'react';
 import { z } from 'zod';
 import { encryptData } from '../../Middlewares/encryption';
@@ -7,6 +6,10 @@ import axiosInstance from '../../../Api/axiosConfig';
 import { Link, useNavigate } from 'react-router-dom';
 import { setUserId } from '../../../redux/userSlices';
 import { useDispatch } from 'react-redux';
+//Iconos del logeo
+import userIcon from '../assets/img/user.svg';
+import passwordIcon from '../assets/img/lock.svg';
+
 
 // Definir el esquema de validación usando Zod
 const loginSchema = z.object({
@@ -79,10 +82,12 @@ function Login() {
         <form className='FormLogin' onSubmit={(event) => event.preventDefault()}>
             <div className='ContentFormLogin'>
                 <div className='titleLogin'>
-                    <h1>LOGIN IN</h1>
+                    <h1>Iniciar sesión</h1>
                 </div>
                 <div className='name'>
                     <label htmlFor='username'></label>
+                    <div className='inputIcon'>
+                        <img src={userIcon} alt='User Icon' className='iconUser' />
                     <input
                         type='text'
                         id='username'
@@ -91,6 +96,7 @@ function Login() {
                         onChange={handleChange}
                         placeholder='Usuario'
                     />
+                    </div>
                     {formErrors?.find((issue) => issue.path[0] === 'username') && (
                         <span className='error'>
                             {formErrors.find((issue) => issue.path[0] === 'username')?.message}
@@ -99,6 +105,8 @@ function Login() {
                 </div>
                 <div className='password'>
                     <label htmlFor='password'></label>
+                    <div className='inputIcon'>
+                        <img src={passwordIcon} alt='Pass Icon' className='iconPassword' />
                     <input
                         type='password'
                         id='password'
@@ -107,6 +115,7 @@ function Login() {
                         onChange={handleChange}
                         placeholder='Contraseña'
                     />
+                    </div>
                     {formErrors?.find((issue) => issue.path[0] === 'password') && (
                         <span className='error'>
                             {formErrors.find((issue) => issue.path[0] === 'password')?.message}
