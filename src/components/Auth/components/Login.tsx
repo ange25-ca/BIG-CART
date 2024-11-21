@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { z } from 'zod';
 import { encryptData } from '../../Middlewares/encryption';
 import axiosInstance from '../../../Api/axiosConfig';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setUserId } from '../../../redux/userSlices';
 import { useDispatch } from 'react-redux';
 
@@ -28,6 +28,8 @@ function Login() {
 
     // Se llama al dispatch
     const dispatch = useDispatch();
+    const navigate = useNavigate(); // Redirección
+
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
@@ -61,13 +63,14 @@ function Login() {
             // Se supone que userID es la clave de en la respuesta 
                 dispatch(setUserId(result.userId));
                 setLoginSuccess(true);
+                navigate('/');
+
             } else {
-                setServerError("Error: No se recibió el ID de usuario.");
+                setServerError("La contraseña o usario son incorrectos");
                 setLoginSuccess(false);
             }
         } catch (error) {
-            console.error("Error al cifrar o enviar datos:", error);
-            setServerError("Error al iniciar sesión. Inténtalo de nuevo.");
+            setServerError("Error al iniciar sesión. Inténtalo más tarde.");
             setLoginSuccess(false);
         }
     }; 
@@ -86,7 +89,7 @@ function Login() {
                         name='username'
                         value={formData.username}
                         onChange={handleChange}
-                        placeholder='Username'
+                        placeholder='Usuario'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'username') && (
                         <span className='error'>
@@ -102,7 +105,7 @@ function Login() {
                         name='password'
                         value={formData.password}
                         onChange={handleChange}
-                        placeholder='Password'
+                        placeholder='Contraseña'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'password') && (
                         <span className='error'>
@@ -118,7 +121,7 @@ function Login() {
                     </button>
                 </div>
                 <div className="no-account">
-                    <p>Don´t have an account? <Link to="/SignUp">Get BigCart account now</Link></p>
+                    <p>Aun no tienes una cuenta? <Link to="/SignUp">Crea una cuenta aqui</Link></p>
             </div>
             </div>
         </form>
