@@ -1,3 +1,4 @@
+//import '../../Control/assets/styles/login.css';
 import '../assets/login.css'
 import React, { useState } from 'react';
 import { z } from 'zod';
@@ -9,7 +10,6 @@ import { useDispatch } from 'react-redux';
 //Iconos del logeo
 import userIcon from '../assets/img/user.svg';
 import passwordIcon from '../assets/img/lock.svg';
-
 
 // Definir el esquema de validación usando Zod
 const loginSchema = z.object({

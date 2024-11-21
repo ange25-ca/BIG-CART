@@ -39,12 +39,12 @@
 
   }
 
-  .name, .password, .email, .phonenumber,
+  .name, .password, .confirmPassword, .email, .phonenumber,
   .lastname, .age, .address, .terms{
-    width: 90%;
+    width: 100%;
     align-items: center;
     font-size: 13px;
-    margin: 0 20px;
+    margin: 0 10px;
     margin-bottom: 2px;
   } 
 
@@ -82,34 +82,30 @@
     grid-column: 1 / -1; /* Ocupa toda la fila */
   }
 
-  .button-send {
+.button-send {
     width: 100%;
-    border-radius: 50px;
+    font-size: 13px;
+    padding: 5px;
+    border-radius: 60px;
+    border-color: var(--bacground-color1);
     cursor: pointer;
     color: var(--bacground-color1);
-    outline: none;
-    border: none;
-    align-items: center;
-    justify-content: center;
+    outline: none;   
+    text-align: center;
   }
 
-  .button-send svg {
-    margin-left: 8px; /* Si deseas espacio entre el texto y el ícono */
-  }
-
-  .button-send:focus{
-    outline: none;
-    border: none;
-  }
-
-  .button-send:hover {
-    color: #72a866;
+  .button-send:hover{
+    background-color: var(--primary-color);
+    color: #2c2c2c;
   }
 
   .buttonAction{
     width: 100%;
     font-size: 16px;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+    grid-column: 1 / -1;
   }
   
   .error {
@@ -125,10 +121,14 @@
 .terms {  
   color: var(--font-color);
   line-height: 1.6;
+  text-align: center;
   max-height: 200px;
   overflow-y: auto;
   padding: 10px;
   border-radius: 5px;
+  display: center;
+  grid-column: 1 / -1; /* Ocupa toda la fila */
+
 }
 
 .terms input[type="checkbox"] {
@@ -136,39 +136,11 @@
   margin-right: 3px;
 }
 
-
-/* Estilo para el enlace de los términos */
-.terms a {
-  color: var(--primary-color); /* Color de los enlaces */
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.terms a:hover {
-  text-decoration: underline;
-}
-
-/* Estilo para el checkbox */
-.terms-checkbox {
-  display: flex;
-  align-items: center;
-}
-
-.terms-checkbox label {
-  font-size: 14px;
-  border: solid;
-  color: #333;
-}
-
-/* Estilo para mostrar un mensaje si no se aceptan los términos */
-.errorTerminos {
-  color: var(--bacground-color1);
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  margin-left: 15px;
-  font-size: 10px;
-  
+.success {
+  color: rgb(175, 216, 117);
+  font-size: 12px;
+  margin-bottom: 15px; 
+  grid-column: 1 / -1; /* Ocupa toda la fila */
 }
 
   .no-account{
@@ -177,7 +149,7 @@
     grid-column: 1 / -1; /* Ocupa toda la fila */
   }
 
-  /* Media query para pantallas pequeñas (menos de 400px) */
+/* Media query para pantallas pequeñas (menos de 400px) */
 @media (max-width: 500px) {
   .FormSignUp {
     max-width: 100%;
@@ -190,21 +162,30 @@
   }
 
   .titleSignUp {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .button-send {
     font-size: 14px;
   }
 
+  .buttonAction{
+    width: 50%;
+    margin: 0 5rem;
+  }
+
   .name, .password, .email, .phonenumber,
   .lastname, .age, .address {
     font-size: 12px;
   }
+
+  .success{
+    margin-left: 7rem;
+  }
 }
 
 /* Media query para pantallas medianas (entre 401px y 768px) */
-@media (min-width: 401px) and (max-width: 767px) {
+@media (min-width: 561px) and (max-width: 767px) {
   .FormSignUp {
     max-width: 80%; 
     margin: 2rem auto;
@@ -224,8 +205,13 @@
     font-size: 15px;
   }
 
+  .buttonAction{
+    width: 50%;
+    margin-left: 8rem;
+  }
+  
   .titleSignUp {
-    font-size: 20px;
+    font-size: 10px;
   }
 }
 
@@ -249,7 +235,14 @@
     font-size: 16px;
   }
 
+  .buttonAction{
+    width: 50%;
+    margin-left: 10rem;
+  }
   .titleSignUp {
     font-size: 12px;
+  }
+  .success{
+    margin-left: 17rem;
   }
 }
