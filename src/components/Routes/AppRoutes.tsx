@@ -7,6 +7,7 @@ import CatalogsProducts from "../Productos/components/SectionProducts.tsx";
 import ContactUs from '../ContactUs/components/SectionContactUs.tsx';
 import UserProfile from '../Auth/components/UserProfile.tsx';
 import SignUp from '../Auth/components/SignUp.tsx';
+import CartPayment from '../PaymentMethod/components/CartPayment.tsx';
 
 
 
@@ -19,6 +20,7 @@ const routes = [
     { path: "/about-us", element: <AboutUs /> },
     { path: "/login", element: <Login /> },
     { path: "/cart", element: <Cart /> },
+    { path: "/cartPayment", element: < CartPayment />},
     { path: "/productos", element: <CatalogsProducts /> },
     { path: "/contactus", element: <ContactUs/> },
     { path: "/SignUp", element: <SignUp/> },

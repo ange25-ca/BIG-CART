@@ -2,8 +2,10 @@ import React from 'react';
 import cartData from '../../../../public/shopCart.json';
 import CartItemComponent from './CartItem';
 import '../assets/styles/ShoppingCart.css';
+import {useNavigate} from 'react-router-dom';
 
 const ShoppingCart: React.FC = () => {
+  const navigate = useNavigate();
   const items = cartData;
 
   // Calcular el subtotal
@@ -49,7 +51,7 @@ const ShoppingCart: React.FC = () => {
           <p>Impuestos (10%): ${tax.toFixed(2)}</p>
           <p>Costo de Envío: ${shippingCost.toFixed(2)}</p>
           <div className="balance">Total: ${totalAmount.toFixed(2)}</div>
-          <button onClick={() => console.log("Proceder al pago")} className="cart-checkout">
+          <button onClick={() => navigate('/cartPayment')} className="cart-checkout">
             Proceder al Pago
           </button>
           <button onClick={() => console.log("Carrito vaciado")} className="cart-clear">
