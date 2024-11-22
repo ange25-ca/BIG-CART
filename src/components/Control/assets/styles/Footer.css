@@ -7,16 +7,84 @@
   font-family: "Poppins", sans-serif;
 }
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* Ocupa el espacio restante */
+  overflow-y: auto; /* Scroll solo para el contenido principal */
+  transition: margin-bottom 0.3s ease-in-out;
+}
+
+/* Footer */
 .footer {
   width: 100%;
   background: #081057;
   color: #dbd3d3;
   padding: 40px 20px;
-  display: flex;
+  display: none; /* Por defecto, no se muestra */
   flex-direction: column;
   align-items: center;
 }
 
+.footer.show {
+  display: flex; /* Se muestra cuando está visible */
+}
+
+/* Botón de toggle */
+.footer-toggle {
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
+  background-color: #EC8304;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Secciones del footer */
+.footer__content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.footer__section {
+  flex: 1 1 200px;
+  margin: 10px;
+}
+
+.footer__section h3,
+.footer__section h4 {
+  color: #ec8305;
+}
+
+.footer__section ul {
+  list-style: none;
+}
+
+.footer__section a {
+  color: #dbd3d3;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer__bottom {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.8rem;
+  color: #dbd3d3;
+}
+
+/* Redes sociales */
 .footer__top {
   text-align: center;
   margin-bottom: 20px;
@@ -44,6 +112,7 @@
   transform: scale(1.1);
 }
 
+/* Contenido principal del footer */
 .footer__content {
   width: 100%;
   display: flex;
@@ -58,12 +127,14 @@
   text-align: left;
 }
 
-.footer__section h3, .footer__section h4 {
+.footer__section h3,
+.footer__section h4 {
   color: #ec8305;
   margin-bottom: 10px;
 }
 
-.footer__section p, .footer__section ul {
+.footer__section p,
+.footer__section ul {
   font-size: 0.9rem;
   color: #dbd3d3;
   line-height: 1.6;
@@ -88,6 +159,7 @@
   color: #024caa;
 }
 
+/* Parte inferior del footer */
 .footer__bottom {
   text-align: center;
   margin-top: 30px;
@@ -95,7 +167,7 @@
   color: #dbd3d3;
 }
 
-/* Responsiveness */
+/* Responsividad para dispositivos más pequeños */
 @media (max-width: 768px) {
   .footer__content {
     flex-direction: column;
