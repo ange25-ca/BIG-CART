@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "../assets/styles/CarouselPromotions.css";
-import img3 from "../assets/img/navidad2.png";
-import img6 from "../assets/img/1.svg";
-import img4 from  "../assets/img/navidad3.png";
-import img7 from  "../assets/img/3.svg";
-import img5 from "../assets/img/4.svg";
-import img1 from  "../assets/img/navidad1.png";
+import img3 from "../assets/img/banner3.svg";
+import img6 from "../assets/img/banner6.svg";
+import img4 from  "../assets/img/banner4.svg";
+import img7 from  "../assets/img/banner7.svg";
+import img5 from "../assets/img/banner5.svg";
+import img2 from "../assets/img/banner2.svg";
+import img1 from  "../assets/img/banner1.svg";
 
 const images = [
-  img1, img3, img4, img5, img6, img7
+  img1, img3, img4, img5, img6, img7, img2
 ];
 
 const CarouselPromotions: React.FC = () => {
