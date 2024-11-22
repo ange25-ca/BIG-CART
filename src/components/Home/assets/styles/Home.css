@@ -12,7 +12,6 @@ main {
 /* Estilos para la sección de ofertas especiales */
 .special-offers {
   width: 100%;
-  padding: 20px;
   background-color: transparent; /* Color de fondo suave */
   text-align: center;
   margin-bottom: 85px !important;
