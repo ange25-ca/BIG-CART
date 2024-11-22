@@ -32,7 +32,7 @@
   }
   
   .carousel-item.inactive {
-    transform: translateX(15%);
+    transform: translateX(10%);
   }
   
   .carousel-buttons {
