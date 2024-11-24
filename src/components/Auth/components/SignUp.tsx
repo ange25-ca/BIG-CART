@@ -1,33 +1,39 @@
-import React, { useState } from 'react';
+import '../assets/signUp.css'
+import React, { useEffect, useState } from 'react';
 import { z } from 'zod';
-import '../../Control/assets/styles/signUp.css';
 import axiosInstance from '../../../Api/axiosConfig';
 import { encryptData } from '../../Middlewares/encryption';
-import { Link } from 'react-router-dom';
-import { TiThumbsUp } from 'react-icons/ti';
-
+import { Link, useNavigate} from 'react-router-dom';
+import imgSignUp from '../assets/img/imgSignUp.png'
 // Definir el esquema de validación usando Zod
 const SignUpSchema = z.object({
-  username: z.string().min(1, { message: "El nombre del usuario es requerido" }),
+  username: z.string().min(1, { message: "El nombre es requerido" }),
   lastname: z.string().min(1, { message: 'El apellido es requerido' }),
-  age: z.number().min(0, { message: 'La edad no puede ser negativa' }).max(120, { message: 'La edad no puede ser mayor de 120' }),
+  age: z.union([z.string().min(1, { message: 'Ingrese su edad' }), z.number().min(0, { message: 'La edad no puede ser negativa' }).max(120, { message: 'La edad no puede ser mayor de 120' })]), // Permitir cadena vacía o número
   email: z.string().min(8, { message: 'El email es requerido' }),
   phonenumber: z.string().regex(/^\+?\d{10,15}$/, "Número de teléfono no válido"),
   address: z.string().min(10, { message: 'La dirección es obligatoria' }),
-  password: z.string().min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
+  password: z.string().min(6, { message: 'El minimo de cacteres son 6' }),
+  confirmPassword: z.string().min(6, { message: 'La contraseña no coincide' }),  // Nueva propiedad
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Las contraseñas no coinciden",
+  path: ["confirmPassword"], 
 });
 
-export type FormData = z.infer<typeof SignUpSchema>;
+export type FormData = z.infer<typeof SignUpSchema> & {
+    age: string | number; // Permitir tanto número como cadena para evitar conflictos
+};
 
 function SignUp() {
     const [formData, setFormData] = useState<FormData>({
         username: '',
         lastname: '',
-        age: 0,
+        age: '' ,
         email: '',
         phonenumber: '',
         address: '',
         password: '',
+        confirmPassword: '',
     });
 
     const [formErrors, setFormErrors] = useState<z.ZodIssue[] | null>(null);
@@ -36,8 +42,11 @@ function SignUp() {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
-        setFormData({ ...formData, [name]: name === 'age' ? Number(value) : value });
+        //Realiza una evaluación del input Age para verificar si es number
+        setFormData({ ...formData, [name]: name === 'age' ? (value === "" ? "" : Number(value)): value });
     };
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -47,7 +56,6 @@ function SignUp() {
             setFormErrors(result.error.issues);
         } else {
             setFormErrors(null);
-            console.log('Datos válidos:', result.data);
             try {
                 // Cifrar los datos sensibles (password y username)
                 const encryptedUsername = await encryptData(formData.username);
@@ -82,11 +90,22 @@ function SignUp() {
         }
     };
 
+    // Redirigir automáticamente después de un registro exitoso
+    useEffect(() => {
+    if (signupSuccess) {
+      const timer = setTimeout(() => {
+        navigate('/login');
+      }, 5000); // Redirigir después de 2 segundos
+      return () => clearTimeout(timer); // Limpiar el temporizador al desmontar
+    }
+    }, [signupSuccess, navigate]);
+
+
     return (
         <form className='FormSignUp' onSubmit={handleSubmit}>
             <div className='ContentFormSignUp'>
                 <div className='titleSignUp'>
-                    <h1>SIGN UP</h1>
+                    <h1>Crear una cuenta</h1>
                 </div>
                 {/* Nombre */}
                 <div className='name'>
@@ -97,7 +116,7 @@ function SignUp() {
                         name='username'
                         value={formData.username}
                         onChange={handleChange}
-                        placeholder='Username'
+                        placeholder='Usuario'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'username') && (
                         <span className='error'>{formErrors.find((issue) => issue.path[0] === 'username')?.message}</span>
@@ -112,7 +131,7 @@ function SignUp() {
                         name='lastname'
                         value={formData.lastname}
                         onChange={handleChange}
-                        placeholder='Lastname'
+                        placeholder='Primer apellido'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'lastname') && (
                         <span className='error'>{formErrors.find((issue) => issue.path[0] === 'lastname')?.message}</span>
@@ -127,7 +146,7 @@ function SignUp() {
                         name='age'
                         value={formData.age}
                         onChange={handleChange}
-                        placeholder='Age'
+                        placeholder='Edad'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'age') && (
                         <span className='error'>{formErrors.find((issue) => issue.path[0] === 'age')?.message}</span>
@@ -142,7 +161,7 @@ function SignUp() {
                         name='email'
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder='Gmail'
+                        placeholder='Correo electronico'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'email') && (
                         <span className='error'>{formErrors.find((issue) => issue.path[0] === 'email')?.message}</span>
@@ -157,7 +176,7 @@ function SignUp() {
                         name='phonenumber'
                         value={formData.phonenumber}
                         onChange={handleChange}
-                        placeholder='Phone number'
+                        placeholder='Telefono'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'phonenumber') && (
                         <span className='error'>{formErrors.find((issue) => issue.path[0] === 'phonenumber')?.message}</span>
@@ -172,7 +191,7 @@ function SignUp() {
                         name='address'
                         value={formData.address}
                         onChange={handleChange}
-                        placeholder='Address'
+                        placeholder='Dirección'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'address') && (
                         <span className='error'>{formErrors.find((issue) => issue.path[0] === 'address')?.message}</span>
@@ -187,24 +206,48 @@ function SignUp() {
                         name='password'
                         value={formData.password}
                         onChange={handleChange}
-                        placeholder='Password'
+                        placeholder='Contraseña'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'password') && (
                         <span className='error'>{formErrors.find((issue) => issue.path[0] === 'password')?.message}</span>
                     )}
                 </div>
+                {/* Confirmar Contraseña */}
+                <div className='confirmPassword'>
+                    <label htmlFor='confirmPassword'></label>
+                    <input
+                        type='password'
+                        id='confirmPassword'
+                        name='confirmPassword'
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        placeholder='Confirmar Contraseña'
+                    />
+                    {formErrors?.find((issue) => issue.path[0] === 'confirmPassword') && (
+                        <span className='error'>{formErrors.find((issue) => issue.path[0] === 'confirmPassword')?.message}</span>
+                    )}
+                </div>                
                 {serverError && <span className="error">{serverError}</span>}
-                {signupSuccess && <span className="success">Registro exitoso</span>}
+                {signupSuccess &&
+                 <span className="success">Registro exitoso</span>
+
+                }
                 {/* Botones de acción */}
                 <div className='buttonAction'>
-                    <button className='button-send' type='submit'> Completed
-                        <TiThumbsUp size={20}/>
+                    <button className='button-send' type='submit'> Enviar
                     </button>
                 </div>
                 <div className="no-account">
-                    <p>You already have an account ? <Link to="/login">Login in BigCart</Link></p>
+                    <p>Ya tiene una cuenta? <Link className='linkSignUp' to="/login">Inicia sesión aqui</Link></p>
                 </div>
                 </div>
+                <div className='decorativo'>
+                <img 
+                    src={imgSignUp} 
+                    className={`imgSignUp ${formErrors ? 'error-present' : ''}`} 
+                    alt="Decorativo"
+                />
+            </div>
         </form>
     );
 }

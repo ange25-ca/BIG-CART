@@ -1,12 +1,16 @@
 //import '../../Control/assets/styles/login.css';
-import '../../Control/assets/styles/login.css'
+import '../assets/login.css'
 import React, { useState } from 'react';
 import { z } from 'zod';
 import { encryptData } from '../../Middlewares/encryption';
 import axiosInstance from '../../../Api/axiosConfig';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setUserId } from '../../../redux/userSlices';
 import { useDispatch } from 'react-redux';
+//Iconos del logeo
+import userIcon from '../assets/img/user.svg';
+import passwordIcon from '../assets/img/lock.svg';
+import imgLogin from '../assets/img/BigCardLogin.png'
 
 // Definir el esquema de validación usando Zod
 const loginSchema = z.object({
@@ -28,6 +32,8 @@ function Login() {
 
     // Se llama al dispatch
     const dispatch = useDispatch();
+    const navigate = useNavigate(); // Redirección
+
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = event.target;
@@ -61,13 +67,14 @@ function Login() {
             // Se supone que userID es la clave de en la respuesta 
                 dispatch(setUserId(result.userId));
                 setLoginSuccess(true);
+                navigate('/');
+
             } else {
-                setServerError("Error: No se recibió el ID de usuario.");
+                setServerError("La contraseña o usario son incorrectos");
                 setLoginSuccess(false);
             }
         } catch (error) {
-            console.error("Error al cifrar o enviar datos:", error);
-            setServerError("Error al iniciar sesión. Inténtalo de nuevo.");
+            setServerError("Error al iniciar sesión. Inténtalo más tarde.");
             setLoginSuccess(false);
         }
     }; 
@@ -76,18 +83,21 @@ function Login() {
         <form className='FormLogin' onSubmit={(event) => event.preventDefault()}>
             <div className='ContentFormLogin'>
                 <div className='titleLogin'>
-                    <h1>LOGIN IN</h1>
+                    <h1>Iniciar sesión</h1>
                 </div>
                 <div className='name'>
                     <label htmlFor='username'></label>
+                    <div className='inputIcon'>
+                        <img src={userIcon} alt='User Icon' className='iconUser' />
                     <input
                         type='text'
                         id='username'
                         name='username'
                         value={formData.username}
                         onChange={handleChange}
-                        placeholder='Username'
+                        placeholder='Usuario'
                     />
+                    </div>
                     {formErrors?.find((issue) => issue.path[0] === 'username') && (
                         <span className='error'>
                             {formErrors.find((issue) => issue.path[0] === 'username')?.message}
@@ -96,14 +106,17 @@ function Login() {
                 </div>
                 <div className='password'>
                     <label htmlFor='password'></label>
+                    <div className='inputIcon'>
+                        <img src={passwordIcon} alt='Pass Icon' className='iconPassword' />
                     <input
                         type='password'
                         id='password'
                         name='password'
                         value={formData.password}
                         onChange={handleChange}
-                        placeholder='Password'
+                        placeholder='Contraseña'
                     />
+                    </div>
                     {formErrors?.find((issue) => issue.path[0] === 'password') && (
                         <span className='error'>
                             {formErrors.find((issue) => issue.path[0] === 'password')?.message}
@@ -118,8 +131,11 @@ function Login() {
                     </button>
                 </div>
                 <div className="no-account">
-                    <p>Don´t have an account? <Link to="/SignUp">Get BigCart account now</Link></p>
+                    <p>Aun no tienes una cuenta? <Link className="signup-link" to="/SignUp">Crea una cuenta aqui</Link></p>
             </div>
+            </div>
+            <div>
+                <img src={imgLogin} className='imgLogin' alt="Decorativo"/>
             </div>
         </form>
     );

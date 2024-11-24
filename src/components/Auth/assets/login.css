@@ -1,0 +1,237 @@
+:root {
+    --primary-color: #F6BD3B;
+    --second-color: #0c3762;
+    --third-color: #222020a2;
+    --font-color: #080808;
+    --error-color: #e8f885;
+    --bacground-color: #100f0b;
+    --bacground-color1: #FFF;
+    --background-color: var(--bacground-color);
+  }
+  
+  .FormLogin {
+    width: 100%;
+    height: 400px;
+    margin: 2rem auto;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: var(--third-color);
+    color: black;
+    border-width: 1.5px;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+  }
+  
+  .ContentFormLogin {
+    width: 100%;
+    font-size: 10px;
+    border-color: var(--second-color);
+    color: black;
+    margin-top: 4px;
+    border-width: 1.5px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: solid #F6BD3B;
+  }
+
+  .imgLogin{
+    width: 350px;
+    height: 325px;
+    margin-left: 10px;
+  }
+
+  .inputIcon{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    line-height: 2px;
+    gap: 10px;
+  }
+
+  .iconUser, .iconPassword{
+      margin-top: -1rem;
+  }
+  
+  .encabezado-login {
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+  }
+
+
+  input[type="text"], input[type="password"]{
+    padding: 20px;
+    background-color: #ffffff90;
+    border: 1px solid #cccccc7f;
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: var(--bacground-color);
+    outline: none; 
+    display: flex;
+  }
+  
+  input[type="text"]:focus {
+    border-color: var(--accent-color); 
+    border: solid;
+    border-color: #9e7e32;
+    outline: none; /* Elimina el borde de enfoque */
+  }
+  
+  input::placeholder{
+    color: #4d4d4e;
+    opacity: 0.9;
+  }
+  
+  .titleLogin{
+    padding: 5px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  .name{
+    width: 90%;
+    align-items: center;
+    font-size: 16px;
+    margin: 0 30px;
+    margin-bottom: 2px;
+  }
+
+  .password{
+    width: 90%;
+    margin: 0 30px;
+    margin-bottom: 2px;
+    font-size: 16px;
+  }
+
+  .button_Send {
+    width: 100%;
+    font-size: 13px;
+    padding: 10px;
+    border-radius: 60px;
+    cursor: pointer;
+    outline: none;
+   
+  }
+
+  .button_Send:hover{
+    background-color: var(--primary-color);
+    color: #2c2c2c;
+  }
+
+  .buttonAction{
+    display: flex;
+    flex-direction: initial;
+    gap: 1rem;
+  }
+  
+  .error {
+    margin: 2rem;
+    font-size: 12px;
+    text-align: center;
+    color: var(--error-color);
+    font-style: bold;
+  }
+  .signup-link {
+    color: #e48811; /* Color del texto */
+  }
+
+  .signup-link:hover{
+    color: #0c3762;
+  }
+
+/* Media query para pantallas medianas entre 400px y 767px */
+@media (min-width: 401px) and (max-width: 767px) {
+  .FormLogin {
+    max-width: 800px;
+    padding: 15px;
+    margin: 2rem auto;
+  }
+
+  .button_Send {
+    max-width: 150px;
+    margin: 0 auto;
+  }
+
+  .FormLogin h1 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .ContentFormLogin{
+    border: none;
+  }
+
+  .buttonAction {
+    flex-direction: column;
+    gap: 0.5rem; 
+  }
+
+  .imgLogin {
+    display: none; /* Oculta la imagen en pantallas pequeñas */
+  }
+}
+
+/* Media query para pantallas grandes (desde 768px en adelante) */
+@media (min-width: 768px) {
+  .FormLogin {
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .ContentFormLogin {
+    max-width: 339px;
+    margin-left: 32px;
+  }
+
+  .button_Send {
+    max-width: 100px;
+  }
+
+  .FormLogin h1 {
+    font-size: 24px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .buttonAction {
+    gap: 1rem;
+    flex-direction: row;
+  }
+
+}
+
+/* Media query para pantallas pequeñas (máximo 400px) */
+@media (max-width: 400px) {
+  .FormLogin {
+    margin: 3rem auto;
+    padding: 10px;
+    display: block;
+    height: auto;
+  }
+
+  .FormLogin h1 {
+    font-size: 18px;
+    overflow: hidden;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .button_Send {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .buttonAction {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .imgLogin {
+    display: none; /* Oculta la imagen en pantallas pequeñas */
+  }
+}
