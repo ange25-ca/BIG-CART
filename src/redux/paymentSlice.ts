@@ -1,44 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Definir la estructura del estado de pago
 interface PaymentState {
-  cardholderName: string;  // Nombre del titular de la tarjeta
-  cardNumber: string;      // Número de la tarjeta
-  expirationDate: string;  // Fecha de expiración (MM/AA)
-  cvv: string;             // Código de seguridad (CVV)
-  amount: number;          // Monto a pagar
+  cardNumber: string;
+  expirationDate: string;
+  cvv: string;
+  cardholderName: string;
+  error: string | null; // Solo almacena errores, no los calcula
 }
 
-// Estado inicial con valores vacíos o predeterminados
 const initialState: PaymentState = {
-  cardholderName: '',
   cardNumber: '',
   expirationDate: '',
   cvv: '',
-  amount: 0,
+  cardholderName: '',
+  error: null,
 };
 
-// Crear el slice de pago
 const paymentSlice = createSlice({
   name: 'payment',
   initialState,
   reducers: {
-    // Acción para actualizar cualquier campo del estado de pago
     updateField: (
       state,
-      action: PayloadAction<{ field: keyof PaymentState; value: string | number }>
+      action: PayloadAction<{ field: keyof PaymentState; value: string }>
     ) => {
-      //const { field, value } = action.payload;
-      // Actualizar el campo dinámico en el estado
-      //state[field] = value as PaymentState[keyof PaymentState];
+      const { field, value } = action.payload;
+      state[field] = value;
     },
-    // Acción para restablecer el estado de pago
-    resetPayment: () => initialState,
+    setError: (state, action: PayloadAction<string | null>) => {
+      state.error = action.payload; // Permite establecer un mensaje de error
+    },
   },
 });
 
-// Exportar las acciones generadas
-export const { updateField, resetPayment } = paymentSlice.actions;
-
-// Exportar el reducer del slice
+export const { updateField, setError } = paymentSlice.actions;
 export default paymentSlice.reducer;
