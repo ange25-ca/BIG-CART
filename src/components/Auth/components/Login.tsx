@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 //Iconos del logeo
 import userIcon from '../assets/img/user.svg';
 import passwordIcon from '../assets/img/lock.svg';
-import imgLogin from '../assets/img/BigCardLogin.jpg'
+import imgLogin from '../assets/img/BigCardLogin.png'
 
 // Definir el esquema de validación usando Zod
 const loginSchema = z.object({
