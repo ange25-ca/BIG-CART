@@ -55,7 +55,7 @@ const ShoppingCart: React.FC = () => {
           <div className="balance">
             <p>Total: <strong>${totalAmount.toFixed(2)}</strong></p>
           </div>
-          <button onClick={() => console.log("Proceder al pago")} className="cart-checkout">
+          <button onClick={() => navigate('/cartPayment')} className="cart-checkout">
             Proceder al Pago
           </button>
           <button onClick={() => console.log("Carrito vaciado")} className="cart-clear">
