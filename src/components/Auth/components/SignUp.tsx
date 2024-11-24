@@ -4,17 +4,17 @@ import { z } from 'zod';
 import axiosInstance from '../../../Api/axiosConfig';
 import { encryptData } from '../../Middlewares/encryption';
 import { Link, useNavigate} from 'react-router-dom';
-
+import imgSignUp from '../assets/img/imgSignUp.png'
 // Definir el esquema de validación usando Zod
 const SignUpSchema = z.object({
-  username: z.string().min(1, { message: "El nombre del usuario es requerido" }),
+  username: z.string().min(1, { message: "El nombre es requerido" }),
   lastname: z.string().min(1, { message: 'El apellido es requerido' }),
-  age: z.union([z.string().min(1, { message: 'La edad no puede estar vacía' }), z.number().min(0, { message: 'La edad no puede ser negativa' }).max(120, { message: 'La edad no puede ser mayor de 120' })]), // Permitir cadena vacía o número
+  age: z.union([z.string().min(1, { message: 'Ingrese su edad' }), z.number().min(0, { message: 'La edad no puede ser negativa' }).max(120, { message: 'La edad no puede ser mayor de 120' })]), // Permitir cadena vacía o número
   email: z.string().min(8, { message: 'El email es requerido' }),
   phonenumber: z.string().regex(/^\+?\d{10,15}$/, "Número de teléfono no válido"),
   address: z.string().min(10, { message: 'La dirección es obligatoria' }),
-  password: z.string().min(6, { message: 'La contraseña debe tener al menos 6 caracteres' }),
-  confirmPassword: z.string().min(6, { message: 'La confirmación de contraseña es requerida' }),  // Nueva propiedad
+  password: z.string().min(6, { message: 'El minimo de cacteres son 6' }),
+  confirmPassword: z.string().min(6, { message: 'La contraseña no coincide' }),  // Nueva propiedad
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Las contraseñas no coinciden",
   path: ["confirmPassword"], 
@@ -238,9 +238,16 @@ function SignUp() {
                     </button>
                 </div>
                 <div className="no-account">
-                    <p>Ya tiene una cuenta? <Link to="/login">Inicia sesión aqui</Link></p>
+                    <p>Ya tiene una cuenta? <Link className='linkSignUp' to="/login">Inicia sesión aqui</Link></p>
                 </div>
                 </div>
+                <div className='decorativo'>
+                <img 
+                    src={imgSignUp} 
+                    className={`imgSignUp ${formErrors ? 'error-present' : ''}`} 
+                    alt="Decorativo"
+                />
+            </div>
         </form>
     );
 }

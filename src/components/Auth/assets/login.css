@@ -62,7 +62,7 @@
   }
 
 
-  input[type="text"], input[type="password"] {
+  input[type="text"], input[type="password"]{
     padding: 20px;
     background-color: #ffffff90;
     border: 1px solid #cccccc7f;
@@ -76,7 +76,8 @@
   input[type="text"]:focus {
     border-color: var(--accent-color); 
     border: solid;
-  border-color: #9e7e32;
+    border-color: #9e7e32;
+    outline: none; /* Elimina el borde de enfoque */
   }
   
   input::placeholder{
