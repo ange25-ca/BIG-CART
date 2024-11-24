@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 //Iconos del logeo
 import userIcon from '../assets/img/user.svg';
 import passwordIcon from '../assets/img/lock.svg';
+import imgLogin from '../assets/img/BigCardLogin.jpg'
 
 // Definir el esquema de validación usando Zod
 const loginSchema = z.object({
@@ -130,8 +131,11 @@ function Login() {
                     </button>
                 </div>
                 <div className="no-account">
-                    <p>Aun no tienes una cuenta? <Link to="/SignUp">Crea una cuenta aqui</Link></p>
+                    <p>Aun no tienes una cuenta? <Link className="signup-link" to="/SignUp">Crea una cuenta aqui</Link></p>
             </div>
+            </div>
+            <div>
+                <img src={imgLogin} className='imgLogin' alt="Decorativo"/>
             </div>
         </form>
     );
