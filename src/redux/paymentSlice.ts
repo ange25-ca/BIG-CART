@@ -1,3 +1,4 @@
+// paymentSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface PaymentState {
@@ -5,7 +6,6 @@ interface PaymentState {
   expirationDate: string;
   cvv: string;
   cardholderName: string;
-  error: string | null; // Solo almacena errores, no los calcula
 }
 
 const initialState: PaymentState = {
@@ -13,25 +13,18 @@ const initialState: PaymentState = {
   expirationDate: '',
   cvv: '',
   cardholderName: '',
-  error: null,
 };
 
 const paymentSlice = createSlice({
   name: 'payment',
   initialState,
   reducers: {
-    updateField: (
-      state,
-      action: PayloadAction<{ field: keyof PaymentState; value: string }>
-    ) => {
-      const { field, value } = action.payload;
-      state[field] = value;
+    updateField: (state, action: PayloadAction<{ field: keyof PaymentState; value: string }>) => {
+      state[action.payload.field] = action.payload.value;
     },
-    setError: (state, action: PayloadAction<string | null>) => {
-      state.error = action.payload; // Permite establecer un mensaje de error
-    },
+    resetPayment: () => initialState, // Acción para reiniciar el estado
   },
 });
 
-export const { updateField, setError } = paymentSlice.actions;
+export const { updateField, resetPayment } = paymentSlice.actions;
 export default paymentSlice.reducer;

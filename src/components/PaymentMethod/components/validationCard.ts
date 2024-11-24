@@ -24,11 +24,6 @@ export type CardType = keyof typeof cardIcons;
 export const validateCardType = (cardNumber: string): CardType => {
     const cleanCardNumber = cardNumber.replace(/\s/g, '');
   
-    // Comprobar si la tarjeta es un número de 16 dígitos compuesto solo por ceros
-    if (/^0{16}$/.test(cleanCardNumber)) {
-      return 'Desconocida'; // O el tipo que prefieras
-    }
-  
     if (/^4\d{12}(\d{3})?$/.test(cleanCardNumber)) {
       return 'Visa';
     }

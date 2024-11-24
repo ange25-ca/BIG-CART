@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { updateField } from '../../../redux/paymentSlice';
+import { resetPayment, updateField } from '../../../redux/paymentSlice';
 import { z } from 'zod';
 import Confetti from 'react-confetti';
 import { useNavigate } from 'react-router-dom';
@@ -18,19 +18,46 @@ const CartPayment: React.FC = () => {
   const [errors, setErrors] = useState<Record<string, string | null>>({});
   const [isPaymentSuccess, setIsPaymentSuccess] = useState(false);
 
-  // Esquema de validación Zod
-  const paymentSchema = z.object({
-    cardNumber: z
-      .string()
-      .regex(/^\d{4} \d{4} \d{4} \d{4}$/, 'Número de tarjeta inválido')
-      .refine((value) => value.replace(/\s/g, '').length === 16, {
-        message: 'El número de tarjeta debe tener como mínimo 16 dígitos',
-      }),
-    expirationDate: z.string().regex(/^\d{2}\/\d{2}$/, 'Fecha de expiración no es válida'),
-    cvv: z.string().length(3, 'CVV no es válido'),
-    cardholderName: z.string().min(1, 'El nombre del titular es obligatorio'),
-  });
 
+// Esquema de validación Zod
+const paymentSchema = z.object({
+  cardNumber: z
+    .string()
+    .refine((value) => {
+      const cardType = validateCardType(value.replace(/\s/g, ""));
+      const length = value.replace(/\s/g, "").length;
+      return (
+        (cardType === "AmericanExpress" && length === 15) ||
+        (cardType !== "AmericanExpress" && length === 16)
+      );
+    }, {
+      message: "Número de tarjeta inválido. Verifica la longitud según el tipo de tarjeta.",
+    }),
+  expirationDate: z
+    .string()
+    .regex(/^\d{2}\/\d{2}$/, "Fecha de expiración no es válida")
+    .refine((value) => {
+      const [month, year] = value.split("/").map(Number);
+      const currentYear = new Date().getFullYear() % 100; // Año en formato YY
+      return month >= 1 && month <= 12 && year >= currentYear;
+    }, {
+      message: "Fecha de expiración inválida. Revisa el mes y el año.",
+    }),
+  cvv: z
+    .string()
+    .refine((value) => {
+      // El numero de tarjeta ya ha sido validado antes de usar este esquema
+      const cardType = validateCardType(payment.cardNumber.replace(/\s/g, ""));
+      return (
+        (cardType === "AmericanExpress" && value.length === 4) ||
+        (cardType !== "AmericanExpress" && value.length === 3)
+      );
+    }, {
+      message: "CVV no válido para el tipo de tarjeta.",
+    }),
+  cardholderName: z.string().min(1, "El nombre del titular es obligatorio"),
+});
+  
   const navigate = useNavigate();
 
   // Validación de campos
@@ -52,7 +79,9 @@ const CartPayment: React.FC = () => {
     e.preventDefault();
     if (validateFields()) {
       setIsPaymentSuccess(true);
-
+      // Limpiar el estado después de confirmar el pago
+      dispatch(resetPayment());
+      
       // Redirige a la página principal después de unos segundos
       setTimeout(() => {
         navigate('/');
@@ -63,6 +92,24 @@ const CartPayment: React.FC = () => {
   // Detectar el tipo de tarjeta
   const cardType: CardType = validateCardType(payment.cardNumber);
   const cardIcon = cardIcons[cardType];
+
+  // Manejo del cambio en el número de tarjeta
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value.replace(/\D/g, '');
+    const cardType = validateCardType(rawValue);
+
+    // Ajustar la longitud máxima según el tipo de tarjeta
+    const maxLength = cardType === 'AmericanExpress' ? 15 : 16;
+    const limitedValue = rawValue.slice(0, maxLength);
+
+    // Formatear según el tipo de tarjeta
+    const formattedValue =
+      cardType === 'AmericanExpress'
+        ? limitedValue.match(/.{1,4}|.{1,6}|.{1,5}/g)?.join(' ') 
+        : limitedValue.match(/.{1,4}/g)?.join(' '); 
+
+    dispatch(updateField({ field: 'cardNumber', value: formattedValue || '' }));
+  };
 
   if (isPaymentSuccess) {
     return (
@@ -104,12 +151,7 @@ const CartPayment: React.FC = () => {
               width: '100%',
               boxSizing: 'border-box',
             }}
-            onChange={(e) => {
-              const rawValue = e.target.value.replace(/\D/g, '');
-              const limitedValue = rawValue.slice(0, 16);
-              const formattedValue = limitedValue.match(/.{1,4}/g)?.join(' ') || '';
-              dispatch(updateField({ field: 'cardNumber', value: formattedValue }));
-            }}
+            onChange={handleCardNumberChange}
           />
           {errors.cardNumber && <p className="error">{errors.cardNumber}</p>}
         </div>
@@ -138,14 +180,17 @@ const CartPayment: React.FC = () => {
           <div>
             <label htmlFor="cvv">CVV</label>
             <input
-              type="text"
-              id="cvv"
-              placeholder="123"
-              value={payment.cvv}
-              maxLength={3}
-              onChange={(e) =>
-                dispatch(updateField({ field: 'cvv', value: e.target.value }))
-              }
+             type="text"
+             id="cvv"
+             placeholder="123"
+             value={payment.cvv}
+             maxLength={cardType === 'AmericanExpress' ? 4 : 3} // Ajusta dinámicamente la longitud
+             onChange={(e) => {
+               const rawValue = e.target.value.replace(/\D/g, ''); // Remueve caracteres no numéricos
+               const maxLength = cardType === 'AmericanExpress' ? 4 : 3;
+               const validValue = rawValue.slice(0, maxLength); // Asegura que no exceda la longitud máxima
+               dispatch(updateField({ field: 'cvv', value: validValue }));
+             }}
             />
             {errors.cvv && <p className="error">{errors.cvv}</p>}
           </div>
