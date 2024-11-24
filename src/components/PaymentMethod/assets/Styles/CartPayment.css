@@ -109,6 +109,42 @@
     font-size: 12px;
     color: rgb(174, 16, 16);
   }
+
+
+  .payment-success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .payment-success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .success-modal {
+    background: white;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .success-modal h1 {
+    color: #4caf50;
+    margin-bottom: 10px;
+  }
+  
+  .success-modal p {
+    color: #555;
+    margin-top: 0;
+  }
+  
   
   /* Pestañas grandes */
 @media (min-width: 786px) {
