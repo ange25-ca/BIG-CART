@@ -9,7 +9,7 @@ interface ProductProps {
 const CardProduct: React.FC<ProductProps> = ({ product }) => {
   return (
     <div className="card">
-      <img src={'https://picsum.photos/200/200'} alt={product.nombreProducto} className="product-image" />
+      <img src={product.imagenUrl} alt={product.nombreProducto} className="product-image" />
       {/* {product.discount && <span className="discount-badge">{product.discount}% OFF</span>} */}
       <h3 className="product-name">{product.nombreProducto}</h3>
       <p className="category">{product.categoria}</p>

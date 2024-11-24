@@ -28,17 +28,17 @@
     transform: translateX(0);
     left: 0;
     opacity: 1;
-    z-index: 2;
+    z-index: 1;
   }
   
   .carousel-item.inactive {
-    transform: translateX(100%);
+    transform: translateX(10%);
   }
   
   .carousel-buttons {
     position: absolute;
     bottom: 15px;
-    z-index: 99999;
+    z-index: 3;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
