@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logoImagePath from '../assets/img/BIgCart.svg';
 import iconCart from '../assets/img/icon-cart.svg';
 import "../assets/styles/NavBar.css";
+import { jwtDecode } from 'jwt-decode';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
-
+  const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -26,6 +27,26 @@ const Navbar: React.FC = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const handleLogout = (): void => {
+    localStorage.removeItem('authToken');
+    navigate('/'); // Redirige al home después de cerrar sesión
+  };
+
+  // Verifica si el usuario está autenticado
+  const isAuthenticated = (): boolean => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      try {
+        const decodedToken: { exp: number } = jwtDecode(token);
+        const isExpired = decodedToken.exp * 1000 < Date.now();
+        return !isExpired;
+      } catch (error) {
+        return false; 
+      }
+    }
+    return false;
+  };
+
   return (
     <nav className="navbar">
       {/* Logo */}
@@ -43,13 +64,13 @@ const Navbar: React.FC = () => {
         {/* Dropdown y carrito */}
         <div className="navbar-right">
           <div className="navbar-dropdown">
-          <button onClick={toggleDropdown} className="dropdown-toggle">
-            <div className={`hamburger-icon ${isDropdownOpen ? 'open' : ''}`}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </button>
+            <button onClick={toggleDropdown} className="dropdown-toggle">
+              <div className={`hamburger-icon ${isDropdownOpen ? 'open' : ''}`}>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </button>
             <ul className={`dropdown-menu ${isDropdownOpen ? 'open' : ''}`}>
               <li className="nav-item">
                 <Link to="/about-us" className={`nav-link ${isActive("/about-us")}`} onClick={closeDropdown}>Nosotros</Link>
@@ -60,22 +81,30 @@ const Navbar: React.FC = () => {
               <li className="nav-item">
                 <Link to="/contactus" className={`nav-link ${isActive("/contactus")}`} onClick={closeDropdown}>Contáctenos</Link>
               </li>
-              <li className="nav-item">
-                <Link to="/login" className={`nav-link ${isActive("/login")}`} onClick={closeDropdown}>Iniciar sesión</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/account" className={`nav-link ${isActive("/account")}`} onClick={closeDropdown}>Mi cuenta</Link>
-              </li>
+              {/* Aquí cambia la opción según si está autenticado muestra el link correspondiente*/}
+              {isAuthenticated() ? (
+                <>
+                  <li className="nav-item">
+                    <Link to="/account" className={`nav-link ${isActive("/account")}`} onClick={closeDropdown}>Mi cuenta</Link>
+                  </li>
+                  <li className="nav-item">
+                  <Link to="" className={`nav-link`} onClick={handleLogout}>Cerrar sesión</Link>
+                  </li>
+                </>
+              ) : (
+                <li className="nav-item">
+                  <Link to="/login" className={`nav-link ${isActive("/login")}`} onClick={closeDropdown}>Iniciar sesión</Link>
+                </li>
+              )}
             </ul>
           </div>
 
           {/* Carrito */}
-          {/* Carrito */}
-            <div className={`btn-cart ${isActive("/Cart") ? 'active' : ''}`}>
-              <Link to="/Cart">
-                <img src={iconCart} width="25" height="25" alt="Cart Icon" />
-              </Link>
-            </div>
+          <div className={`btn-cart ${isActive("/Cart") ? 'active' : ''}`}>
+            <Link to="/Cart">
+              <img src={iconCart} width="25" height="25" alt="Cart Icon" />
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -97,12 +126,21 @@ const Navbar: React.FC = () => {
           <li className={`nav-item ${isActive("/contactus")}`}>
             <Link to="/contactus" className="nav-link" onClick={toggleMobileMenu}>Contáctenos</Link>
           </li>
-          <li className={`nav-item ${isActive("/login")}`}>
-            <Link to="/login" className="nav-link" onClick={toggleMobileMenu}>Iniciar sesión</Link>
-          </li>
-          <li className={`nav-item ${isActive("/account")}`}>
-            <Link to="/account" className="nav-link" onClick={toggleMobileMenu}>Mi cuenta</Link>
-          </li>
+          {/* Menú para iniciar o cerrar sesión */}
+          {isAuthenticated() ? (
+            <>
+              <li className="nav-item">
+                <Link to="/account" className="nav-link" onClick={toggleMobileMenu}>Mi cuenta</Link>
+              </li>
+              <li className="nav-item">
+                <button className="nav-link" onClick={() => { handleLogout(); toggleMobileMenu(); }}>Cerrar sesión</button>
+              </li>
+            </>
+          ) : (
+            <li className="nav-item">
+              <Link to="/login" className="nav-link" onClick={toggleMobileMenu}>Iniciar sesión</Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
