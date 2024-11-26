@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { z } from 'zod';
 import { encryptData } from '../../Middlewares/encryption';
 import axiosInstance from '../../../Api/axiosConfig';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { setUserId } from '../../../redux/userSlices';
 import { useDispatch } from 'react-redux';
 //Iconos del logeo
@@ -33,6 +33,8 @@ function Login() {
     // Se llama al dispatch
     const dispatch = useDispatch();
     const navigate = useNavigate(); // Redirección
+    const location = useLocation(); // Para acceder a la ubicación antes del login
+
 
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -59,20 +61,23 @@ function Login() {
                 },
             });
     
-            // Procesar la respuesta
             const result = response.data;
-            
-            // Despachar el ID del usuario al store de Redux
-            if (result && result.userId) { 
-            // Se supone que userID es la clave de en la respuesta 
-                dispatch(setUserId(result.userId));
-                setLoginSuccess(true);
-                navigate('/');
 
-            } else {
-                setServerError("La contraseña o usario son incorrectos");
-                setLoginSuccess(false);
-            }
+            if (result && result.token && result.userId) { 
+            // Supone que 'token' y 'userId' son las claves en la respuesta del backend
+            localStorage.setItem('authToken', result.token); // Guardar el token en localStorage
+            dispatch(setUserId(result.userId)); // Despachar el ID del usuario al store de Redux
+
+            setLoginSuccess(true);
+            // Redirigir a la ruta almacenada en el estado, o al inicio si no hay ruta previa
+            const redirectTo = (location.state as any)?.from || '/';
+            navigate(redirectTo);
+            //navigate('/'); // Redirigir al usuario después del inicio de sesión
+        } else {
+            setServerError("La contraseña o usuario son incorrectos");
+            setLoginSuccess(false);
+        }
+
         } catch (error) {
             setServerError("Error al iniciar sesión. Inténtalo más tarde.");
             setLoginSuccess(false);
