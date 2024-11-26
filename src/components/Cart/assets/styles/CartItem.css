@@ -6,7 +6,7 @@
   margin: 15px 0;
   border: none;
   border-radius: 12px;
-  background-color: #ffffff;
+  background-color: #EEE8E0;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
@@ -42,7 +42,7 @@
 }
 
 .cart-item-title:hover {
-  color: #007BFF; /* Cambio de color al pasar el mouse */
+  color: #8C8C8C; /* Cambio de color al pasar el mouse */
 }
 
 .cart-item-price {
@@ -90,7 +90,7 @@
 }
 
 .remove-item:hover {
-  background-color: #ff1a1a;
+  background-color: #c84545;
 }
 
 .quantity-btn img,
@@ -107,6 +107,7 @@
   border-radius: 18px;
   text-align: center;
   font-size: 1rem;
+  margin-bottom: 4px;
   transition: background-color 0.3s ease;
 }
 

@@ -1,13 +1,9 @@
 import '../assets/styles/Home.css';
 import TapeClientes from './CarouselClientes';
 import CarouselPromotions from '../components/CarouselPromotions';
+import TopProductsCarousel from "../components/CarouselProducts";
+import CategoriesCarousel from "../components/CarouselCategories";
 import { Link } from 'react-router-dom';
-import imgElect from '../../Productos/assets/img/elect.jpg';
-import imgHog from '../../Productos/assets/img/hogar.webp';
-import imgJug from '../../Productos/assets/img/plasticos.jpg';
-import product1 from '../assets/img/llaves.jpg';
-import product2 from '../assets/img/amazon-fire.webp';
-import product3 from '../assets/img/plumas-2.webp';
 
 
 const Home = () => {
@@ -41,50 +37,10 @@ const Home = () => {
        {/* Categorías */}
        {/* Categorías */}
       <section className="categories">
-        <h2>Las categorías más top</h2>
         <div className="category-list">
-          <div className="category-card">
-            <img src={imgElect} alt="Electrónica" />
-            <div className="category-info">
-              <h3>Electrónica</h3>
-              <div className="rating">
-                ⭐⭐⭐⭐⭐
-                <span>5.0</span>
-              </div>
-            </div>
-          </div>
-          <div className="category-card">
-            <img src={imgHog} alt="Ropa" />
-            <div className="category-info">
-              <h3>Ropa</h3>
-              <div className="rating">
-                ⭐⭐⭐⭐☆
-                <span>4.7</span>
-              </div>
-            </div>
-          </div>
-          <div className="category-card">
-            <img src={imgHog}alt="Hogar" />
-            <div className="category-info">
-              <h3>Hogar</h3>
-              <div className="rating">
-                ⭐⭐⭐⭐☆
-                <span>4.5</span>
-              </div>
-            </div>
-          </div>
-          <div className="category-card">
-            <img src={imgJug} alt="Juguetes" />
-            <div className="category-info">
-              <h3>Juguetes</h3>
-              <div className="rating">
-                ⭐⭐⭐⭐☆
-                <span>4.6</span>
-              </div>
-            </div>
-          </div>
+         <CategoriesCarousel />
         </div>
-        <Link to="/products" className="category-button">
+        <Link to="/productos" className="category-button">
           Ir a categorías
         </Link>
       </section>
@@ -94,21 +50,7 @@ const Home = () => {
       <section className="featured-products">
         <h2>Productos top</h2>
         <div className="product-list">
-          <div className="product-card">
-            <img src={product1} alt="Producto 1" />
-            <h3>Producto 1</h3>
-            <p>$29.99</p>
-          </div>
-          <div className="product-card">
-            <img src={product2} alt="Producto 2" />
-            <h3>Producto 2</h3>
-            <p>$39.99</p>
-          </div>
-          <div className="product-card">
-            <img src={product3} alt="Producto 3" />
-            <h3>Producto 3</h3>
-            <p>$19.99</p>
-          </div>
+          <TopProductsCarousel/>
         </div>
       </section>
 
@@ -125,7 +67,9 @@ const Home = () => {
       <section className="call-to-action">
         <h2>Únete a Nuestra Comunidad</h2>
         <p>Regístrate para recibir ofertas exclusivas y descuentos especiales.</p>
-        <button className="sign-up-btn">Regístrate Ahora</button>
+        <Link to="contactus" className="sign-up-btn">
+          Registrarse ahora
+        </Link>
       </section>
     </div>
   );
