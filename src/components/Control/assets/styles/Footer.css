@@ -37,15 +37,30 @@ main {
 /* Botón de toggle */
 .footer-toggle {
   position: fixed;
-  bottom: 0px;
+  bottom: 0; /* Pegado al borde inferior */
   right: 20px;
   background-color: #EC8304;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  padding: 10px 20px;
   font-size: 1rem;
   cursor: pointer;
   z-index: 1000;
+
+  /* Forma de montaña plana */
+  border-radius: 20px 20px 0 0; /* Más curva en los bordes superiores */
+  width: 120px; /* Ancho para simular una pestaña */
+  height: 40px; /* Altura de la pestaña */
+  text-align: center;
+
+  /* Sombra para darle efecto de profundidad */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto hover */
+.footer-toggle:hover {
+  background-color: #d67103;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Secciones del footer */
