@@ -37,7 +37,7 @@
 .cart-summary {
   flex: 1;
   padding: 20px;
-  background-color: #3686ff;
+  background-color: #EEE8E0;
   color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -47,46 +47,66 @@
   font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 15px;
+  color: #909090;
 }
 
 .cart-summary p {
   margin: 5px 0;
   font-size: 1rem;
+  color: #787878;
 }
 
 .cart-summary .balance p {
   font-size: 1.3rem;
+
 }
 
-/* Botones */
-.cart-checkout, .cart-clear {
-  padding: 12px 16px;
+.cart-checkout,
+.cart-clear {
+  display: flex;
+  align-items: center; /* Alinear icono y texto */
+  justify-content: center; /* Centrar contenido */
+  padding: 16px 20px; /* Más espacio */
   font-size: 1rem;
   font-weight: bold;
-  border-radius: 8px;
-  margin-top: 20px;
+  border-radius: 12px; /* Botones más redondeados */
+  margin: 10px 0; /* Espacio entre botones */
   width: 100%;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
 }
 
 .cart-checkout {
-  background-color: #0056b3;
+  background-color: #8c8c8c; /* Gris amigable */
   color: #fff;
+  border: 2px solid #c0bebe; /* Acento beige */
 }
 
 .cart-checkout:hover {
-  background-color: #003d80;
+  background-color: #6e6e6e; /* Gris más oscuro */
+  border-color: #a8a6a6; /* Acento beige más oscuro */
+  transform: scale(1.05); /* Animación ligera */
 }
 
 .cart-clear {
-  background-color: #ff5722;
-  color: #fff;
+  background-color: #d1c3b3; /* Beige amigable */
+  color: #333; /* Texto oscuro para contraste */
+  border: 2px solid #b2a595; /* Acento beige más oscuro */
 }
 
 .cart-clear:hover {
-  background-color: #e64a19;
+  background-color: #b9a796; /* Beige más oscuro */
+  border-color: #a09183; /* Beige oscuro */
+  transform: scale(1.05); /* Animación ligera */
 }
+
+.cart-checkout i,
+.cart-clear i {
+  margin-right: 25px; /* Espacio entre icono y texto */
+  font-size: 1.2rem; /* Icono más visible */
+}
+
 
 /* Métodos de Pago */
 .payment-methods {
@@ -97,12 +117,14 @@
 .payment-methods h4 {
   font-size: 1.2rem;
   margin-bottom: 10px;
+  color: #787878;
 }
 
 .payment-icons {
   display: flex;
   justify-content: center;
   gap: 10px;
+  color: #787878;
 }
 
 /* Responsividad */
