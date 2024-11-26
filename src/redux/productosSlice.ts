@@ -16,6 +16,7 @@ export const fetchProductos = createAsyncThunk<Producto[], void, {rejectValue: s
     'productos/fetchProductos',
     async(_, {rejectWithValue}) => {
         try {
+            await new Promise((resolve) => setTimeout(resolve, 2000)); 
             const productos = await obtenerProductos(); // se hace la solicitu a la api
             
             return productos;
