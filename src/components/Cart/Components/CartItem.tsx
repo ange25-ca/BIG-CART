@@ -7,21 +7,23 @@ import iconDelete from '../assets/img/remove_36dp_000_FILL0_wght400_GRAD0_opsz40
 interface CartItemProps {
   item: {
     idProducto: number;
-    nombre: string;
+    nombreProducto: string;
     cantidad: number;
     precio: number;
-    imagen: string;
+    imagen: string ;
   };
   onUpdateQuantity: (quantity: number) => void;
   onRemove: () => void;
 }
 
 const CartItemComponent: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove }) => {
+
+  console.log(item.imagen);
   return (
     <div className="cart-item">
-      <img src={item.imagen} alt={item.nombre} />
+      <img src={item.imagen} alt={item.nombreProducto} />
       <div className="cart-item-details">
-        <div className="cart-item-title">{item.nombre}</div>
+        <div className="cart-item-title">{item.nombreProducto}</div>
         <div className="cart-item-quantity">
           <button onClick={() => onUpdateQuantity(item.cantidad - 1)} className="quantity-btn">
             <img src={iconAdd} />

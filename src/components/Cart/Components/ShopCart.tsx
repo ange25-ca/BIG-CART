@@ -1,17 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+
 import { FaCcVisa, FaCcMastercard, FaPaypal } from 'react-icons/fa';
 import { FiTrash2 } from 'react-icons/fi';
-import cartData from '../../../../public/shopCart.json';
+// import cartData from '../../../../public/shopCart.json';
+// import cartData from '../../../../public/shopCart.json';
 import CartItemComponent from './CartItem';
+import { RootState, AppDispatch } from '../../../redux/store';
+import { verCart} from '../../../controllers/cartController'
 import '../assets/styles/ShoppingCart.css';
+import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
 const ShoppingCart: React.FC = () => {
   const navigate = useNavigate();
-  const items = cartData;
+  const distpatch = useDispatch<AppDispatch>();
+  const {detallesCarrito, itemsCarrito, isLoading, error} = useSelector((state: RootState) => state.carrito);
+  useEffect(
+    () => {
+      distpatch(verCart());
+    }, [distpatch]
+  );
+
+  
 
   // Calcular el subtotal
-  const subtotal = items.reduce(
+  const subtotal = itemsCarrito.reduce(
     (total, item) => total + item.precio * item.cantidad,
     0
   );
@@ -36,7 +49,7 @@ const ShoppingCart: React.FC = () => {
       <div className="shopping-cart-content">
         {/* Lista de ítems con scroll activado cuando hay muchos elementos */}
         <div className="cart-items-container">
-          {items.map(item => (
+          {itemsCarrito.map(item => (
             <CartItemComponent
               key={item.idProducto}
               item={item}
