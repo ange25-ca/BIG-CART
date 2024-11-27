@@ -10,7 +10,8 @@ const store = configureStore({
     reducer: {
         productos: productosReducer,
         user: userReducer,
-        carrito: cartReducer
+        carrito: cartReducer,
+        payment: paymentReducer,
     }
 });
 
