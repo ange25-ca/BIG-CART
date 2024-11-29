@@ -9,38 +9,60 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div className="home">
-      {/* Banner destacado */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1>Bienvenido a BigCart</h1>
-          <p>Productos de calidad al mejor precio</p>
-          <button className="shop-now-btn">Comprar Ahora</button>
+        {/* Ofertas Especiales */}
+        <section className="special-offers">
+          <div className="offer-list">
+            <CarouselPromotions />
+          </div>
+        </section>
+      {/* Bienvenida */}
+      <section className="minimalist-welcome">
+        <div className="content-wrapper">
+          <h1 className="headline">Donde la variedad y los precios al por mayor se encuentran.</h1>
+          <p className="subheadline">Explora miles de productos a precios competitivos y disfruta de una experiencia de compra rápida y confiable.</p>
+          <a href="#explorar" className="cta-button">Explorar ahora</a>
         </div>
       </section>
-      {/* Bienvenida */}
-      <section className="welcome-section">
-      <h2>Donde la variedad y los precios al por mayor se encuentran.</h2>
-      <p>Nos enorgullece ofrecerte miles de productos en todas las categorías imaginables, diseñados para satisfacer todas tus necesidades de negocio. 
-        Desde artículos de tendencia hasta básicos de alta demanda, en BigCart encontrarás un catálogo vasto y actualizado pensado para 
-        ayudarte a abastecer tu negocio con facilidad y eficiencia.</p>
-      <p>Aquí, valoramos cada compra al por mayor y trabajamos para ofrecerte no solo precios competitivos, 
-        sino también una experiencia de compra rápida y confiable. 
-        ¡Explora nuestras categorías, selecciona los productos que necesitas y 
-        disfruta de los beneficios de comprar al por mayor con nosotros!</p>
-      </section>
+
       {/* Clientes */}
-      <section className="categories">
-        <h2>Nuestros clientes</h2>
+      <section className="categories-cli">
+      <h2 className="section-title-cli">Nuestros clientes</h2>
         <TapeClientes/>
       </section>
 
-       {/* Categorías */}
+       {/* reviews*/}
+       <section className="reviews">
+        <h2 className="section-title">Reseñas de nuestros clientes</h2>
+        <div className="reviews-container">
+          <div className="review-card">
+            <div className="review-card-content">
+              <p className="review-text">"Excelente servicio y precios competitivos. ¡Completamente recomendado!"</p>
+              <span className="review-author">- Juan Pérez</span>
+            </div>
+            <div className="review-icon">&#9733;</div>
+          </div>
+          <div className="review-card">
+            <div className="review-card-content">
+              <p className="review-text">"Un catálogo impresionante, siempre encuentro lo que necesito para mi negocio."</p>
+              <span className="review-author">- Ana Gómez</span>
+            </div>
+            <div className="review-icon">&#9733;</div>
+          </div>
+          <div className="review-card">
+            <div className="review-card-content">
+              <p className="review-text">"Compra fácil, entrega rápida. ¡Todo fue perfecto! lo que necesitaba para mi negocio."</p>
+              <span className="review-author">- Carlos Ruiz</span>
+            </div>
+            <div className="review-icon">&#9733;</div>
+          </div>
+        </div>
+      </section>
        {/* Categorías */}
       <section className="categories">
         <div className="category-list">
          <CategoriesCarousel />
         </div>
-        <Link to="/productos" className="category-button">
+        <Link to="/productos" className="category-button-home">
           Ir a categorías
         </Link>
       </section>
@@ -53,14 +75,6 @@ const Home = () => {
           <TopProductsCarousel/>
         </div>
       </section>
-
-      {/* Ofertas Especiales */}
-        <section className="special-offers">
-          <h2>Ofertas Especiales</h2>
-          <div className="offer-list">
-            <CarouselPromotions />
-          </div>
-        </section>
 
 
       {/* Llamada a la acción */}

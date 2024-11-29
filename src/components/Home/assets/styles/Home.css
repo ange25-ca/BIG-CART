@@ -30,11 +30,10 @@ main {
 .offer-list {
   position: relative;
   overflow: hidden;
+  height: 490px;
   width: 100%;
   max-width: 2500px;
   margin: 0 auto;
-  border-radius: 10px;
-  margin-bottom: 50px;
 }
 /* Ajustes para cada imagen en el carrusel */
 .carousel-item img {
@@ -70,9 +69,10 @@ main {
   position: absolute;
   bottom: 15px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-30%);
   display: flex;
   gap: 10px;
+  margin-bottom: 5px;
 }
 
 .carousel-buttons button {
@@ -102,6 +102,7 @@ main {
 
   .offer-list {
     padding: 10px;
+    height: 153px;
   }
 }
 
@@ -109,7 +110,7 @@ main {
 @keyframes fadeInLeft {
   0% {
     opacity: 0;
-    transform: translateX(-30px);
+    transform: translateX(-20px);
   }
   100% {
     opacity: 1;
@@ -128,74 +129,167 @@ main {
   }
 }
 
-/* Hero Section */
-.hero {
-  background: url('../img/1.png') no-repeat center center;
-  background-size: cover;
+/* Diseño de la sección */
+.minimalist-welcome {
+  background-color: #f6f6f6;
+  color: #2c3e50;
   padding: 100px 20px;
-  color: white;
   text-align: center;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  margin-top: -86px;
 }
 
-.hero-content {
-  animation: fadeInLeft 1.2s ease-in-out;
+.content-wrapper {
+  max-width: 900px;
+  width: 100%;
+  padding: 20px;
 }
 
-.hero-content h1 {
-  font-size: 3rem;
-  color: #ffffff;
-  margin-bottom: 15px;
-  -webkit-text-stroke: 1px black;
-}
-
-.hero-content p {
+.headline {
+  font-size: 3.5rem; /* Título grande y fuerte */
+  font-weight: 700;
+  line-height: 1.2;
+  color: #333;
   margin-bottom: 20px;
-  font-size: 1.2rem;
-  color: white;
-  font-weight: bold;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  letter-spacing: 1px; /* Espaciado de letras para mayor impacto */
+  animation: fadeIn 1.5s ease-out;
 }
 
-.shop-now-btn {
-  padding: 12px 25px;
-  background-color: #EC8304;
-  color: white;
-  border: none;
-  font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.596);
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+.subheadline {
+  font-size: 1.2rem; /* Texto secundario más pequeño */
+  font-weight: 400;
+  color: #555;
+  margin-bottom: 40px;
+  opacity: 0; /* Inicialmente invisible */
+  animation: fadeIn 1.5s ease-out 0.5s forwards; /* Animación con retraso */
 }
 
-.shop-now-btn:hover {
-  background-color: #d96f03;
-  transform: scale(1.1);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.cta-button {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #fff;
+  background-color: #00aaff; /* Color llamativo y moderno */
+  border-radius: 50px; /* Bordes redondeados para un toque elegante */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  letter-spacing: 1px;
 }
+
+.cta-button:hover {
+  background-color: #0088cc; /* Cambio de color al pasar el mouse */
+  transform: scale(1.05); /* Escala suave para mayor dinamismo */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .headline {
+    font-size: 2.5rem; /* Ajusta el tamaño del título para pantallas más pequeñas */
+  }
+  .offer-list {
+    height: 305px;
+  }
+
+  .subheadline {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    font-size: 1rem;
+    padding: 12px 25px;
+  }
+}
+
 
 /* Categorías */
+/* Estilos para la sección de categorías */
 .categories {
-  margin: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el contenido horizontalmente */
+  justify-content: center; /* Alinea el contenido verticalmente */
   text-align: center;
-  color: black;
+  background-color: #F6F6F6;
+  padding: 40px 20px;
+   /* Línea de separación sutil */
+  animation: fadeInRight 1.5s ease-in-out;
+}
+.categories-cli {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el contenido horizontalmente */
+  justify-content: center; /* Alinea el contenido verticalmente */
+  text-align: center;
+  background-color: #F6F6F6;
+  padding: 16px 20px;
   animation: fadeInRight 1.5s ease-in-out;
 }
 
-.categories h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #091057;
+
+/* Estilos para el contenedor del carrusel */
+.category-list {
+  width: 100%;
+  max-width: 1200px; /* Asegura que el carrusel no ocupe todo el ancho */
+  margin-bottom: 30px; /* Espacio debajo del carrusel */
 }
 
-.category-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+/* Estilos para el botón */
+.category-button-home {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  background-color: #EC8304; /* Mantenemos el color original */
+  color: white;
+  font-size: 16px;
+  font-weight: 500; /* Ligero grosor en el texto para un estilo más profesional */
+  text-decoration: none;
+  border: 2px solid #EC8304; /* Bordes sutiles del mismo color */
+  border-radius: 25px; /* Bordes rectos */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transiciones sutiles */
+}
+
+/* Efecto al pasar el mouse */
+.category-button-home:hover {
+  background-color: white; /* Fondo blanco para el hover */
+  color: #EC8304; /* Cambiar el color del texto al color base */
+  border-color: #EC8304; /* Aseguramos que el borde también cambie */
+}
+
+/* Efecto al hacer clic (activo) */
+.category-button-home:active {
+  background-color: #D47102; /* Un color ligeramente más oscuro al hacer clic */
+  border-color: #D47102; /* Cambio de borde al hacer clic */
+  transform: translateY(1px); /* Efecto de hundimiento sutil */
+}
+
+
+/* Animación para la entrada */
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .category-card {
@@ -283,9 +377,11 @@ main {
 
 h2 {
   font-size: 32px;
-  color: #024CAA;
+  color: #333333;
   margin-bottom: 30px;
 }
+
+
 
 h3 {
   font-size: 22px;
@@ -324,32 +420,40 @@ h3 {
   transform: scale(1.05);
 }
 /* Bienvenida */
-.welcome-section {
-  margin: 50px auto;
+.welcome-section-cat {
+  font-size: 2rem;
+  font-weight: bold;
   padding: 0px 33px;
   max-width: 900px;
   color: #333;
   text-align: center;
   animation: fadeInWelcome 1.2s ease-out forwards;
   opacity: 0;
+  margin-left: -40px;
 }
 
+/* Estilo para el h2 en la sección bienvenida */
 .welcome-section h2 {
   font-size: 2rem;
   color: #024CAA;
   margin-bottom: 20px;
   font-weight: bold;
-  border-bottom: 2px solid #EC8304;
+  border-bottom: 2px solid #05AAFF;
   padding-bottom: 10px;
+  margin-left: -10px; /* Ajustado a 0 para que no haya margen negativo */
+  text-align: left; /* Alineación a la izquierda */
 }
 
+/* Estilo para el texto del párrafo en la sección bienvenida */
 .welcome-section p {
   font-size: 1.15rem;
-  text-align: justify;
+  text-align: left; /* Alineación a la izquierda */
   line-height: 1.8;
   margin: 15px 0;
   color: #555;
+  margin-left: 0; /* Eliminar cualquier margen negativo */
 }
+
 
 
 /* Animación para bienvenida */
@@ -366,7 +470,7 @@ h3 {
 
 /* Estilo de transición al hacer scroll */
 .welcome-section h2:hover {
-  color: #EC8304;
+  color: #05AAFF;
   transition: color 0.3s ease;
 }
 
@@ -377,36 +481,64 @@ h3 {
 
 
 /* Llamada a la acción */
+/* Estilos para la sección de llamada a la acción */
 .call-to-action {
-  background-color: #ECF1F8;
-  color: #091057;
-  padding: 60px 20px;
+  background-color: #ECF1F8; /* Mantiene el color de fondo suave */
+  color: #091057; /* Mantiene el color de texto en azul oscuro */
+  padding: 80px 20px; /* Aumenta el padding para mayor espacio */
   text-align: center;
   position: relative;
   overflow: hidden;
-  animation: fadeInRight 1.5s ease-in-out;
+  animation: fadeInRight 1.5s ease-in-out; /* Animación de entrada */
+  border-radius: 15px; /* Bordes redondeados para un aspecto más suave */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Agrega una sombra sutil para darle profundidad */
 }
 
+/* Estilo para el encabezado */
+.call-to-action h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #091057; /* Mantiene el color de texto */
+  letter-spacing: 0.5px; /* Añade un poco de espaciado entre letras */
+  text-transform: uppercase; /* Convierte el texto a mayúsculas para mayor impacto */
+}
+
+/* Estilo para el párrafo */
 .call-to-action p {
   margin-bottom: 30px;
-  font-size: 1.2rem;
+  font-size: 1.1rem; /* Ajusta el tamaño de fuente */
+  color: #4C4C6C; /* Color gris más suave para el párrafo */
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto; /* Centra el párrafo */
 }
 
+/* Estilo para el botón */
 .sign-up-btn {
-  padding: 12px 25px;
-  background-color: #EC8304;
+  background-color: #091057; /* Fondo oscuro para el botón */
   color: white;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border-radius: 30px; /* Botón redondeado */
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+  font-weight: bold;
+  text-transform: uppercase; /* Hace que el texto del botón sea en mayúsculas */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra sutil */
 }
 
 .sign-up-btn:hover {
-  background-color: #d96f03;
-  transform: scale(1.1);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #EC8304; /* Cambia el color del fondo al pasar el ratón */
+  transform: translateY(-3px);
+  color: white; /* Añade un efecto de desplazamiento sutil al pasar el ratón */
 }
+
+.sign-up-btn:focus {
+  outline: none; /* Elimina el contorno al hacer clic */
+}
+
 
 /* Animación de FadeIn desde abajo */
 @keyframes fadeInUp {
@@ -417,5 +549,152 @@ h3 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+/* Estilos generales */
+
+/* Estilos para la tarjeta de reseña minimalista */
+.review-card {
+  background: #fff; /* Fondo blanco para un aspecto limpio */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 100%;
+  color: #333; /* Texto oscuro para mejor contraste */
+}
+
+/* Efecto al pasar el mouse sobre la tarjeta */
+.review-card:hover {
+  transform: translateY(-5px); /* Sutil desplazamiento hacia arriba */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Contenido de la tarjeta */
+.review-card-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review-text {
+  font-size: 16px;
+  font-family: 'Arial', sans-serif;
+  color: #555; /* Gris oscuro para el texto */
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.review-author {
+  font-size: 14px;
+  font-weight: 500;
+  color: #888; /* Gris más suave para el autor */
+}
+
+/* Estilo del icono de la estrella */
+.review-icon {
+  font-size: 25px;
+  color: #f39c12; /* Dorado para la estrella */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* Estilos de la sección de reseñas */
+.reviews {
+  background-color: #f7f7f7; /* Fondo muy suave para la sección */
+  padding: 60px 20px;
+  text-align: center;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+/* Título de la sección */
+/* Título de la sección */
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  color: #333;
+  margin-bottom: 45px; 
+  text-transform: uppercase; 
+  text-align: right; 
+  padding-right: 5%;
+}
+.section-title-cli {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  color: #333;
+  margin-bottom: 30px; 
+  text-transform: uppercase; 
+  text-align: left; 
+  padding-right: 55%;
+}
+
+/* Contenedor de las reseñas */
+.reviews-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* Animación de entrada de la sección */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 26px;
+    margin-bottom: 30px;
+  }
+  .section-title-cli{
+    padding-right: 10px;
+   }
+  .offer-list{
+    height: 305px;
+  }
+
+  .reviews-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .review-card {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .review-icon {
+    font-size: 20px;
+    top: 10px;
+    right: 10px;
+  }
+  .offer-list {
+    height: 305px;
   }
 }
