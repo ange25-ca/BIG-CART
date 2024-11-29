@@ -1,44 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../../../redux/userSlices'; // Asegúrate de importar la acción para actualizar el estado de Redux
-import { obtenerDatosUsuario } from './api'; // obtener los datos
-import '../assets/UserProfile.css'
+import { setUserId } from '../../../redux/userSlices';
+import axiosInstance from '../../../Api/axiosConfig';
+import '../assets/UserProfile.css';
+
+interface UserState {
+  idUsuario: string;
+  username: string;
+  email: string;
+  address: string;
+  phone: string;
+  profileImage: string | null;
+}
+
 const UserProfile: React.FC = () => {
   const dispatch = useDispatch();
-  const token = localStorage.getItem('token'); // Obtener el token desde localStorage o de Redux
-  const user = useSelector((state: any) => state.user); // Obtén el usuario desde Redux
-
+  const token = localStorage.getItem('authToken');
+  const user = useSelector((state: { user: UserState }) => state.user); // Usamos la interfaz UserState
+  
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [userData, setUserData] = useState({
-    name: '',
     address: '',
     email: '',
     username: '',
     phone: '',
   });
 
-  // Cargar los datos del usuario desde Redux o la API
+  // Cargar los datos del usuario desde la API
   useEffect(() => {
     if (token) {
-      // Si ya hay un token, obtenemos los datos del usuario de la API
-      obtenerDatosUsuario(token)
-        .then((data) => {
-          // Actualiza los datos del usuario en el estado global de Redux
-          dispatch(setUser(data));
-          // También puedes prellenar los datos en el formulario
-          setUserData({
-            name: data.name,
-            address: data.address,
+      axiosInstance.get('/user/obtenerDatosUsuario')
+        .then((response) => {
+          const data = response.data;
+          // Despachar datos a Redux
+          dispatch(setUserId({
+            idUsuario: data.idUsuario,
+            username: data.nombreUsuario,
             email: data.email,
-            username: data.username,
-            phone: data.phone,
+            address: data.direccion,
+            phone: data.telefono,
+            profileImage: data.profileImage,
+          }));
+
+          // Prellenar estado local con los datos del usuario
+          setUserData({
+            address: data.direccion || '',
+            email: data.email || '',
+            username: data.nombreUsuario || '',
+            phone: data.telefono || '',
           });
+
+          setProfileImage(data.profileImage || null);
         })
         .catch((error) => {
           console.error('Error al obtener los datos del usuario:', error);
         });
     }
   }, [token, dispatch]);
+
+  // Sincronizar el estado local con los datos de Redux si cambian
+  useEffect(() => {
+    if (user) {
+      setUserData({
+        address: user.address || '',
+        email: user.email || '',
+        username: user.username || '',
+        phone: user.phone || '',
+      });
+      setProfileImage(user.profileImage || null);
+    }
+  }, [user]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -53,11 +84,15 @@ const UserProfile: React.FC = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Datos guardados:', userData);
-    // Aquí puedes hacer una llamada a la API para actualizar los datos del usuario
-    // Por ejemplo: actualizarDatosUsuario(userData)
+    //Se despacha los datos a Redux
+    dispatch(setUserId({
+      idUsuario: user.idUsuario,
+      ...userData,
+      profileImage: profileImage,
+    }));
+    //Aqui iria el ajuste de ka imagen
   };
 
   return (
@@ -80,20 +115,12 @@ const UserProfile: React.FC = () => {
         />
       </div>
 
-      <form onSubmit={handleSubmit} className="user-info-form">
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre Completo"
-          value={userData.name}
-          onChange={handleInputChange}
-          className="user-input"
-        />
+      <form className="user-info-form" onSubmit={handleSave}>
         <input
           type="text"
           name="address"
           placeholder="Dirección"
-          value={userData.address}
+          value={userData.address || ''}
           onChange={handleInputChange}
           className="user-input"
         />
@@ -101,7 +128,7 @@ const UserProfile: React.FC = () => {
           type="email"
           name="email"
           placeholder="Correo Electrónico"
-          value={userData.email}
+          value={userData.email || ''}
           onChange={handleInputChange}
           className="user-input"
         />
@@ -109,7 +136,7 @@ const UserProfile: React.FC = () => {
           type="text"
           name="username"
           placeholder="Nombre de Usuario"
-          value={userData.username}
+          value={userData.username || ''}
           onChange={handleInputChange}
           className="user-input"
         />
@@ -117,17 +144,13 @@ const UserProfile: React.FC = () => {
           type="tel"
           name="phone"
           placeholder="Teléfono"
-          value={userData.phone}
+          value={userData.phone || ''}
           onChange={handleInputChange}
           className="user-input"
         />
         <div className="buttons-container">
-          <button type="button" className="cancel-button" onClick={() => window.location.href = '/'}>
-            Cancelar
-          </button>
-          <button type="submit" className="save-button">
-            Guardar
-          </button>
+          <button type="button" className="cancel-button" onClick={() => window.location.href = '/'}>Cancelar</button>
+          <button type="submit" className="save-button">Guardar</button>
         </div>
       </form>
     </div>

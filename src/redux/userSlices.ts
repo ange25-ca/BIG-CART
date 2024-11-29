@@ -1,38 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
-    idUsuario: string | null;
-    username: string | null;
-    email: string | null;
-    // Agrega cualquier otro dato relevante del usuario
+  idUsuario: string;
+  username: string;
+  email: string;
+  address: string;
+  phone: string;
+  profileImage: string | null;
 }
 
 const initialState: UserState = {
-    idUsuario: null,
-    username: null,
-    email: null,
-    // Otros campos inicializados
+  idUsuario: '',
+  address: '',
+  email: '',
+  username: '',
+  phone: '',
+  profileImage: null,
 };
 
 const userSlice = createSlice({
-    name: 'user',
-    initialState,
-    reducers: {
-        setUser: (state, action) => {
-            const { idUsuario, username, email } = action.payload;
-            state.idUsuario = idUsuario;
-            state.username = username;
-            state.email = email;
-            // Agrega otros datos que quieras almacenar
-        },
-        clearUserId: (state) => {
-            state.idUsuario = null;
-            state.username = null;
-            state.email = null;
-            // Limpiar otros datos si es necesario
-        },
+  name: 'user',
+  initialState,
+  reducers: {
+    setUserId: (state, action: PayloadAction<UserState>) => {
+      state.idUsuario = action.payload.idUsuario;
+      state.address = action.payload.address;
+      state.email = action.payload.email;
+      state.username = action.payload.username;
+      state.phone = action.payload.phone;
+      state.profileImage = action.payload.profileImage;
     },
+  },
 });
 
-export const { setUser, clearUserId } = userSlice.actions;
+export const { setUserId } = userSlice.actions;
+
 export default userSlice.reducer;
