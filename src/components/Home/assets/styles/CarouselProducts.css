@@ -1,119 +1,139 @@
+/* Estilo para los botones de control del carrusel */
+.products-control-btn {
+  position: absolute;
+  top: 50%;
+  color: black;
+  font-size: 2rem; /* Aumenta el tamaño de la fuente para hacerlo más visible */
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.products-control-btn:hover {
+  border-color: none;
+  
+}
+
+/* Posicionamiento de los botones prev y next */
+.products-prev-btn {
+  left: 0px;
+}
+
+.products-next-btn {
+  right: 0px; 
+}
+
+/* Estilo del contenedor del carrusel */
 .top-products-carousel {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px 0;
-    overflow: hidden;
-    text-align: center;
-  }
-  
-  .products-carousel-container {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    gap: 20px;
-  }
-  
+  position: relative;
+  width: 100%;
+  max-width: 1225px;
+  margin: auto;
+  padding: 20px 0;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 15px; /* Bordes redondeados para un diseño más suave */
+}
+
+/* Estilo de los elementos del carrusel */
+.products-carousel-container {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 20px;
+}
+
+.products-carousel-item {
+  flex: 1;
+  min-width: calc(25% - 20px); /* Mostrar 4 productos */
+  display: none; /* Ocultar por defecto */
+  text-align: center;
+}
+
+.products-carousel-item.visible {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.products-carousel-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+.product-details {
+  text-align: center;
+}
+
+.product-details h3 {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.product-details p {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.product-rating {
+  font-size: 0.8rem;
+  color: #f39c12;
+}
+
+/* Estilo del botón para ver todos los productos */
+.view-all-products {
+  margin-top: 30px;
+  text-align: center; /* Centrado para mayor alineación */
+}
+
+.view-all-btn {
+  text-decoration: none;
+  color: #EC8304; /* Color profesional sin fondo */
+  border: 2px solid #EC8304; /* Bordes finos para elegancia */
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 500; /* Ligero grosor en el texto */
+  transition: all 0.3s ease;
+  margin-top: 40px !important; /* Mueve el botón hacia abajo */
+}
+
+
+.view-all-btn:hover {
+  background-color: #EC8304;
+  color: white;
+  border-color: #EC8304;
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
   .products-carousel-item {
-    flex: 1;
-    min-width: calc(25% - 20px); /* Mostrar 4 productos */
-    display: none; /* Ocultar por defecto */
-    text-align: center;
+    min-width: calc(50% - 20px); /* Mostrar 2 productos por vez */
   }
-  
-  .products-carousel-item.visible {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+}
+
+@media (max-width: 768px) {
+  .products-carousel-item {
+    min-width: calc(100% - 20px); /* Mostrar 1 producto por vez */
   }
-  
-  .products-carousel-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    object-fit: cover;
-  }
-  
-  .product-details {
-    text-align: center;
-  }
-  
-  .product-details h3 {
-    font-size: 1rem;
-    margin: 5px 0;
-  }
-  
-  .product-details p {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .product-rating {
-    font-size: 0.8rem;
-    color: #f39c12;
-  }
-  
+
   .products-control-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 1.5rem;
-    border: none;
-    border-radius: 50%;
-    padding: 10px 15px;
-    cursor: pointer;
-    z-index: 1;
+    font-size: 1.5rem; /* Ajustar tamaño de los botones en pantallas medianas */
+    padding: 10px; /* Reducir el tamaño del botón */
   }
-  
-  .products-prev-btn {
-    left: 10px;
+
+  .top-products-carousel {
+    padding: 10px 0; /* Reducir el padding en pantallas más pequeñas */
   }
-  
-  .products-next-btn {
-    right: 10px;
+}
+
+@media (max-width: 480px) {
+  .products-control-btn {
+    font-size: 1.2rem; /* Reducir aún más el tamaño de los botones */
+    padding: 8px; /* Reducir el padding de los botones */
   }
-  
-  .products-control-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
-  }
-  
-  .view-all-products {
-    margin-top: 20px;
-  }
-  
-  .view-all-btn {
-    text-decoration: none;
-    color: white;
-    background-color: #007bff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 0.9rem;
-  }
-  
-  .view-all-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Responsividad */
-  @media (max-width: 1024px) {
-    .products-carousel-item {
-      min-width: calc(33.33% - 20px); /* Mostrar 3 productos */
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .products-carousel-item {
-      min-width: calc(50% - 20px); /* Mostrar 2 productos */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .products-carousel-item {
-      min-width: calc(100% - 20px); /* Mostrar 1 producto */
-    }
-  }
-  
+}

@@ -20,23 +20,25 @@ const CarouselPromotions: React.FC = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000); // Cambia cada 3 segundos
+    }, 2500); // Cambia cada 2.5 segundos
 
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="carousel">
-      {images.map((image, index) => (
-        <div
-          key={index}
-          className={`carousel-item ${
-            index === currentIndex ? "active" : "inactive"
-          }`}
-        >
-          <img src={image} alt={`Slide ${index + 1}`} />
-        </div>
-      ))}
+    <div className="carousel-prom">
+      <div className="carousel-items-wrapper">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`carousel-item ${
+              index === currentIndex ? "active" : "inactive"
+            }`}
+          >
+            <img src={image} alt={`Slide ${index + 1}`} />
+          </div>
+        ))}
+      </div>
 
       {/* Botones para navegar manualmente */}
       <div className="carousel-buttons">

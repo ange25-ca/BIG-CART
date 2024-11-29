@@ -39,6 +39,7 @@ export const validateCardType = (cardNumber: string): CardType => {
     if (/^6011\d{12}$/.test(cleanCardNumber)) {
       return 'Discover';
     }
+
   
     return 'Desconocida';
   };
