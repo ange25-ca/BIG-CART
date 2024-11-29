@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
-import '../assets/UserProfile.css';
-
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../../../redux/userSlices'; // Asegúrate de importar la acción para actualizar el estado de Redux
+import { obtenerDatosUsuario } from './api'; // obtener los datos
+import '../assets/UserProfile.css'
 const UserProfile: React.FC = () => {
+  const dispatch = useDispatch();
+  const token = localStorage.getItem('token'); // Obtener el token desde localStorage o de Redux
+  const user = useSelector((state: any) => state.user); // Obtén el usuario desde Redux
+
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [userData, setUserData] = useState({
     name: '',
@@ -10,6 +16,29 @@ const UserProfile: React.FC = () => {
     username: '',
     phone: '',
   });
+
+  // Cargar los datos del usuario desde Redux o la API
+  useEffect(() => {
+    if (token) {
+      // Si ya hay un token, obtenemos los datos del usuario de la API
+      obtenerDatosUsuario(token)
+        .then((data) => {
+          // Actualiza los datos del usuario en el estado global de Redux
+          dispatch(setUser(data));
+          // También puedes prellenar los datos en el formulario
+          setUserData({
+            name: data.name,
+            address: data.address,
+            email: data.email,
+            username: data.username,
+            phone: data.phone,
+          });
+        })
+        .catch((error) => {
+          console.error('Error al obtener los datos del usuario:', error);
+        });
+    }
+  }, [token, dispatch]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,7 +55,9 @@ const UserProfile: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Datos guardados:", userData);
+    console.log('Datos guardados:', userData);
+    // Aquí puedes hacer una llamada a la API para actualizar los datos del usuario
+    // Por ejemplo: actualizarDatosUsuario(userData)
   };
 
   return (
@@ -35,7 +66,7 @@ const UserProfile: React.FC = () => {
       <div className="profile-image-container">
         <label htmlFor="profileImage" className="profile-image-label">
           <img
-            src={profileImage || 'https://via.placeholder.com/150'}
+            src={profileImage || user.profileImage || 'https://via.placeholder.com/150'}
             alt="Profile"
             className="profile-image"
           />
