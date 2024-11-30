@@ -4,10 +4,13 @@ import logoImagePath from '../assets/img/BIgCart.svg';
 import iconCart from '../assets/img/icon-cart.svg';
 import "../assets/styles/NavBar.css";
 import { jwtDecode } from 'jwt-decode';
+import { logout } from "../../../redux/userSlices";
+import { useDispatch } from "react-redux";
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -30,6 +33,7 @@ const Navbar: React.FC = () => {
   const handleLogout = (): void => {
     localStorage.removeItem('authToken');
     navigate('/'); // Redirige al home después de cerrar sesión
+    dispatch(logout()); // Actualiza el estado global
   };
 
   // Verifica si el usuario está autenticado

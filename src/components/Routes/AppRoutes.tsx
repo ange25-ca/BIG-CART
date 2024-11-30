@@ -29,6 +29,14 @@ const routes = [
         </ProtectedRoute>
       ),
     },
+    {
+      path: "/cartPayment", 
+      element: (
+        <ProtectedRoute>
+          <CartPayment /> {/* Aquí es donde se renderiza el componente protegido */}
+        </ProtectedRoute>
+      ),
+    },
     { path: "/productos", element: <CatalogsProducts /> },
     { path: "/contactus", element: <ContactUs/> },
     { path: "/SignUp", element: <SignUp/> },
