@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { encryptData } from '../../Middlewares/encryption';
 import axiosInstance from '../../../Api/axiosConfig';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { setUserId } from '../../../redux/userSlices';
+import { setUserId, setUserIdOnly } from '../../../redux/userSlices';
 import { useDispatch } from 'react-redux';
 //Iconos del logeo
 import userIcon from '../assets/img/user.svg';
@@ -66,7 +66,7 @@ function Login() {
             if (result && result.token && result.userId) { 
             // Supone que 'token' y 'userId' son las claves en la respuesta del backend
             localStorage.setItem('authToken', result.token); // Guardar el token en localStorage
-            dispatch(setUserId(result.userId)); // Despachar el ID del usuario al store de Redux
+            dispatch(setUserIdOnly(result.userId)); // Despachar el ID del usuario al store de Redux
 
             setLoginSuccess(true);
             // Redirigir a la ruta almacenada en el estado, o al inicio si no hay ruta previa

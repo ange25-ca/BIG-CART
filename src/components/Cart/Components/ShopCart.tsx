@@ -1,120 +1,54 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../assets/styles/ShoppingCart.css';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../redux/store';
+import { verCart } from '../../../controllers/cartController';
 
 interface CartItem {
-  id: number;
-  name: string;
-  variant: string;
-  price: number;
-  quantity: number;
-  image: string;
+  idProducto: number;
+  nombreProducto: string;
+  descripcion: string;
+  precio: number;
+  cantidad: number;
+  imagen: string;
 }
 
 const Cart: React.FC = () => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: 1,
-      name: 'BlendMaster Elite Fusionator',
-      variant: 'Variant: EU',
-      price: 199.0,
-      quantity: 1,
-      image: '/path-to-image/blender.png', // Cambia esto por la ruta real de la imagen.
-    },
-    {
-      id: 2,
-      name: 'EcoChef Precision Cooker',
-      variant: 'Color: Stainless Steel',
-      price: 129.99,
-      quantity: 2,
-      image: '/path-to-image/cooker.png',
-    },
-    {
-      id: 3,
-      name: 'UltraBrew Coffee Grinder',
-      variant: 'Size: Medium',
-      price: 89.0,
-      quantity: 1,
-      image: '/path-to-image/grinder.png',
-    },
-    {
-      id: 4,
-      name: 'FreshVac Pro Juicer',
-      variant: 'Variant: 2024 Edition',
-      price: 249.5,
-      quantity: 1,
-      image: '/path-to-image/juicer.png',
-    },
-    {
-      id: 5,
-      name: 'PowerMatic Turbo Blender',
-      variant: 'Color: Red',
-      price: 159.0,
-      quantity: 1,
-      image: '/path-to-image/turbo-blender.png',
-    },
-    {
-      id: 6,
-      name: 'HomeBake Artisan Oven',
-      variant: 'Power: 220V',
-      price: 399.99,
-      quantity: 1,
-      image: '/path-to-image/oven.png',
-    },
-    {
-      id: 7,
-      name: 'ChopEasy Kitchen Processor',
-      variant: 'Speed: Turbo',
-      price: 179.0,
-      quantity: 1,
-      image: '/path-to-image/processor.png',
-    },
-    {
-      id: 8,
-      name: 'SteamPower Iron Master',
-      variant: 'Color: Black',
-      price: 69.99,
-      quantity: 3,
-      image: '/path-to-image/iron.png',
-    },
-    {
-      id: 9,
-      name: 'SmartMix Pro Blender',
-      variant: 'Version: Advanced',
-      price: 189.0,
-      quantity: 1,
-      image: '/path-to-image/smart-blender.png',
-    },
-    {
-      id: 10,
-      name: 'MultiChef Compact Mixer',
-      variant: 'Attachments: 3-in-1',
-      price: 109.0,
-      quantity: 2,
-      image: '/path-to-image/mixer.png',
-    },
-  ]);
-  
-  const [discountCode, setDiscountCode] = useState('');
 
-  const updateQuantity = (id: number, delta: number) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(item.quantity + delta, 1) }
-          : item
-      )
-    );
-  };
+  const navigate = useNavigate();
+  const distpatch = useDispatch<AppDispatch>();
+  const { detallesCarrito, itemsCarrito, isLoading, error } = useSelector((state: RootState) => state.carrito);
+  const idUsuario = useSelector((state: RootState) => state.user.idUsuario);
+  console.log(idUsuario);
+  const [localCart, setLocalCart] = useState<CartItem[]>([]);
 
-  const removeItem = (id: number) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
+  // Recuperar productos del backend si el usuario está logueado
+  useEffect(() => {
+    if (idUsuario) {
+      distpatch(verCart());
+    } else {
+      // Recuperar productos desde localStorage si no está logueado
+      const storedCart = localStorage.getItem('carrito');
+      setLocalCart(storedCart ? JSON.parse(storedCart) : []);
+    }
+  }, [idUsuario, distpatch]);
 
-  const clearCart = () => {
-    setCartItems([]);
-  };
 
-  const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  // Calcular el subtotal
+  const subtotal = itemsCarrito.reduce(
+    (total, item) => total + item.precio * item.cantidad,
+    0
+  );
+
+  // Configuración de impuestos y envío
+  const taxRate = 0.1; // 10% de impuestos
+  const shippingCost = subtotal > 100 ? 0 : 10; // Envío gratis para pedidos de más de $100
+  const tax = subtotal * taxRate;
+  const totalAmount = subtotal + tax + shippingCost;
+
+
+  const items = idUsuario ? itemsCarrito : localCart;
 
   const handleCheckout = () => {
     // Lógica para redirigir a la vista de pago
@@ -126,39 +60,45 @@ const Cart: React.FC = () => {
       <main className="cart-main">
         <section className="cart-items-section">
           <h2>Carrito</h2>
-          {cartItems.map((item) => (
-            <div key={item.id} className="cart-item">
-              <img src={item.image} alt={item.name} className="cart-item-image" />
-              <div className="cart-item-info">
-                <p className="cart-item-name">{item.name}</p>
-                <p className="cart-item-variant">{item.variant}</p>
-              </div>
-              <div className="cart-item-controls">
-                <span className="cart-item-price">${item.price.toFixed(2)}</span>
-                <div className="cart-item-quantity">
-                  <button
-                    className="quantity-button"
-                    onClick={() => updateQuantity(item.id, -1)}
-                  >
-                    -
-                  </button>
-                  <span className="quantity-display">{item.quantity}</span>
-                  <button
-                    className="quantity-button"
-                    onClick={() => updateQuantity(item.id, 1)}
-                  >
-                    +
-                  </button>
-                  <button
-                    className="remove-item"
-                    onClick={() => removeItem(item.id)}
-                  >
-                    🗑
-                  </button>
+          {items.length > 0 ? (
+            
+              items.map((item) => (
+                <div key={item.idProducto} className="cart-item">
+                  <img src={item.imagen} alt={item.nombreProducto} className="cart-item-image" />
+                  <div className="cart-item-info">
+                    <p className="cart-item-name">{item.nombreProducto}</p>
+                    <p className="cart-item-variant">{item.descripcion}</p>
+                  </div>
+                  <div className="cart-item-controls">
+                    <span className="cart-item-price">${item.precio}</span>
+                    <div className="cart-item-quantity">
+                      <button
+                        className="quantity-button"
+
+                      >
+                        -
+                      </button>
+                      <span className="quantity-display">{item.cantidad}</span>
+                      <button
+                        className="quantity-button"
+                      // onClick={() => updateQuantity(item.id, 1)}
+                      >
+                        +
+                      </button>
+                      <button
+                        className="remove-item"
+                      // onClick={() => removeItem(item.id)}
+                      >
+                        🗑
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              ))
+            
+          ) : (
+            <p> No hay productos en el carrito. </p>
+          )}
         </section>
 
         <aside className="cart-summary">
@@ -167,8 +107,8 @@ const Cart: React.FC = () => {
             <input
               type="text"
               placeholder="Gift card or discount code"
-              value={discountCode}
-              onChange={(e) => setDiscountCode(e.target.value)}
+              value={10}
+              // onChange={(e) => setDiscountCode(e.target.value)}
               className="discount-input"
             />
           </div>
@@ -191,7 +131,7 @@ const Cart: React.FC = () => {
             <span>${subtotal.toFixed(2)}</span>
           </div>
           <div className="summary-actions">
-            <button className="clear-cart-button" onClick={clearCart}>
+            <button className="clear-cart-button" >
               Empty Cart
             </button>
             <button className="checkout-button" onClick={handleCheckout}>
