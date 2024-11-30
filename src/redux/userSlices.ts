@@ -30,9 +30,13 @@ const userSlice = createSlice({
       state.phone = action.payload.phone;
       state.profileImage = action.payload.profileImage;
     },
+    logout: (state) => {
+      // Restaura el estado a su inicial
+      Object.assign(state, initialState);
+    },
   },
 });
 
-export const { setUserId } = userSlice.actions;
+export const { setUserId, logout } = userSlice.actions;
 
 export default userSlice.reducer;
