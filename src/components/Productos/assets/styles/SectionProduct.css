@@ -1,24 +1,151 @@
-main {
-  height: 100vh; /* O la altura de la pantalla */
-  overflow-y: scroll; /* Siempre permitir el scroll vertical */
+/* General */
+.catalog-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  color: #000;
+  min-height: 100vh;
+  justify-content: space-between;
 }
 
+/* Filtros */
+.filters {
+  flex: 1;
+  max-width: 280px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filters h3 {
+  font-size: 1.8rem;
+  text-align: center;
+  color: #444;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.filter-group h4 {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.filter-button {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  color: #007bff;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+
+.filter-button:hover {
+  background-color: #007bff;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+/* Sección de Productos */
 .products-section {
-    margin: 20px;
-    padding: 20px;
-    background-color: #f5f5f5;
-    color: #000;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.products-section h2 {
+  font-size: 2rem;
+  text-align: center;
+  color: #444;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+/* Botón Toggler (solo en móvil) */
+.filter-toggler {
+  display: none;
+  color: black;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: -15px;
+  text-align: right;
+}
+
+
+/* Mostrar/Ocultar filtros */
+.filters {
+  display: block;
+}
+
+.filters.show {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .filter-toggler {
+    display: block;
   }
-  
+
+  .filters {
+    display: none;
+  }
+
+  .filters.show {
+    display: block;
+  }
+}
+
+
+/* Responsividad */
+@media (max-width: 1024px) {
+  .catalog-container {
+    flex-direction: column;
+  }
+
+  .filters {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
   .products-grid {
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
   }
-  
-  h2 {
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
   }
-  
+
+  .filter-button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}
