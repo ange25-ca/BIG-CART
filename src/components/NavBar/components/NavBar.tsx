@@ -32,6 +32,7 @@ const Navbar: React.FC = () => {
 
   const handleLogout = (): void => {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('profileImage');  // Eliminar imagen de perfil al cerrar sesión
     navigate('/'); // Redirige al home después de cerrar sesión
     dispatch(logout()); // Actualiza el estado global
   };

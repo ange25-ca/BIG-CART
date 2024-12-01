@@ -17,15 +17,13 @@ const initialState: UserState = {
   email: '',
   username: '',
   phone: '',
-  profileImage: localStorage.getItem('profileImage') || null, // Tomar el valor de localStorage si existe
+  profileImage: localStorage.getItem('profileImage') || null, // Leer la imagen del perfil desde localStorage
 };
 
 // Definimos el slice de usuario
 const userSlice = createSlice({
   name: 'user',
-
   initialState,
-  
   reducers: {
     setUserIdOnly: (state, action: PayloadAction<string>) => {
       state.idUsuario = action.payload;  // Solo actualiza el idUsuario
@@ -42,15 +40,15 @@ const userSlice = createSlice({
       
       // Guardar en localStorage solo si profileImage tiene un valor válido
       if (action.payload.profileImage) {
-        localStorage.setItem('imageUrl', action.payload.profileImage);
+        localStorage.setItem('profileImage', action.payload.profileImage);  // Cambié de imageUrl a profileImage
       }
     },
 
     logout: (state) => {
       // Restaura el estado a su valor inicial
       Object.assign(state, initialState);
-      // Opcionalmente limpiar localStorage al cerrar sesión
-      localStorage.removeItem('profileImage');
+      // Limpiar localStorage al cerrar sesión
+      localStorage.removeItem('profileImage');  // Eliminar imagen de perfil al hacer logout
     },
   },
 });

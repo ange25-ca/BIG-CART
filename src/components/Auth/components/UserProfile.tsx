@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUserId } from '../../../redux/userSlices';
 import axiosInstance from '../../../Api/axiosConfig';
 import '../assets/UserProfile.css';
+
 const baseURL = 'http://localhost:3000';
 
 interface UserState {
@@ -11,13 +12,13 @@ interface UserState {
   email: string;
   address: string;
   phone: string;
-  perfilImage: string | null;  // Cambio de profileImage a perfilImage
+  perfilImage: string | null;  // Cambié a perfilImage para que coincida con la respuesta del backend
 }
 
 const UserProfile: React.FC = () => {
   const dispatch = useDispatch();
   const token = localStorage.getItem('authToken');
-  const user = useSelector((state: { user: UserState }) => state.user); // Usamos la interfaz UserState
+  const user = useSelector((state: { user: UserState }) => state.user);
   
   const [perfilImage, setPerfilImage] = useState<string | null>(null);
   const [userData, setUserData] = useState({
@@ -25,22 +26,25 @@ const UserProfile: React.FC = () => {
     email: '',
     username: '',
     phone: '',
+    profileImage: '',
   });
 
-  // Cargar los datos del usuario desde la API
   useEffect(() => {
     if (token) {
       axiosInstance.get('/user/obtenerDatosUsuario')
         .then((response) => {
           const data = response.data;
-          // Despachar datos a Redux
+          const relativeImageUrl = data.perfilImagen;
+          const imageUrl = relativeImageUrl ? `${baseURL}${relativeImageUrl}` : null;
+  
+          // Despachar los datos al store de Redux
           dispatch(setUserId({
             idUsuario: data.idUsuario,
             username: data.nombreUsuario,
             email: data.email,
             address: data.direccion,
             phone: data.telefono,
-            profileImage: data.perfilImage,  // Ajuste a perfilImage
+            profileImage: imageUrl,
           }));
 
           // Prellenar estado local con los datos del usuario
@@ -49,20 +53,22 @@ const UserProfile: React.FC = () => {
             email: data.email || '',
             username: data.nombreUsuario || '',
             phone: data.telefono || '',
+            profileImage: data.perfilImagen || '',
           });
-
-          setPerfilImage(data.perfilImage || null);  // Ajuste a perfilImage
-
-          // Guardar la imagen de perfil en localStorage
-          if (data.perfilImage) {
-            localStorage.setItem('profileImage', data.perfilImage);
+  
+          // Guardar la imagen de perfil en localStorage si es válida
+          if (imageUrl) {
+            localStorage.setItem('profileImage', imageUrl);
           }
+          
+          setPerfilImage(imageUrl);  // Actualiza el estado local
         })
         .catch((error) => {
           console.error('Error al obtener los datos del usuario:', error);
         });
     }
   }, [token, dispatch]);
+ 
 
   useEffect(() => {
     // Leer la URL de la imagen de perfil de localStorage al cargar el componente
@@ -71,22 +77,10 @@ const UserProfile: React.FC = () => {
       setPerfilImage(storedPerfilImage);  // Usar la imagen guardada en localStorage si existe
     }
   }, []);
-  
 
   useEffect(() => {
-    const storedPerfilImage = localStorage.getItem('profileImage');
-    
-    if (storedPerfilImage && user.perfilImage !== storedPerfilImage) {
-      // Actualiza Redux con la imagen almacenada en localStorage si no coincide
-      dispatch(setUserId({
-        ...user,
-        profileImage: storedPerfilImage,
-      }));
-    }
-    
-    setPerfilImage(storedPerfilImage || null); // Actualiza el estado local
-  }, [dispatch, user]);
-  
+  }, [perfilImage]);  // Este efecto se ejecuta cada vez que perfilImage cambia
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
@@ -99,7 +93,7 @@ const UserProfile: React.FC = () => {
       reader.readAsDataURL(e.target.files[0]);
     }
   };
-
+  
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
   
@@ -127,7 +121,6 @@ const UserProfile: React.FC = () => {
   
       // URL completa para la imagen de perfil
       const imageUrl = `${baseURL}${response.data.profileImage}`;
-  
       // Actualizar Redux y localStorage
       dispatch(setUserId({ ...user, profileImage: imageUrl }));
   
@@ -140,7 +133,6 @@ const UserProfile: React.FC = () => {
       alert('Hubo un error al subir la imagen. Por favor, inténtalo nuevamente.');
     }
   };
-  
 
   return (
     <div className="user-profile">
@@ -148,7 +140,7 @@ const UserProfile: React.FC = () => {
       <div className="profile-image-container">
         <label htmlFor="perfilImage" className="profile-image-label"> 
           <img
-            src={perfilImage || 'https://via.placeholder.com/150'}  // Usar la imagen de perfil desde el estado
+            src={perfilImage || 'https://via.placeholder.com/150'}  // Se usa la imagen de perfil desde el estado
             alt="Profile"
             className="profile-image"
           />
