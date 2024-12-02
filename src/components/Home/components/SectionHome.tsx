@@ -19,7 +19,7 @@ const Home = () => {
       <section className="minimalist-welcome">
         <div className="content-wrapper">
           <h1 className="headline">Donde la variedad y los precios al por mayor se encuentran.</h1>
-          <p className="subheadline">Explora miles de productos a precios competitivos y disfruta de una experiencia de compra rápida y confiable.</p>
+          <p className="subheadline-welcome">¡Explora nuestras secciones ahora mismo y conoce todo lo que tenemos para ti! Descubre más sobre nuestra historia, lo que nos impulsa, y los productos únicos que hemos creado pensando en ti. ¡Estás a solo un clic de encontrar lo que necesitas!</p>
           <a href="#explorar" className="cta-button">Explorar ahora</a>
         </div>
       </section>
@@ -31,32 +31,60 @@ const Home = () => {
       </section>
 
        {/* reviews*/}
-       <section className="reviews">
-        <h2 className="section-title">Reseñas de nuestros clientes</h2>
-        <div className="reviews-container">
-          <div className="review-card">
-            <div className="review-card-content">
-              <p className="review-text">"Excelente servicio y precios competitivos. ¡Completamente recomendado!"</p>
-              <span className="review-author">- Juan Pérez</span>
-            </div>
-            <div className="review-icon">&#9733;</div>
-          </div>
-          <div className="review-card">
-            <div className="review-card-content">
-              <p className="review-text">"Un catálogo impresionante, siempre encuentro lo que necesito para mi negocio."</p>
-              <span className="review-author">- Ana Gómez</span>
-            </div>
-            <div className="review-icon">&#9733;</div>
-          </div>
-          <div className="review-card">
-            <div className="review-card-content">
-              <p className="review-text">"Compra fácil, entrega rápida. ¡Todo fue perfecto! lo que necesitaba para mi negocio."</p>
-              <span className="review-author">- Carlos Ruiz</span>
-            </div>
-            <div className="review-icon">&#9733;</div>
-          </div>
-        </div>
-      </section>
+       <section className="customer-reviews">
+  <h2 className="customer-reviews-title">Lo que opinan nuestros clientes</h2>
+  <div className="customer-reviews-container">
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Juan Pérez" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"Excelente servicio y precios competitivos. ¡Completamente recomendado!"</p>
+        <span className="customer-review-author">- Juan Pérez -</span>
+        <div className="customer-rating">⭐⭐⭐⭐ 4.0</div>
+      </div>
+    </div>
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Ana Gómez" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"Un catálogo impresionante, siempre encuentro lo que necesito para mi negocio."</p>
+        <span className="customer-review-author">- Ana Gómez -</span>
+        <div className="customer-rating">⭐⭐⭐⭐⭐ 5.0</div>
+      </div>
+    </div>
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Carlos Ruiz" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"Un catálogo impresionante, siempre encuentro lo que necesito para mi negocio."</p>
+        <span className="customer-review-author">- Carlos Ruiz -</span>
+        <div className="customer-rating">⭐⭐⭐⭐ 4.5</div>
+      </div>
+    </div>
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="María López" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"Gran variedad de productos, siempre de calidad."</p>
+        <span className="customer-review-author">- María López -</span>
+        <div className="customer-rating">⭐⭐⭐⭐ 4.4</div>
+      </div>
+    </div>
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Luis Fernández" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"La atención al cliente es excelente, me ayudaron con todo lo que necesitaba."</p>
+        <span className="customer-review-author">- Luis Fernández -</span>
+        <div className="customer-rating">⭐⭐⭐⭐⭐ 5.0</div>
+      </div>
+    </div>
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Luis Fernández" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"La atención al cliente es excelente, me ayudaron con todo lo que necesitaba."</p>
+        <span className="customer-review-author">- Luis Fernández -</span>
+        <div className="customer-rating">⭐⭐⭐⭐⭐ 5.0</div>
+      </div>
+    </div>
+  </div>
+</section>
+
        {/* Categorías */}
       <section className="categories">
         <div className="category-list">

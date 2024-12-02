@@ -6,7 +6,7 @@ main {
 .home {
   font-family: 'Noto Sans', sans-serif;
   padding: 0;
-  background-color: #ffffff;
+  background-color: #F6F6F6;
   overflow-x: hidden;
 }
 /* Estilos para la sección de ofertas especiales */
@@ -22,8 +22,11 @@ main {
   color: #333;
   margin-bottom: 20px;
 }
+
 .special-offers img {
-  width: 1500px;
+  width: 100%; /* Asegura que las imágenes no se desborden */
+  height: auto;
+  max-width: 1500px; /* Maximo tamaño para pantallas grandes */
 }
 
 /* Estilos para el contenedor del carrusel */
@@ -34,12 +37,15 @@ main {
   width: 100%;
   max-width: 2500px;
   margin: 0 auto;
+  padding: 0 15px; /* Espacio para evitar que las imágenes toquen los bordes */
 }
+
 /* Ajustes para cada imagen en el carrusel */
 .carousel-item img {
-  width: 1500px;
+  width: 100%;
   height: auto;
   border-radius: 10px;
+  max-width: 1500px; /* Asegura que las imágenes no se estiren */
 }
 
 /* Ajustes para que se vea como un carrusel horizontal */
@@ -69,7 +75,7 @@ main {
   position: absolute;
   bottom: 15px;
   left: 50%;
-  transform: translateX(-30%);
+  transform: translateX(-50%); /* Centrado horizontal */
   display: flex;
   gap: 10px;
   margin-bottom: 5px;
@@ -82,7 +88,7 @@ main {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 9999999;
+  z-index: 9999;
   transition: background-color 0.3s ease;
 }
 
@@ -95,14 +101,73 @@ main {
 }
 
 /* Responsividad */
-@media (max-width: 768px) {
+
+/* Pantallas grandes */
+@media (min-width: 1201px) {
   .special-offers h2 {
-    font-size: 1.5rem;
+    font-size: 2.5rem; /* Título más grande en pantallas grandes */
   }
 
   .offer-list {
-    padding: 10px;
-    height: 153px;
+    padding: 0; /* Sin relleno en pantallas grandes */
+    height: 490px; /* Altura predeterminada */
+  }
+
+  .carousel-buttons button {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* Pantallas medianas */
+@media (max-width: 1200px) {
+  .special-offers h2 {
+    font-size: 2rem; /* Título adecuado para pantallas medianas */
+  }
+
+  .offer-list {
+    padding: 10px; /* Relleno para evitar que las imágenes toquen los bordes */
+    height: 400px; /* Altura ajustada para pantallas medianas */
+  }
+
+  .carousel-buttons button {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Pantallas pequeñas (tablet y landscape móviles) */
+@media (max-width: 768px) {
+  .special-offers h2 {
+    font-size: 1.5rem; /* Título más pequeño en tabletas */
+  }
+
+  .offer-list {
+    padding: 5px;
+    height: 300px; /* Altura reducida para dispositivos más pequeños */
+  }
+
+  .carousel-buttons button {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Pantallas móviles */
+@media (max-width: 480px) {
+  .special-offers h2 {
+    font-size: 1.2rem; /* Título aún más pequeño para móviles */
+    margin-bottom: 10px; /* Menos margen en móviles */
+  }
+
+  .offer-list {
+    padding: 0;
+    height: 250px; /* Altura aún más pequeña para pantallas móviles */
+  }
+
+  .carousel-buttons button {
+    width: 8px;
+    height: 8px;
   }
 }
 
@@ -134,12 +199,13 @@ main {
   background-color: #f6f6f6;
   color: #2c3e50;
   padding: 100px 20px;
-  text-align: center;
+  text-align: justify; 
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin-left: 30px;
   flex-direction: column;
   margin-top: -86px;
 }
@@ -148,25 +214,45 @@ main {
   max-width: 900px;
   width: 100%;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  
 }
 
+.headline,
+.subheadline-welcome {
+  max-width: 100%; /* Asegura el mismo ancho máximo */
+  text-align: justify; /* Justifica el texto */
+  margin: 0 auto; /* Centra horizontalmente */
+  line-height: 1.8; /* Espaciado entre líneas */
+}
+
+
 .headline {
-  font-size: 3.5rem; /* Título grande y fuerte */
+  font-size: 3.5rem; 
   font-weight: 700;
   line-height: 1.2;
   color: #333;
-  margin-bottom: 20px;
-  letter-spacing: 1px; /* Espaciado de letras para mayor impacto */
+  letter-spacing: 3px;
+  margin-top: -15px;
+  margin-bottom: 27px;
   animation: fadeIn 1.5s ease-out;
 }
 
-.subheadline {
-  font-size: 1.2rem; /* Texto secundario más pequeño */
-  font-weight: 400;
-  color: #555;
-  margin-bottom: 40px;
-  opacity: 0; /* Inicialmente invisible */
-  animation: fadeIn 1.5s ease-out 0.5s forwards; /* Animación con retraso */
+.subheadline-welcome{
+  font-size: 1.2rem !important;
+  font-weight: 400 !important;
+  color: #555 !important;
+  opacity: 0;
+  letter-spacing: 3px!important;
+  animation: fadeIn 1.5s ease-out 0.5s forwards;
+}
+
+.cta-button-wrapper {
+  display: flex;
+  justify-content: center;  
+  width: 100%; 
+  margin-top: 30px; 
 }
 
 .cta-button {
@@ -175,15 +261,56 @@ main {
   font-size: 1.1rem;
   text-decoration: none;
   color: #fff;
-  background-color: #00aaff; /* Color llamativo y moderno */
-  border-radius: 50px; /* Bordes redondeados para un toque elegante */
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  background-color: #0171DC; 
+  border-radius: 50px;
+  margin-top: 35px;
   letter-spacing: 1px;
+  align-self: center;
 }
 
 .cta-button:hover {
-  background-color: #0088cc; /* Cambio de color al pasar el mouse */
-  transform: scale(1.05); /* Escala suave para mayor dinamismo */
+  background-color: #ffffff; 
+  color: #0171DC;
+  border: 1.5px solid #0171DC; 
+}
+/* Pantallas grandes (a partir de 1200px) */
+@media (min-width: 1200px) {
+  .minimalist-welcome {
+      padding: 120px 40px;
+      margin-left: 50px;
+      height: auto; /* Permite altura dinámica para pantallas grandes */
+      margin-top: -50px;
+      text-align: left; /* Ajusta texto a la izquierda */
+  }
+}
+
+/* Pantallas medianas (entre 768px y 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .minimalist-welcome {
+      padding: 80px 20px;
+      margin-left: 20px;
+      height: auto;
+      text-align: justify;
+      margin-top: -60px;
+  }
+}
+
+/* Pantallas pequeñas (hasta 767px) */
+@media (max-width: 767px) {
+  .minimalist-welcome {
+      padding: 60px 10px;
+      margin-left: 10px;
+      height: auto; /* Asegura altura dinámica */
+      text-align: center; /* Centra texto para dispositivos pequeños */
+      margin-top: 0;
+      flex-direction: column; /* Mantiene el diseño en columna */
+  }
+  .special-offers {
+    width: 100%;
+    background-color: transparent;
+    text-align: center;
+    margin-bottom: -85px !important;
+}
 }
 
 @keyframes fadeIn {
@@ -203,10 +330,16 @@ main {
     font-size: 2.5rem; /* Ajusta el tamaño del título para pantallas más pequeñas */
   }
   .offer-list {
-    height: 305px;
+        height: 208px;
+        width: 537px;
+        margin-top: -10px;
+        margin-left: -8px;
   }
-
-  .subheadline {
+  
+  .offer-list img{
+        height: 600px;
+    }
+  .subheadline-welcome {
     font-size: 1rem;
   }
 
@@ -553,148 +686,148 @@ h3 {
 }
 /* Estilos generales */
 
-/* Estilos para la tarjeta de reseña minimalista */
-.review-card {
-  background: #fff; /* Fondo blanco para un aspecto limpio */
-  border-radius: 10px;
+.customer-reviews {
+  padding: 40px 20px;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+.customer-reviews-title {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Contenedor responsivo con grid */
+.customer-reviews-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tarjetas de reseñas */
+.customer-review-card {
+  background: #ffffff;
+  border-radius: 15px;
   padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  width: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 100%;
-  color: #333; /* Texto oscuro para mejor contraste */
 }
 
-/* Efecto al pasar el mouse sobre la tarjeta */
-.review-card:hover {
-  transform: translateY(-5px); /* Sutil desplazamiento hacia arriba */
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+.customer-review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Contenido de la tarjeta */
-.review-card-content {
-  text-align: center;
+/* Imagen circular del cliente */
+.customer-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 3px solid #e0e0e0;
+  object-fit: cover;
+}
+
+.customer-review-content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.review-text {
-  font-size: 16px;
-  font-family: 'Arial', sans-serif;
-  color: #555; /* Gris oscuro para el texto */
+.customer-review-text {
+  font-size: 1rem;
+  font-style: italic;
+  color: #666;
+  margin: 10px 0;
+}
+
+.customer-review-author {
+  font-weight: bold;
+  color: #444;
   margin-bottom: 10px;
-  line-height: 1.6;
-  font-weight: 300;
 }
 
-.review-author {
-  font-size: 14px;
-  font-weight: 500;
-  color: #888; /* Gris más suave para el autor */
+.customer-rating {
+  font-size: 1.2rem;
+  color: #f4b400;
 }
 
-/* Estilo del icono de la estrella */
-.review-icon {
-  font-size: 25px;
-  color: #f39c12; /* Dorado para la estrella */
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
+/* RESPONSIVIDAD */
 
-/* Estilos de la sección de reseñas */
-.reviews {
-  background-color: #f7f7f7; /* Fondo muy suave para la sección */
-  padding: 60px 20px;
-  text-align: center;
-  animation: fadeInUp 1s ease-in-out;
-}
-
-/* Título de la sección */
-/* Título de la sección */
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  line-height: 1.2;
-  color: #333;
-  margin-bottom: 45px; 
-  text-transform: uppercase; 
-  text-align: right; 
-  padding-right: 5%;
-}
-.section-title-cli {
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  line-height: 1.2;
-  color: #333;
-  margin-bottom: 30px; 
-  text-transform: uppercase; 
-  text-align: left; 
-  padding-right: 55%;
-}
-
-/* Contenedor de las reseñas */
-.reviews-container {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-/* Animación de entrada de la sección */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
-  .section-title {
-    font-size: 26px;
-    margin-bottom: 30px;
-  }
-  .section-title-cli{
-    padding-right: 10px;
-   }
-  .offer-list{
-    height: 305px;
-  }
-
-  .reviews-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .review-card {
-    width: 100%;
-    max-width: 350px;
+/* Pantallas pequeñas (smartphones) */
+@media (max-width: 576px) {
+  .customer-reviews-title {
+    font-size: 1.8rem;
     margin-bottom: 20px;
   }
+  .customer-reviews-container {
+    gap: 15px;
+    grid-template-columns: 1fr;
+  }
+
+  .customer-review-card {
+    padding: 15px;
+  }
+
+  .customer-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .customer-review-text {
+    font-size: 0.9rem;
+  }
+
+  .customer-rating {
+    font-size: 1rem;
+  }
 }
 
-@media (max-width: 480px) {
-  .review-icon {
-    font-size: 20px;
-    top: 10px;
-    right: 10px;
+/* Pantallas medianas (tablets) */
+@media (min-width: 577px) and (max-width: 992px) {
+  .customer-reviews-title {
+    font-size: 2rem;
   }
-  .offer-list {
-    height: 305px;
+
+  .customer-reviews-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .customer-review-card {
+    padding: 20px;
+  }
+}
+
+/* Pantallas grandes (desktops y más) */
+@media (min-width: 993px) {
+  .customer-reviews-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+
+  .customer-reviews-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .customer-review-card {
+    padding: 25px;
+  }
+
+  .customer-avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .customer-review-text {
+    font-size: 1.1rem;
+  }
+
+  .customer-rating {
+    font-size: 1.2rem;
   }
 }

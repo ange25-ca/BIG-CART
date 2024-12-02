@@ -9,7 +9,7 @@ import UserProfile from '../Auth/components/UserProfile.tsx';
 import SignUp from '../Auth/components/SignUp.tsx';
 import CartPayment from '../PaymentMethod/components/CartPayment.tsx';
 import ProtectedRoute from '../Middlewares/authTokenMiddlewar.tsx';
-import ProductDetails from '../Productos/components/DetailProduct.tsx'
+import ProductDetails from '../Productos/components/DetailProduct.tsx';
 
 
 

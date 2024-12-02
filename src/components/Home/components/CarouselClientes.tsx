@@ -18,7 +18,7 @@ const TapeClientes = () => {
               <img
                 src={imgSrc}
                 height="100"
-                width="250"
+                width="200"
                 alt={`Image ${index + 1}`}
               />
             </div>
