@@ -97,13 +97,36 @@ const UserProfile: React.FC = () => {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
   
+    // Creamos un FormData
     const formData = new FormData();
     const fileInput = document.getElementById('perfilImage') as HTMLInputElement;
   
+    // Verificar si la imagen ha sido modificada
     if (fileInput?.files?.[0]) {
-      formData.append('profileImage', fileInput.files[0]); // Manda la imagen
-    } else {
-      alert('Por favor selecciona una imagen.');
+      formData.append('profileImage', fileInput.files[0]);
+    }
+  
+    // Mapeamos los datos del formulario a los nombres correctos para el backend
+    if (userData.username !== user.username) {
+      formData.append('username', userData.username);
+    }
+  
+    if (userData.email !== user.email) {
+      formData.append('email', userData.email);
+    }
+  
+    if (userData.address !== user.address) {
+      formData.append('address', userData.address);
+    }
+  
+    if (userData.phone !== user.phone) {
+      formData.append('phone', userData.phone);
+    }
+  
+    // Verificar si se han hecho cambios
+    const hasChanges = Array.from(formData.entries()).length > 0;
+    if (!hasChanges) {
+      alert('No se han realizado cambios.');
       return;
     }
   
@@ -119,21 +142,34 @@ const UserProfile: React.FC = () => {
         }
       );
   
-      // URL completa para la imagen de perfil
-      const imageUrl = `${baseURL}${response.data.profileImage}`;
-      // Actualizar Redux y localStorage
-      dispatch(setUserId({ ...user, profileImage: imageUrl }));
+      // Asignar la nueva URL de la imagen al estado
+      const imageUrl = response.data.profileImage ? `${baseURL}${response.data.profileImage}` : perfilImage;
   
-      // Actualizar estado local
+      // Actualizar Redux con los nuevos datos
+      dispatch(setUserId({
+        ...user,
+        username: userData.username,
+        email: userData.email,
+        address: userData.address,
+        phone: userData.phone,
+        profileImage: imageUrl,
+      }));
+  
+      // Guardar la imagen en localStorage
+      if (imageUrl) {
+        localStorage.setItem('profileImage', imageUrl);
+      }
+  
+      // Actualizar el estado local de la imagen
       setPerfilImage(imageUrl);
   
-      alert('Cambio de imagen de perfil correctamente.');
+      alert('Datos guardados correctamente.');
     } catch (error) {
-      console.error('Error al subir la imagen:', error);
-      alert('Hubo un error al subir la imagen. Por favor, inténtalo nuevamente.');
+      console.error('Error al guardar los datos:', error);
+      alert('Hubo un error al guardar los datos. Por favor, inténtalo nuevamente.');
     }
   };
-
+  
   return (
     <div className="user-profile">
       <h2>Mi Perfil</h2>
