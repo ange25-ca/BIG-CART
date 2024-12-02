@@ -1,12 +1,16 @@
 /* Estilo general para el nav */
 .navbar {
   width: 100%;
-  background-color: #3686FF;
+  background-color: #05AAFF;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 1000;
   padding: -3px 0;
+  pointer-events: none;
+}
+.navbar * {
+  pointer-events: auto; /* Permite la interacción dentro del navbar */
 }
 
 
@@ -15,8 +19,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 38px;
-  background-color: #3586FF;
+  background-color: #0171DC;
   height: 100px;
+  pointer-events: none;
 }
 
 .navbar-brand{
@@ -95,13 +100,6 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn-cart.active {
-  width: 35px; /* Tamaño más pequeño del círculo */
-  height: 35px;
-  background-color: #EC8305; /* Color de fondo del círculo activo */
-  border-radius: 50%;
-  transform: scale(1.1);
-}
 
 .btn-cart img {
   margin-left: 2px;

@@ -9,38 +9,88 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div className="home">
-      {/* Banner destacado */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1>Bienvenido a BigCart</h1>
-          <p>Productos de calidad al mejor precio</p>
-          <button className="shop-now-btn">Comprar Ahora</button>
+        {/* Ofertas Especiales */}
+        <section className="special-offers">
+          <div className="offer-list">
+            <CarouselPromotions />
+          </div>
+        </section>
+      {/* Bienvenida */}
+      <section className="minimalist-welcome">
+        <div className="content-wrapper">
+          <h1 className="headline">Donde la variedad y los precios al por mayor se encuentran.</h1>
+          <p className="subheadline-welcome">¡Explora nuestras secciones ahora mismo y conoce todo lo que tenemos para ti! Descubre más sobre nuestra historia, lo que nos impulsa, y los productos únicos que hemos creado pensando en ti. ¡Estás a solo un clic de encontrar lo que necesitas!</p>
+          <a href="#explorar" className="cta-button">Explorar ahora</a>
         </div>
       </section>
-      {/* Bienvenida */}
-      <section className="welcome-section">
-      <h2>Donde la variedad y los precios al por mayor se encuentran.</h2>
-      <p>Nos enorgullece ofrecerte miles de productos en todas las categorías imaginables, diseñados para satisfacer todas tus necesidades de negocio. 
-        Desde artículos de tendencia hasta básicos de alta demanda, en BigCart encontrarás un catálogo vasto y actualizado pensado para 
-        ayudarte a abastecer tu negocio con facilidad y eficiencia.</p>
-      <p>Aquí, valoramos cada compra al por mayor y trabajamos para ofrecerte no solo precios competitivos, 
-        sino también una experiencia de compra rápida y confiable. 
-        ¡Explora nuestras categorías, selecciona los productos que necesitas y 
-        disfruta de los beneficios de comprar al por mayor con nosotros!</p>
-      </section>
+
       {/* Clientes */}
-      <section className="categories">
-        <h2>Nuestros clientes</h2>
+      <section className="categories-cli">
+      <h2 className="section-title-cli">Nuestros clientes</h2>
         <TapeClientes/>
       </section>
 
-       {/* Categorías */}
+       {/* reviews*/}
+       <section className="customer-reviews">
+  <h2 className="customer-reviews-title">Lo que opinan nuestros clientes</h2>
+  <div className="customer-reviews-container">
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Juan Pérez" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"Excelente servicio y precios competitivos. ¡Completamente recomendado!"</p>
+        <span className="customer-review-author">- Juan Pérez -</span>
+        <div className="customer-rating">⭐⭐⭐⭐ 4.0</div>
+      </div>
+    </div>
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Ana Gómez" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"Un catálogo impresionante, siempre encuentro lo que necesito para mi negocio."</p>
+        <span className="customer-review-author">- Ana Gómez -</span>
+        <div className="customer-rating">⭐⭐⭐⭐⭐ 5.0</div>
+      </div>
+    </div>
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Carlos Ruiz" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"Un catálogo impresionante, siempre encuentro lo que necesito para mi negocio."</p>
+        <span className="customer-review-author">- Carlos Ruiz -</span>
+        <div className="customer-rating">⭐⭐⭐⭐ 4.5</div>
+      </div>
+    </div>
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="María López" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"Gran variedad de productos, siempre de calidad."</p>
+        <span className="customer-review-author">- María López -</span>
+        <div className="customer-rating">⭐⭐⭐⭐ 4.4</div>
+      </div>
+    </div>
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Luis Fernández" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"La atención al cliente es excelente, me ayudaron con todo lo que necesitaba."</p>
+        <span className="customer-review-author">- Luis Fernández -</span>
+        <div className="customer-rating">⭐⭐⭐⭐⭐ 5.0</div>
+      </div>
+    </div>
+    <div className="customer-review-card">
+      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Luis Fernández" className="customer-avatar" />
+      <div className="customer-review-content">
+        <p className="customer-review-text">"La atención al cliente es excelente, me ayudaron con todo lo que necesitaba."</p>
+        <span className="customer-review-author">- Luis Fernández -</span>
+        <div className="customer-rating">⭐⭐⭐⭐⭐ 5.0</div>
+      </div>
+    </div>
+  </div>
+</section>
+
        {/* Categorías */}
       <section className="categories">
         <div className="category-list">
          <CategoriesCarousel />
         </div>
-        <Link to="/productos" className="category-button">
+        <Link to="/productos" className="category-button-home">
           Ir a categorías
         </Link>
       </section>
@@ -53,14 +103,6 @@ const Home = () => {
           <TopProductsCarousel/>
         </div>
       </section>
-
-      {/* Ofertas Especiales */}
-        <section className="special-offers">
-          <h2>Ofertas Especiales</h2>
-          <div className="offer-list">
-            <CarouselPromotions />
-          </div>
-        </section>
 
 
       {/* Llamada a la acción */}

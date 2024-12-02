@@ -1,119 +1,141 @@
-.top-products-carousel {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px 0;
-    overflow: hidden;
-    text-align: center;
+/* Contenedor principal del carrusel */
+.unique-carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1225px;
+  margin: auto;
+  padding: 20px 0;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 15px; /* Bordes redondeados */
+}
+
+/* Botones de control del carrusel */
+.unique-carousel-control {
+  position: absolute;
+  top: 50%;
+  color: black;
+  font-size: 2rem; /* Tamaño visible */
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  z-index: 2;
+  background: none;
+}
+
+.unique-carousel-control:hover {
+  color: #ec8304; /* Cambio de color al hover */
+}
+
+/* Botón anterior */
+.unique-carousel-prev {
+  left: 0;
+}
+
+/* Botón siguiente */
+.unique-carousel-next {
+  right: 0;
+}
+
+/* Contenedor de los elementos del carrusel */
+.unique-carousel-items {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 20px;
+}
+
+/* Elementos individuales del carrusel */
+.unique-carousel-item {
+  flex: 1;
+  min-width: calc(25% - 20px);
+  display: none; /* Ocultos por defecto */
+  text-align: center;
+}
+
+.unique-carousel-item.unique-visible {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.unique-carousel-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+/* Detalles del producto */
+.unique-product-details {
+  text-align: center;
+}
+
+.unique-product-details h3 {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.unique-product-details p {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.unique-product-rating {
+  font-size: 0.8rem;
+  color: #000;
+  font-weight: bold;
+}
+
+/* Botón "Ver todos los productos" */
+.unique-view-all {
+  margin-top: 45px;
+  text-align: center;
+}
+
+.unique-view-all-btn {
+  margin-top: 20px !important; 
+  text-decoration: none;
+  color: #ec8304;
+  border: 2px solid #ec8304;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.unique-view-all-btn:hover {
+  background-color: #ec8304;
+  color: white;
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+  .unique-carousel-item {
+    min-width: calc(50% - 20px); /* Mostrar 2 productos */
   }
-  
-  .products-carousel-container {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .unique-carousel-item {
+    min-width: calc(100% - 20px); /* Mostrar 1 producto */
   }
-  
-  .products-carousel-item {
-    flex: 1;
-    min-width: calc(25% - 20px); /* Mostrar 4 productos */
-    display: none; /* Ocultar por defecto */
-    text-align: center;
-  }
-  
-  .products-carousel-item.visible {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .products-carousel-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    object-fit: cover;
-  }
-  
-  .product-details {
-    text-align: center;
-  }
-  
-  .product-details h3 {
-    font-size: 1rem;
-    margin: 5px 0;
-  }
-  
-  .product-details p {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .product-rating {
-    font-size: 0.8rem;
-    color: #f39c12;
-  }
-  
-  .products-control-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
+
+  .unique-carousel-control {
     font-size: 1.5rem;
-    border: none;
-    border-radius: 50%;
-    padding: 10px 15px;
-    cursor: pointer;
-    z-index: 1;
+    padding: 10px;
   }
-  
-  .products-prev-btn {
-    left: 10px;
+
+  .unique-carousel-container {
+    padding: 16px 0;
   }
-  
-  .products-next-btn {
-    right: 10px;
+}
+
+@media (max-width: 480px) {
+  .unique-carousel-control {
+    font-size: 1.2rem;
+    padding: 8px;
   }
-  
-  .products-control-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
-  }
-  
-  .view-all-products {
-    margin-top: 20px;
-  }
-  
-  .view-all-btn {
-    text-decoration: none;
-    color: white;
-    background-color: #007bff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 0.9rem;
-  }
-  
-  .view-all-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  /* Responsividad */
-  @media (max-width: 1024px) {
-    .products-carousel-item {
-      min-width: calc(33.33% - 20px); /* Mostrar 3 productos */
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .products-carousel-item {
-      min-width: calc(50% - 20px); /* Mostrar 2 productos */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .products-carousel-item {
-      min-width: calc(100% - 20px); /* Mostrar 1 producto */
-    }
-  }
-  
+}

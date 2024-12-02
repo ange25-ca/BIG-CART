@@ -6,7 +6,7 @@ main {
 .home {
   font-family: 'Noto Sans', sans-serif;
   padding: 0;
-  background-color: #ffffff;
+  background-color: #F6F6F6;
   overflow-x: hidden;
 }
 /* Estilos para la sección de ofertas especiales */
@@ -22,25 +22,30 @@ main {
   color: #333;
   margin-bottom: 20px;
 }
+
 .special-offers img {
-  width: 1500px;
+  width: 100%; /* Asegura que las imágenes no se desborden */
+  height: auto;
+  max-width: 1500px; /* Maximo tamaño para pantallas grandes */
 }
 
 /* Estilos para el contenedor del carrusel */
 .offer-list {
   position: relative;
   overflow: hidden;
+  height: 490px;
   width: 100%;
   max-width: 2500px;
   margin: 0 auto;
-  border-radius: 10px;
-  margin-bottom: 50px;
+  padding: 0 15px; /* Espacio para evitar que las imágenes toquen los bordes */
 }
+
 /* Ajustes para cada imagen en el carrusel */
 .carousel-item img {
-  width: 1500px;
+  width: 100%;
   height: auto;
   border-radius: 10px;
+  max-width: 1500px; /* Asegura que las imágenes no se estiren */
 }
 
 /* Ajustes para que se vea como un carrusel horizontal */
@@ -70,9 +75,10 @@ main {
   position: absolute;
   bottom: 15px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* Centrado horizontal */
   display: flex;
   gap: 10px;
+  margin-bottom: 5px;
 }
 
 .carousel-buttons button {
@@ -82,7 +88,7 @@ main {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 9999999;
+  z-index: 9999;
   transition: background-color 0.3s ease;
 }
 
@@ -95,13 +101,73 @@ main {
 }
 
 /* Responsividad */
-@media (max-width: 768px) {
+
+/* Pantallas grandes */
+@media (min-width: 1201px) {
   .special-offers h2 {
-    font-size: 1.5rem;
+    font-size: 2.5rem; /* Título más grande en pantallas grandes */
   }
 
   .offer-list {
-    padding: 10px;
+    padding: 0; /* Sin relleno en pantallas grandes */
+    height: 490px; /* Altura predeterminada */
+  }
+
+  .carousel-buttons button {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* Pantallas medianas */
+@media (max-width: 1200px) {
+  .special-offers h2 {
+    font-size: 2rem; /* Título adecuado para pantallas medianas */
+  }
+
+  .offer-list {
+    padding: 10px; /* Relleno para evitar que las imágenes toquen los bordes */
+    height: 400px; /* Altura ajustada para pantallas medianas */
+  }
+
+  .carousel-buttons button {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Pantallas pequeñas (tablet y landscape móviles) */
+@media (max-width: 768px) {
+  .special-offers h2 {
+    font-size: 1.5rem; /* Título más pequeño en tabletas */
+  }
+
+  .offer-list {
+    padding: 5px;
+    height: 300px; /* Altura reducida para dispositivos más pequeños */
+  }
+
+  .carousel-buttons button {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Pantallas móviles */
+@media (max-width: 480px) {
+  .special-offers h2 {
+    font-size: 1.2rem; /* Título aún más pequeño para móviles */
+    margin-bottom: 10px; /* Menos margen en móviles */
+  }
+
+  .offer-list {
+    padding: 0;
+    height: 250px; /* Altura aún más pequeña para pantallas móviles */
+  }
+
+  .carousel-buttons button {
+    width: 8px;
+    height: 8px;
   }
 }
 
@@ -109,7 +175,7 @@ main {
 @keyframes fadeInLeft {
   0% {
     opacity: 0;
-    transform: translateX(-30px);
+    transform: translateX(-20px);
   }
   100% {
     opacity: 1;
@@ -128,74 +194,235 @@ main {
   }
 }
 
-/* Hero Section */
-.hero {
-  background: url('../img/1.png') no-repeat center center;
-  background-size: cover;
+/* Diseño de la sección */
+.minimalist-welcome {
+  background-color: #f6f6f6;
+  color: #2c3e50;
   padding: 100px 20px;
-  color: white;
-  text-align: center;
+  text-align: justify; 
   position: relative;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-left: 30px;
+  flex-direction: column;
+  margin-top: -86px;
 }
 
-.hero-content {
-  animation: fadeInLeft 1.2s ease-in-out;
+.content-wrapper {
+  max-width: 900px;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  
 }
 
-.hero-content h1 {
-  font-size: 3rem;
-  color: #ffffff;
-  margin-bottom: 15px;
-  -webkit-text-stroke: 1px black;
+.headline,
+.subheadline-welcome {
+  max-width: 100%; /* Asegura el mismo ancho máximo */
+  text-align: justify; /* Justifica el texto */
+  margin: 0 auto; /* Centra horizontalmente */
+  line-height: 1.8; /* Espaciado entre líneas */
 }
 
-.hero-content p {
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-  color: white;
-  font-weight: bold;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+
+.headline {
+  font-size: 3.5rem; 
+  font-weight: 700;
+  line-height: 1.2;
+  color: #333;
+  letter-spacing: 3px;
+  margin-top: -15px;
+  margin-bottom: 27px;
+  animation: fadeIn 1.5s ease-out;
 }
 
-.shop-now-btn {
-  padding: 12px 25px;
-  background-color: #EC8304;
-  color: white;
-  border: none;
-  font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.596);
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+.subheadline-welcome{
+  font-size: 1.2rem !important;
+  font-weight: 400 !important;
+  color: #555 !important;
+  opacity: 0;
+  letter-spacing: 3px!important;
+  animation: fadeIn 1.5s ease-out 0.5s forwards;
 }
 
-.shop-now-btn:hover {
-  background-color: #d96f03;
-  transform: scale(1.1);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+.cta-button-wrapper {
+  display: flex;
+  justify-content: center;  
+  width: 100%; 
+  margin-top: 30px; 
 }
+
+.cta-button {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #fff;
+  background-color: #0171DC; 
+  border-radius: 50px;
+  margin-top: 35px;
+  letter-spacing: 1px;
+  align-self: center;
+}
+
+.cta-button:hover {
+  background-color: #ffffff; 
+  color: #0171DC;
+  border: 1.5px solid #0171DC; 
+}
+/* Pantallas grandes (a partir de 1200px) */
+@media (min-width: 1200px) {
+  .minimalist-welcome {
+      padding: 120px 40px;
+      margin-left: 50px;
+      height: auto; /* Permite altura dinámica para pantallas grandes */
+      margin-top: -50px;
+      text-align: left; /* Ajusta texto a la izquierda */
+  }
+}
+
+/* Pantallas medianas (entre 768px y 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .minimalist-welcome {
+      padding: 80px 20px;
+      margin-left: 20px;
+      height: auto;
+      text-align: justify;
+      margin-top: -60px;
+  }
+}
+
+/* Pantallas pequeñas (hasta 767px) */
+@media (max-width: 767px) {
+  .minimalist-welcome {
+      padding: 60px 10px;
+      margin-left: 10px;
+      height: auto; /* Asegura altura dinámica */
+      text-align: center; /* Centra texto para dispositivos pequeños */
+      margin-top: 0;
+      flex-direction: column; /* Mantiene el diseño en columna */
+  }
+  .special-offers {
+    width: 100%;
+    background-color: transparent;
+    text-align: center;
+    margin-bottom: -85px !important;
+}
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .headline {
+    font-size: 2.5rem; /* Ajusta el tamaño del título para pantallas más pequeñas */
+  }
+  .offer-list {
+        height: 208px;
+        width: 537px;
+        margin-top: -10px;
+        margin-left: -8px;
+  }
+  
+  .offer-list img{
+        height: 600px;
+    }
+  .subheadline-welcome {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    font-size: 1rem;
+    padding: 12px 25px;
+  }
+}
+
 
 /* Categorías */
+/* Estilos para la sección de categorías */
 .categories {
-  margin: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el contenido horizontalmente */
+  justify-content: center; /* Alinea el contenido verticalmente */
   text-align: center;
-  color: black;
+  background-color: #F6F6F6;
+  padding: 40px 20px;
+   /* Línea de separación sutil */
+  animation: fadeInRight 1.5s ease-in-out;
+}
+.categories-cli {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra el contenido horizontalmente */
+  justify-content: center; /* Alinea el contenido verticalmente */
+  text-align: center;
+  background-color: #F6F6F6;
+  padding: 16px 20px;
   animation: fadeInRight 1.5s ease-in-out;
 }
 
-.categories h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #091057;
+
+/* Estilos para el contenedor del carrusel */
+.category-list {
+  width: 100%;
+  max-width: 1200px; /* Asegura que el carrusel no ocupe todo el ancho */
+  margin-bottom: 30px; /* Espacio debajo del carrusel */
 }
 
-.category-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+/* Estilos para el botón */
+.category-button-home {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  background-color: #EC8304; /* Mantenemos el color original */
+  color: white;
+  font-size: 16px;
+  font-weight: 500; /* Ligero grosor en el texto para un estilo más profesional */
+  text-decoration: none;
+  border: 2px solid #EC8304; /* Bordes sutiles del mismo color */
+  border-radius: 25px; /* Bordes rectos */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transiciones sutiles */
+}
+
+/* Efecto al pasar el mouse */
+.category-button-home:hover {
+  background-color: white; /* Fondo blanco para el hover */
+  color: #EC8304; /* Cambiar el color del texto al color base */
+  border-color: #EC8304; /* Aseguramos que el borde también cambie */
+}
+
+/* Efecto al hacer clic (activo) */
+.category-button-home:active {
+  background-color: #D47102; /* Un color ligeramente más oscuro al hacer clic */
+  border-color: #D47102; /* Cambio de borde al hacer clic */
+  transform: translateY(1px); /* Efecto de hundimiento sutil */
+}
+
+
+/* Animación para la entrada */
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .category-card {
@@ -283,9 +510,11 @@ main {
 
 h2 {
   font-size: 32px;
-  color: #024CAA;
+  color: #333333;
   margin-bottom: 30px;
 }
+
+
 
 h3 {
   font-size: 22px;
@@ -324,32 +553,40 @@ h3 {
   transform: scale(1.05);
 }
 /* Bienvenida */
-.welcome-section {
-  margin: 50px auto;
+.welcome-section-cat {
+  font-size: 2rem;
+  font-weight: bold;
   padding: 0px 33px;
   max-width: 900px;
   color: #333;
   text-align: center;
   animation: fadeInWelcome 1.2s ease-out forwards;
   opacity: 0;
+  margin-left: -40px;
 }
 
+/* Estilo para el h2 en la sección bienvenida */
 .welcome-section h2 {
   font-size: 2rem;
   color: #024CAA;
   margin-bottom: 20px;
   font-weight: bold;
-  border-bottom: 2px solid #EC8304;
+  border-bottom: 2px solid #05AAFF;
   padding-bottom: 10px;
+  margin-left: -10px; /* Ajustado a 0 para que no haya margen negativo */
+  text-align: left; /* Alineación a la izquierda */
 }
 
+/* Estilo para el texto del párrafo en la sección bienvenida */
 .welcome-section p {
   font-size: 1.15rem;
-  text-align: justify;
+  text-align: left; /* Alineación a la izquierda */
   line-height: 1.8;
   margin: 15px 0;
   color: #555;
+  margin-left: 0; /* Eliminar cualquier margen negativo */
 }
+
 
 
 /* Animación para bienvenida */
@@ -366,7 +603,7 @@ h3 {
 
 /* Estilo de transición al hacer scroll */
 .welcome-section h2:hover {
-  color: #EC8304;
+  color: #05AAFF;
   transition: color 0.3s ease;
 }
 
@@ -377,36 +614,64 @@ h3 {
 
 
 /* Llamada a la acción */
+/* Estilos para la sección de llamada a la acción */
 .call-to-action {
-  background-color: #ECF1F8;
-  color: #091057;
-  padding: 60px 20px;
+  background-color: #ECF1F8; /* Mantiene el color de fondo suave */
+  color: #091057; /* Mantiene el color de texto en azul oscuro */
+  padding: 80px 20px; /* Aumenta el padding para mayor espacio */
   text-align: center;
   position: relative;
   overflow: hidden;
-  animation: fadeInRight 1.5s ease-in-out;
+  animation: fadeInRight 1.5s ease-in-out; /* Animación de entrada */
+  border-radius: 15px; /* Bordes redondeados para un aspecto más suave */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Agrega una sombra sutil para darle profundidad */
 }
 
+/* Estilo para el encabezado */
+.call-to-action h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #091057; /* Mantiene el color de texto */
+  letter-spacing: 0.5px; /* Añade un poco de espaciado entre letras */
+  text-transform: uppercase; /* Convierte el texto a mayúsculas para mayor impacto */
+}
+
+/* Estilo para el párrafo */
 .call-to-action p {
   margin-bottom: 30px;
-  font-size: 1.2rem;
+  font-size: 1.1rem; /* Ajusta el tamaño de fuente */
+  color: #4C4C6C; /* Color gris más suave para el párrafo */
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto; /* Centra el párrafo */
 }
 
+/* Estilo para el botón */
 .sign-up-btn {
-  padding: 12px 25px;
-  background-color: #EC8304;
+  background-color: #091057; /* Fondo oscuro para el botón */
   color: white;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  border-radius: 30px; /* Botón redondeado */
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+  font-weight: bold;
+  text-transform: uppercase; /* Hace que el texto del botón sea en mayúsculas */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra sutil */
 }
 
 .sign-up-btn:hover {
-  background-color: #d96f03;
-  transform: scale(1.1);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #EC8304; /* Cambia el color del fondo al pasar el ratón */
+  transform: translateY(-3px);
+  color: white; /* Añade un efecto de desplazamiento sutil al pasar el ratón */
 }
+
+.sign-up-btn:focus {
+  outline: none; /* Elimina el contorno al hacer clic */
+}
+
 
 /* Animación de FadeIn desde abajo */
 @keyframes fadeInUp {
@@ -417,5 +682,152 @@ h3 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+/* Estilos generales */
+
+.customer-reviews {
+  padding: 40px 20px;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+
+.customer-reviews-title {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Contenedor responsivo con grid */
+.customer-reviews-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tarjetas de reseñas */
+.customer-review-card {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.customer-review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen circular del cliente */
+.customer-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 3px solid #e0e0e0;
+  object-fit: cover;
+}
+
+.customer-review-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.customer-review-text {
+  font-size: 1rem;
+  font-style: italic;
+  color: #666;
+  margin: 10px 0;
+}
+
+.customer-review-author {
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.customer-rating {
+  font-size: 1.2rem;
+  color: #f4b400;
+}
+
+/* RESPONSIVIDAD */
+
+/* Pantallas pequeñas (smartphones) */
+@media (max-width: 576px) {
+  .customer-reviews-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  .customer-reviews-container {
+    gap: 15px;
+    grid-template-columns: 1fr;
+  }
+
+  .customer-review-card {
+    padding: 15px;
+  }
+
+  .customer-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .customer-review-text {
+    font-size: 0.9rem;
+  }
+
+  .customer-rating {
+    font-size: 1rem;
+  }
+}
+
+/* Pantallas medianas (tablets) */
+@media (min-width: 577px) and (max-width: 992px) {
+  .customer-reviews-title {
+    font-size: 2rem;
+  }
+
+  .customer-reviews-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .customer-review-card {
+    padding: 20px;
+  }
+}
+
+/* Pantallas grandes (desktops y más) */
+@media (min-width: 993px) {
+  .customer-reviews-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+
+  .customer-reviews-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .customer-review-card {
+    padding: 25px;
+  }
+
+  .customer-avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .customer-review-text {
+    font-size: 1.1rem;
+  }
+
+  .customer-rating {
+    font-size: 1.2rem;
   }
 }

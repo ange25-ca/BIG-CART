@@ -9,7 +9,7 @@ import UserProfile from '../Auth/components/UserProfile.tsx';
 import SignUp from '../Auth/components/SignUp.tsx';
 import CartPayment from '../PaymentMethod/components/CartPayment.tsx';
 import ProtectedRoute from '../Middlewares/authTokenMiddlewar.tsx';
-
+import ProductDetails from '../Productos/components/DetailProduct.tsx';
 
 
 
@@ -29,10 +29,19 @@ const routes = [
         </ProtectedRoute>
       ),
     },
+    {
+      path: "/cartPayment", 
+      element: (
+        <ProtectedRoute>
+          <CartPayment /> {/* Aquí es donde se renderiza el componente protegido */}
+        </ProtectedRoute>
+      ),
+    },
     { path: "/productos", element: <CatalogsProducts /> },
     { path: "/contactus", element: <ContactUs/> },
     { path: "/SignUp", element: <SignUp/> },
     {path: "/account", element: <UserProfile/>},
+    {path: "/detailProd", element: <ProductDetails/>}
   ];
 
 export default routes;

@@ -1,27 +1,39 @@
-import React, {useEffect} from 'react';
-
-import { FaCcVisa, FaCcMastercard, FaPaypal } from 'react-icons/fa';
-import { FiTrash2 } from 'react-icons/fi';
-// import cartData from '../../../../public/shopCart.json';
-// import cartData from '../../../../public/shopCart.json';
-import CartItemComponent from './CartItem';
-import { RootState, AppDispatch } from '../../../redux/store';
-import { verCart} from '../../../controllers/cartController'
+import React, { useEffect, useState } from 'react';
 import '../assets/styles/ShoppingCart.css';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {useNavigate} from 'react-router-dom';
+import { AppDispatch, RootState } from '../../../redux/store';
+import { verCart } from '../../../controllers/cartController';
 
-const ShoppingCart: React.FC = () => {
+interface CartItem {
+  idProducto: number;
+  nombreProducto: string;
+  descripcion: string;
+  precio: number;
+  cantidad: number;
+  imagen: string;
+}
+
+const Cart: React.FC = () => {
+
   const navigate = useNavigate();
   const distpatch = useDispatch<AppDispatch>();
-  const {detallesCarrito, itemsCarrito, isLoading, error} = useSelector((state: RootState) => state.carrito);
-  useEffect(
-    () => {
-      distpatch(verCart());
-    }, [distpatch]
-  );
+  const { detallesCarrito, itemsCarrito, isLoading, error } = useSelector((state: RootState) => state.carrito);
+  const idUsuario = useSelector((state: RootState) => state.user.idUsuario);
+  console.log(idUsuario);
+  const [localCart, setLocalCart] = useState<CartItem[]>([]);
 
-  
+  // Recuperar productos del backend si el usuario está logueado
+  useEffect(() => {
+    if (idUsuario) {
+      distpatch(verCart());
+    } else {
+      // Recuperar productos desde localStorage si no está logueado
+      const storedCart = localStorage.getItem('carrito');
+      setLocalCart(storedCart ? JSON.parse(storedCart) : []);
+    }
+  }, [idUsuario, distpatch]);
+
 
   // Calcular el subtotal
   const subtotal = itemsCarrito.reduce(
@@ -35,59 +47,102 @@ const ShoppingCart: React.FC = () => {
   const tax = subtotal * taxRate;
   const totalAmount = subtotal + tax + shippingCost;
 
-  const handleUpdateQuantity = (idProducto: number, quantity: number) => {
-    console.log(`Actualizar cantidad de producto con id ${idProducto} a ${quantity}`);
-  };
 
-  const handleRemoveItem = (idProducto: number) => {
-    console.log(`Eliminar producto con id ${idProducto}`);
+  const items = idUsuario ? itemsCarrito : localCart;
+
+  const handleCheckout = () => {
+    // Lógica para redirigir a la vista de pago
+    window.location.href = '/cartPayment';
   };
 
   return (
-    <div className="shopping-cart">
-      <h2>Carrito de Compras</h2>
-      <div className="shopping-cart-content">
-        {/* Lista de ítems con scroll activado cuando hay muchos elementos */}
-        <div className="cart-items-container">
-          {itemsCarrito.map(item => (
-            <CartItemComponent
-              key={item.idProducto}
-              item={item}
-              onUpdateQuantity={(quantity) => handleUpdateQuantity(item.idProducto, quantity)}
-              onRemove={() => handleRemoveItem(item.idProducto)}
+    <div className="cart-container">
+      <main className="cart-main">
+        <section className="cart-items-section">
+          <h2>Carrito</h2>
+          {items.length > 0 ? (
+            
+              items.map((item) => (
+                <div key={item.idProducto} className="cart-item">
+                  <img src={item.imagen} alt={item.nombreProducto} className="cart-item-image" />
+                  <div className="cart-item-info">
+                    <p className="cart-item-name">{item.nombreProducto}</p>
+                    <p className="cart-item-variant">{item.descripcion}</p>
+                  </div>
+                  <div className="cart-item-controls">
+                    <span className="cart-item-price">${item.precio}</span>
+                    <div className="cart-item-quantity">
+                      <button
+                        className="quantity-button"
+
+                      >
+                        -
+                      </button>
+                      <span className="quantity-display">{item.cantidad}</span>
+                      <button
+                        className="quantity-button"
+                      // onClick={() => updateQuantity(item.id, 1)}
+                      >
+                        +
+                      </button>
+                      <button
+                        className="remove-item"
+                      // onClick={() => removeItem(item.id)}
+                      >
+                        🗑
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))
+            
+          ) : (
+            <p> No hay productos en el carrito. </p>
+          )}
+        </section>
+
+        <aside className="cart-summary">
+          <h3>Total</h3>
+          <div className="discount-section">
+            <input
+              type="text"
+              placeholder="Gift card or discount code"
+              value={10}
+              // onChange={(e) => setDiscountCode(e.target.value)}
+              className="discount-input"
             />
-          ))}
-        </div>
-
-        {/* Resumen del carrito */}
-        <div className="cart-summary">
-          <h3>Resumen del Pedido</h3>
-          <p>Subtotal: <strong>${subtotal.toFixed(2)}</strong></p>
-          <p>Impuestos (10%): <strong>${tax.toFixed(2)}</strong></p>
-          <p>Costo de Envío: <strong>${shippingCost.toFixed(2)}</strong></p>
-          <div className="balance">
-            <p>Total: <strong>${totalAmount.toFixed(2)}</strong></p>
           </div>
-          <button onClick={() => navigate('/cartPayment')} className="cart-checkout">
-            Proceder al Pago
-          </button>
-          <button onClick={() => console.log("Carrito vaciado")} className="cart-clear">
-            <FiTrash2 size={18} /> Vaciar Carrito
-          </button>
-
-          {/* Métodos de pago */}
-          <div className="payment-methods">
-            <h4>Métodos de Pago Aceptados:</h4>
-            <div className="payment-icons">
-              <FaCcVisa size={36} />
-              <FaCcMastercard size={36} />
-              <FaPaypal size={36} />
+          <div className="summary-details">
+            <div className="summary-row">
+              <span>Subtotal</span>
+              <span>${subtotal.toFixed(2)}</span>
+            </div>
+            <div className="summary-row">
+              <span>Envío</span>
+              <span>$0.00</span>
+            </div>
+            <div className="summary-row">
+              <span>IVA</span>
+              <span>$0.00</span>
             </div>
           </div>
-        </div>
-      </div>
+          <div className="summary-total">
+            <span>Total</span>
+            <span>${subtotal.toFixed(2)}</span>
+          </div>
+          <div className="summary-actions">
+            <button className="clear-cart-button" >
+              Empty Cart
+            </button>
+            <button className="checkout-button" onClick={handleCheckout}>
+              Process Payment
+            </button>
+          </div>
+        </aside>
+      </main>
     </div>
   );
 };
 
-export default ShoppingCart;
+export default Cart;
+

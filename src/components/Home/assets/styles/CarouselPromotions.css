@@ -1,11 +1,12 @@
-.carousel {
-    position: relative;
-    overflow: hidden;
-    width: 2500px;
-    max-width: 1200px;
-    margin: auto;
-    border-radius: 10px;
-  }
+.carousel-prom {
+  position: relative;
+  overflow: hidden;
+  width: 1447px;
+  height: 502px;
+  max-width: 1500px;
+  margin-left: -3px;
+  border-radius: 0px; 
+}
   
   .carousel-item {
     position: absolute;
@@ -16,12 +17,13 @@
     transition: transform 0.5s ease, opacity 0.5s ease;
     opacity: 0;
     z-index: 1;
+    border-radius: 0 !important;
   }
   
   .carousel-item img {
     width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 0 !important;
   }
   
   .carousel-item.active {
@@ -32,7 +34,7 @@
   }
   
   .carousel-item.inactive {
-    transform: translateX(10%);
+    transform: translateX(15%);
   }
   
   .carousel-buttons {
@@ -65,7 +67,7 @@
   
   /* Responsivo */
   @media (max-width: 768px) {
-    .carousel {
+    .carousel-prom {
       max-width: 90%;
     }
   
@@ -74,4 +76,46 @@
       height: 10px;
     }
   }
-  
+
+/* Responsividad */
+@media (max-width: 1200px) {
+  .carousel-prom {
+    width: 102%; /* Asegura que el carrusel ocupe todo el ancho disponible */
+  }
+
+  .carousel-buttons button {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-prom {
+    width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+    height: 300px; /* Ajusté la altura en dispositivos móviles */
+  }
+
+  .carousel-buttons {
+    bottom: 10px;
+  }
+
+  .carousel-buttons button {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-prom {
+    height: 250px; /* Reducir la altura aún más en pantallas muy pequeñas */
+  }
+
+  .carousel-buttons {
+    bottom: 8px;
+  }
+
+  .carousel-buttons button {
+    width: 6px;
+    height: 6px;
+  }
+}

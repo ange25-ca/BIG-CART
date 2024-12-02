@@ -11,4 +11,3 @@ export interface Product {
         stock: number,
         categoria: number,
 }
-  
