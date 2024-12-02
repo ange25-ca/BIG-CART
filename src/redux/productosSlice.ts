@@ -8,6 +8,7 @@ interface Producto{
     nombreProducto: string,
     precio: number,
     descripcion: string,
+    rating: number, 
     imagenUrl: string,
     stock: number,
     categoria: number

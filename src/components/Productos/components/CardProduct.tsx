@@ -1,7 +1,7 @@
 import React from 'react';
 import { Product } from '../interfaces/Product';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { handleAddToCartwithLogin } from '../../../controllers/cartController';
 import { UserState } from '../../../redux/userSlices';
 import '../assets/styles/CardProduct.css';
 import { agregarProductoLocal } from './addToCartOut';
@@ -36,7 +36,8 @@ const CardProduct: React.FC<ProductProps> = ({ product }) => {
       agregarProductoLocal(item);
       alert(`Producto "${product.nombreProducto}" agregado al carrito local.`);
     } else {alert(`Producto "${product.nombreProducto}" agregado al carrito de backend. el id usuario es: "${idUsuario}`);
-    console.log(idUsuario)}
+    console.log(idUsuario)};
+    handleAddToCartwithLogin(parseInt(idUsuario), product.idProducto, 1);
   }
 
     const rating = typeof product.rating === 'string' ? parseFloat(product.rating) : product.rating;
@@ -58,6 +59,7 @@ const CardProduct: React.FC<ProductProps> = ({ product }) => {
     
     
   };
+  
   return (
     <div className="card">
       <button className="btn-icon like">❤️</button>
