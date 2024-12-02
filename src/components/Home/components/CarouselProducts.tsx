@@ -29,6 +29,7 @@ const topProducts: TopProduct[] = [
   { id: 16, name: "Gaming Chair", image: "https://i.postimg.cc/5t9KXjWY/chairpng-parspng-com.png", price: 250, rating: 4.9 },
 ];
 
+
 const AUTO_PLAY_DELAY = 5000; // 5 segundos
 
 const TopProductsCarousel: React.FC = () => {
@@ -48,34 +49,38 @@ const TopProductsCarousel: React.FC = () => {
   }, []);
 
   return (
-    <div className="top-products-carousel">
-      <button className="products-control-btn products-prev-btn" onClick={prev}>
+    <div className="unique-carousel-container">
+      <button className="unique-carousel-control unique-carousel-prev" onClick={prev}>
         &#8249;
       </button>
-      <div className="products-carousel-container">
+      <div className="unique-carousel-items">
         {topProducts.map((product, index) => (
           <div
             key={product.id}
-            className={`products-carousel-item ${
-              index >= currentIndex && index < currentIndex + 4 ? "visible" : "hidden"
+            className={`unique-carousel-item ${
+              index >= currentIndex && index < currentIndex + 4 ? "unique-visible" : "unique-hidden"
             }`}
           >
-            <img src={product.image} alt={product.name}  style={{height: '200px', width: '200px' }}/>  //gracias a chatgpt
-            <div className="product-details">
-              <h3 style={{fontWeight: 'bold'}}>{product.name}</h3>
+            <img
+              src={product.image}
+              alt={product.name}
+              style={{ height: "200px", width: "200px" }}
+            />
+            <div className="unique-product-details">
+              <h3>{product.name}</h3>
               <p>${product.price.toFixed(2)}</p>
-              <div className="product-rating">
+              <div className="unique-product-rating">
                 {"⭐".repeat(Math.floor(product.rating))} {product.rating.toFixed(1)}
               </div>
             </div>
           </div>
         ))}
       </div>
-      <button className="products-control-btn products-next-btn" onClick={next}>
+      <button className="unique-carousel-control unique-carousel-next" onClick={next}>
         &#8250;
       </button>
-      <div className="view-all-products">
-        <Link to="/productos" className="view-all-btn">
+      <div className="unique-view-all">
+        <Link to="/productos" className="unique-view-all-btn">
           Ver todos los productos
         </Link>
       </div>

@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #FFFFFF;
+  background-color: #F6F6F6;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,7 +20,7 @@ html, body {
   height: 100%;
   overflow-x: hidden; /* Evita el desbordamiento horizontal */
   box-sizing: border-box;
-  background-color: #FFFFFF;
+  background-color: #F6F6F6;
 }
 
 body {
@@ -119,7 +119,7 @@ footer {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #F6F6F6;
   }
 
   a:hover {
