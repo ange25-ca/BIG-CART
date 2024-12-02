@@ -80,7 +80,7 @@
 /* Responsividad */
 @media (max-width: 1200px) {
   .carousel-prom {
-    width: 100%; /* Asegura que el carrusel ocupe todo el ancho disponible */
+    width: 102%; /* Asegura que el carrusel ocupe todo el ancho disponible */
   }
 
   .carousel-buttons button {

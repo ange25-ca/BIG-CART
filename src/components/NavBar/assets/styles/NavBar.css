@@ -7,6 +7,10 @@
   top: 0;
   z-index: 1000;
   padding: -3px 0;
+  pointer-events: none;
+}
+.navbar * {
+  pointer-events: auto; /* Permite la interacción dentro del navbar */
 }
 
 
@@ -15,8 +19,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 38px;
-  background-color: #05AAFF;
+  background-color: #0171DC;
   height: 100px;
+  pointer-events: none;
 }
 
 .navbar-brand{
