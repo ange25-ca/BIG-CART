@@ -6,7 +6,7 @@ export interface UserState {
   username: string;
   email: string;
   address: string;
-  phone: string;
+  phonenumber: string;
   profileImage: string | null;
 }
 
@@ -16,7 +16,7 @@ const initialState: UserState = {
   address: '',
   email: '',
   username: '',
-  phone: '',
+  phonenumber: '',
   profileImage: localStorage.getItem('profileImage') || null, // Leer la imagen del perfil desde localStorage
 };
 
@@ -35,7 +35,7 @@ const userSlice = createSlice({
       state.address = action.payload.address;
       state.email = action.payload.email;
       state.username = action.payload.username;
-      state.phone = action.payload.phone;
+      state.phonenumber = action.payload.phonenumber;
       state.profileImage = action.payload.profileImage;
       
       // Guardar en localStorage solo si profileImage tiene un valor válido

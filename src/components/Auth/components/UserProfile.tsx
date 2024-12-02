@@ -11,7 +11,7 @@ interface UserState {
   username: string;
   email: string;
   address: string;
-  phone: string;
+  phonenumber: string;
   perfilImage: string | null;  // Cambié a perfilImage para que coincida con la respuesta del backend
 }
 
@@ -25,7 +25,7 @@ const UserProfile: React.FC = () => {
     address: '',
     email: '',
     username: '',
-    phone: '',
+    phonenumber: '',
     profileImage: '',
   });
 
@@ -43,7 +43,7 @@ const UserProfile: React.FC = () => {
             username: data.nombreUsuario,
             email: data.email,
             address: data.direccion,
-            phone: data.telefono,
+            phonenumber: data.telefono,
             profileImage: imageUrl,
           }));
 
@@ -52,7 +52,7 @@ const UserProfile: React.FC = () => {
             address: data.direccion || '',
             email: data.email || '',
             username: data.nombreUsuario || '',
-            phone: data.telefono || '',
+            phonenumber: data.telefono || '',
             profileImage: data.perfilImagen || '',
           });
   
@@ -119,10 +119,10 @@ const UserProfile: React.FC = () => {
       formData.append('address', userData.address);
     }
   
-    if (userData.phone !== user.phone) {
-      formData.append('phone', userData.phone);
+    if (userData.phonenumber !== user.phonenumber) {
+      formData.append('phonenumber', userData.phonenumber);
     }
-  
+
     // Verificar si se han hecho cambios
     const hasChanges = Array.from(formData.entries()).length > 0;
     if (!hasChanges) {
@@ -151,7 +151,7 @@ const UserProfile: React.FC = () => {
         username: userData.username,
         email: userData.email,
         address: userData.address,
-        phone: userData.phone,
+        phonenumber: userData.phonenumber,
         profileImage: imageUrl,
       }));
   
@@ -217,9 +217,9 @@ const UserProfile: React.FC = () => {
         />
         <input
           type="tel"
-          name="phone"
+          name="phonenumber"
           placeholder="Teléfono"
-          value={userData.phone || ''}
+          value={userData.phonenumber || ''}
           onChange={handleInputChange}
           className="user-input"
         />
