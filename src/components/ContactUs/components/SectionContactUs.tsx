@@ -1,17 +1,26 @@
 import { useState } from 'react';
 import emailjs from 'emailjs-com';
 import { FaHeadset, FaEnvelopeOpenText, FaMapMarkedAlt } from 'react-icons/fa';
+import { z } from 'zod';
+import Swal from 'sweetalert2';
 import SocialBar from '../../Control/components/SocialBar'; // Importamos el componente SocialBar
 import '../assets/styles/SectionContactUs.css';
 
+// Esquema de validación con Zod
+const contactSchema = z.object({
+    to_name: z.string().nonempty("El nombre es obligatorio"),
+    email: z.string().email("Correo inválido").nonempty("El correo es obligatorio"),
+    message: z.string().min(10, "El mensaje debe tener al menos 10 caracteres"),
+});
+
 const ContactSection = () => {
     const [formData, setFormData] = useState({
-        name: '',
+        to_name: '', 
         email: '',
         message: '',
     });
 
-    // Manejar los cambios en los campos del formulario
+    // Manejar los cambios en los campos del formulario, par limpiar
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -24,33 +33,55 @@ const ContactSection = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); // Prevenir la recarga de la página al enviar el formulario
 
-        // Aquí es donde se utiliza emailjs para enviar el mensaje
-        emailjs.send(
-            'service_2s2crri', // Reemplaza con tu Service ID de EmailJS
-            'template_rjz096f', // Reemplaza con tu Template ID de EmailJS
-            formData, // Los datos que deseas enviar (name, email, message)
-            'EjVFxvDHXee48ABjj' // Reemplaza con tu Public Key de EmailJS (user ID)
-        )
-        .then((response) => {
-            console.log('Mensaje enviado: ', response);
-            // Si la respuesta es exitosa, limpiar los campos del formulario
-            setFormData({
-                name: '',
-                email: '',
-                message: '',
+        // Validar datos con Zod
+        const result = contactSchema.safeParse(formData);
+        if (!result.success) {
+            // Mostrar errores en caso de validación fallida
+            const errors = result.error.errors.map((err) => err.message).join('\n');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en el formulario',
+                text: errors,
             });
-            alert('Formulario enviado correctamente');
-        })
-        .catch((error) => {
-            console.error('Error al enviar el mensaje: ', error);
-            alert('Hubo un error al enviar el formulario');
-        });
+            return;
+        }
+
+        // Si la validación es exitosa, enviar el mensaje
+        emailjs
+            .send(
+                'service_2s2crri', //Service ID de EmailJS
+                'template_rjz096f', // Template ID de EmailJS
+                formData, // data que se envía
+                'EjVFxvDHXee48ABjj' // Public Key de EmailJS (user ID)
+            )
+            .then((response) => {
+                console.log('Mensaje enviado: ', response);
+                //una vez enviado establecemos vacíos los campos
+                setFormData({
+                    to_name: '',
+                    email: '',
+                    message: '',
+                });
+                //notifiaciones de sweetalert, importamos modulo y lo usamos para customizarlo
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Mensaje enviado',
+                    text: 'Tu mensaje ha sido enviado correctamente. ¡Gracias por contactarnos!',
+                });
+            })
+            .catch((error) => {
+                console.error('Error al enviar el mensaje: ', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un problema al enviar tu mensaje. Intenta nuevamente más tarde.',
+                });
+            });
     };
 
     return (
         <>
             <SocialBar />
-
             <section className="contact_us">
                 <div className="container">
                     <div className="contact_inner">
@@ -64,14 +95,13 @@ const ContactSection = () => {
                                     </p>
                                     <h3>¡Esperamos poder ayudarte pronto!</h3>
 
-                                    {/* Formularios dentro de una etiqueta <form> */}
-                                    <form onSubmit={handleSubmit}> {/* Aquí se usa el evento onSubmit */}
+                                    <form onSubmit={handleSubmit}>
                                         <input
                                             type="text"
                                             className="form-control"
                                             placeholder="Nombres"
-                                            name="name"
-                                            value={formData.name}
+                                            name="to_name" // Cambiado de 'name' a 'to_name'
+                                            value={formData.to_name}
                                             onChange={handleChange}
                                         />
                                         <input
@@ -91,8 +121,8 @@ const ContactSection = () => {
                                         ></textarea>
                                         <button className="contact_form_submit" type="submit"> 
                                             Enviar 
-                                        </button> {/* Aquí cambiamos onClick por type="submit" */}
-                                    </form> {/* Cierra el formulario */}
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
