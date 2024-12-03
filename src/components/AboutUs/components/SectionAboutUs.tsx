@@ -1,8 +1,9 @@
 import '../assets/styles/SectionAboutUs.css';
-import imgPesc from '../assets/img/ecommer-ourhistory.jpg';
+import imgHisto from '../assets/img/history.webp';
 import imgAten from '../assets/img/antecion-cliente.jpeg';
 import imgEntre from '../assets/img/entrega-cliente.jpg';
 import imgTratos from '../assets/img/tratos-grandes.webp';
+import imgComp from '../assets/img/comprando.webp';
 
 const AboutUs = () => {
   return (
@@ -40,7 +41,7 @@ const AboutUs = () => {
             </p>
           </div>
           <div className="image-content">
-            <img src={imgPesc} alt="Nuestra Historia" />
+            <img src={imgHisto} alt="Nuestra Historia" />
           </div>
         </div>
 
@@ -57,15 +58,15 @@ const AboutUs = () => {
           <div className="testimonials-grid">
             <div className="testimonial">
               <p>"Gran variedad de productos y un proceso de compra muy ágil. Me encanta que cumplan con los tiempos de entrega, lo que facilita mucho nuestra planificación de logística."</p>
-              <span>- Juan Pérez</span>
+              <span>- Juan Pérez -</span>
             </div>
             <div className="testimonial">
-              <p>"Excelente servicio y atención personalizada. Siempre están dispuestos a ayudarnos a encontrar justo lo que necesitamos, ¡y los productos son totalmete de calidad!"</p>
-              <span>- María López</span>
+              <p>"Excelente servicio y atención personalizada. Siempre están dispuestos a ayudarnos a encontrar justo lo que necesitamos, ¡y los productos son totalmete de calidad y al menos precio!"</p>
+              <span>- María López -</span>
             </div>
             <div className="testimonial">
-              <p>"Precios competitivos y una logística impecable. Desde que comenzamos a trabajar con ellos, nuestro negocio ha ganado en eficiencia y hemos reducido tiempos de espera."</p>
-              <span>- Carlos Gómez</span>
+              <p>"Precios competitivos y una logística impecable. Desde que comenzamos a trabajar con ellos, nuestro negocio ha ganado en eficiencia y hemos reducido tiempos de espera, 100% calidad."</p>
+              <span>- Carlos Gómez -</span>
             </div>
           </div>
         </div>
@@ -97,7 +98,7 @@ const AboutUs = () => {
           <div className="gallery-container">
             <img src={imgAten} alt="Atención" />
             <img src={imgEntre} alt="Capacitaciones" />
-            <img src={imgEntre} alt="Entregas" />
+            <img src={imgComp} alt="Entregas" />
             <img src={imgTratos} alt="Tratos cerrados" />
           </div>
         </div>
@@ -108,22 +109,32 @@ const AboutUs = () => {
             <div className="value-item">
               <i className="icon fa fa-heart"></i>
               <h3>Calidad y Eficiencia</h3>
-              <p>Nos dedicamos a servir con integridad y pasión.</p>
+              <p>Nos dedicamos a servir con integridad y pasión, en cada uno de nuestros pedidos.</p>
             </div>
             <div className="value-item">
               <i className="icon fa fa-star"></i>
               <h3>Orientación al Cliente</h3>
-              <p>Siempre buscamos la excelencia en todo lo que hacemos.</p>
+              <p>Siempre buscamos la excelencia en todo lo que hacemos, para ofrecer siempre lo mejor.</p>
             </div>
             <div className="value-item">
               <i className="icon fa fa-lightbulb"></i>
               <h3>Innovación y Adaptabilidad</h3>
-              <p>Creamos nuevas oportunidades para el crecimiento.</p>
+              <p>Creamos nuevas oportunidades para el crecimiento, tanto porfesional como social.</p>
             </div>
             <div className="value-item">
               <i className="icon fa fa-lightbulb"></i>
-              <h3>Calidad y Eficiencia</h3>
-              <p>Creamos nuevas oportunidades para el crecimiento.</p>
+              <h3>Trabajo en Equipo</h3>
+              <p>Creamos un ambiente colaborativo para nuestros colaboradores y sus responsabilidades.</p>
+            </div>
+            <div className="value-item">
+              <i className="icon fa fa-heart"></i>
+              <h3>Innovación</h3>
+              <p>Fomentamos la creatividad y la mejora continua en todos nuestros procesos y cada uno denuestro productos.</p>
+            </div>
+            <div className="value-item">
+              <i className="icon fa fa-users"></i>
+              <h3>Liderazgo</h3>
+              <p>Promovemos el liderazgo en todos los niveles, brindando oportunidades para el crecimiento.</p>
             </div>
           </div>
         </div>
