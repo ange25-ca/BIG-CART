@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { encryptData } from '../../Middlewares/encryption';
 import axiosInstance from '../../../Api/axiosConfig';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { setUserId, setUserIdOnly } from '../../../redux/userSlices';
+import { setUserIdOnly } from '../../../redux/userSlices';
 import { useDispatch } from 'react-redux';
 //Iconos del logeo
 import userIcon from '../assets/img/user.svg';

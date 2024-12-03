@@ -1,79 +1,192 @@
 .card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+  color: black;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; /* Asegura que nada se desborde fuera de la tarjeta */
+  max-width: 300px; /* Limitar el tamaño máximo para mejorar la organización */
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px; /* Añadir un poco de espacio entre la imagen y los detalles */
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px 0;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Para cortar el texto largo */
+  white-space: nowrap;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 0 15px; /* Separar la descripción de la categoría y precio */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limitar a 2 líneas */
+  -webkit-box-orient: vertical;
+}
+
+.category {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px; /* Separar la categoría del precio */
+}
+
+.current-price {
+  font-size: 1.5rem;
+  color: #e60023;
+  font-weight: bold;
+}
+
+.sales {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 15px; /* Separar de la sección de rating */
+}
+
+.rating {
+  font-size: 1rem;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.star {
+  font-size: 20px;
+  margin-right: 3px;
+  padding: 2px;
+  -webkit-text-stroke: .5px black;
+}
+
+.star.full {
+  color: gold;
+}
+
+.star.half {
+  color: gold;
+  background: linear-gradient(to right, gold 50%, lightgray 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.star.empty {
+  color: lightgray;
+}
+
+.rating-number {
+  font-size: 16px;
+  margin-left: 8px;
+  color: #555;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Espacio entre los botones */
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+}
+
+.btn-container .btn-icon {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  padding: 6px 12px; /* Reducir padding para evitar bordes grandes */
+}
+
+.btn-container .btn-icon:hover {
+  transform: scale(1.2);
+}
+
+.btn-icon.like {
+  color: red;
+  position: absolute;
+  top: 10px;
+  left: 10px; /* Alineado a la esquina superior izquierda */
+}
+
+.btn-icon.details {
+  color: #024caa;
+  position: absolute;
+  bottom: 10px;
+  left: 10px; /* Alineado a la esquina inferior izquierda */
+}
+
+.btn-icon.add-to-cart {
+  color: green;
+  position: absolute;
+  bottom: 10px;
+  right: 10px; /* Alineado a la esquina inferior derecha */
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
     padding: 15px;
-    text-align: center;
-    transition: transform 0.3s ease;
-    position: relative;
-    color: black;
+    max-width: 100%; /* Asegura que ocupe todo el ancho posible en pantallas pequeñas */
   }
-  
-  .card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .product-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .discount-badge {
-    background-color: red;
-    color: white;
-    font-size: 0.9rem;
-    padding: 5px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    border-radius: 5px;
-  }
-  
+
   .product-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 10px 0;
+    font-size: 1.1rem;
   }
-  
-  .category {
-    font-size: 0.9rem;
-    color: #666;
-  }
-  
-  .price-container {
-    margin: 10px 0;
-  }
-  
+
   .current-price {
-    font-size: 1.5rem;
-    color: #e60023;
+    font-size: 1.3rem;
   }
-  
-  .old-price {
-    text-decoration: line-through;
-    color: #888;
-    margin-left: 10px;
+
+  .rating-number {
+    font-size: 14px;
   }
-  
-  .sales {
-    font-size: 0.9rem;
-    color: #777;
+
+  .btn-icon {
+    font-size: 1.2rem;
+    padding: 6px; /* Reducir tamaño y padding de los botones en pantallas pequeñas */
   }
-  
-  .rating {
+}
+
+@media (max-width: 480px) {
+  .card {
+    max-width: 100%; /* La tarjeta ocupará todo el ancho de la pantalla */
+  }
+
+  .product-image {
+    max-height: 180px; /* Limitar el tamaño de la imagen */
+  }
+
+  .product-name {
     font-size: 1rem;
-    margin: 5px 0;
   }
-  
-  .best-seller {
-    background-color: orange;
-    color: white;
-    padding: 3px 6px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+
+  .current-price {
+    font-size: 1.2rem;
   }
-  
+
+  .rating-number {
+    font-size: 12px;
+  }
+}
