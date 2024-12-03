@@ -14,6 +14,8 @@ interface CartItem {
   imagen: string;
 }
 
+
+
 const Cart: React.FC = () => {
 
   const navigate = useNavigate();
@@ -23,10 +25,15 @@ const Cart: React.FC = () => {
   console.log(idUsuario);
   const [localCart, setLocalCart] = useState<CartItem[]>([]);
 
+ 
   // Recuperar productos del backend si el usuario está logueado
   useEffect(() => {
     if (idUsuario) {
-      distpatch(verCart());
+      if (detallesCarrito && detallesCarrito.idCarrito) {
+        console.log(detallesCarrito);
+        // Enviar idCarrito a la función verCart
+        distpatch(verCart(detallesCarrito.idCarrito)); // Ahora pasamos el idCarrito a verCart
+      }
     } else {
       // Recuperar productos desde localStorage si no está logueado
       const storedCart = localStorage.getItem('carrito');
@@ -119,16 +126,16 @@ const Cart: React.FC = () => {
             </div>
             <div className="summary-row">
               <span>Envío</span>
-              <span>$0.00</span>
+              <span>${shippingCost.toFixed(2)}</span>
             </div>
             <div className="summary-row">
               <span>IVA</span>
-              <span>$0.00</span>
+              <span>${tax.toFixed(2)}</span>
             </div>
           </div>
           <div className="summary-total">
             <span>Total</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>${totalAmount.toFixed(2)}</span>
           </div>
           <div className="summary-actions">
             <button className="clear-cart-button" >

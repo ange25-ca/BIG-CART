@@ -10,3 +10,13 @@ export const getviewCart = async (idCarrito: number) => {
     throw error;
   }
 };
+
+
+export const addToCart = async (idCliente: number, idProducto: number, cantidad: number) => {
+  const response = await axiosInstance.post('/carrito/addCart', {
+    idCliente,
+    idProducto,
+    cantidad
+  });
+  console.log('Response completa:', response.data);
+}
