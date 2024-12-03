@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserId } from '../../../redux/userSlices';
 import axiosInstance from '../../../Api/axiosConfig';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserId } from '../../../redux/userSlices';
+import axiosInstance from '../../../Api/axiosConfig';
 import '../assets/UserProfile.css';
 
 const baseURL = 'http://localhost:3000';
@@ -191,10 +195,12 @@ const UserProfile: React.FC = () => {
       </div>
 
       <form className="user-info-form" onSubmit={handleSave}>
+      <form className="user-info-form" onSubmit={handleSave}>
         <input
           type="text"
           name="address"
           placeholder="Dirección"
+          value={userData.address || ''}
           value={userData.address || ''}
           onChange={handleInputChange}
           className="user-input"
@@ -204,6 +210,7 @@ const UserProfile: React.FC = () => {
           name="email"
           placeholder="Correo Electrónico"
           value={userData.email || ''}
+          value={userData.email || ''}
           onChange={handleInputChange}
           className="user-input"
         />
@@ -211,6 +218,7 @@ const UserProfile: React.FC = () => {
           type="text"
           name="username"
           placeholder="Nombre de Usuario"
+          value={userData.username || ''}
           value={userData.username || ''}
           onChange={handleInputChange}
           className="user-input"
@@ -224,6 +232,8 @@ const UserProfile: React.FC = () => {
           className="user-input"
         />
         <div className="buttons-container">
+          <button type="button" className="cancel-button" onClick={() => window.location.href = '/'}>Cancelar</button>
+          <button type="submit" className="save-button">Guardar</button>
           <button type="button" className="cancel-button" onClick={() => window.location.href = '/'}>Cancelar</button>
           <button type="submit" className="save-button">Guardar</button>
         </div>
