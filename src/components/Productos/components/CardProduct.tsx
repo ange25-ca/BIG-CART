@@ -11,8 +11,7 @@ interface ProductProps {
 }
 
 const CardProduct: React.FC<ProductProps> = ({ product }) => {
-
-  // const idUsuario = useSelector((state: RootState) => state.user.idUsuario);// Usamos la interfaz UserState
+ // const idUsuario = useSelector((state: RootState) => state.user.idUsuario);// Usamos la interfaz UserState
   const idUsuario = localStorage.getItem('idUsuario') ?? '';
   const handleAddToCart = () => {
     const item = {
@@ -23,7 +22,6 @@ const CardProduct: React.FC<ProductProps> = ({ product }) => {
       precio: product.precio,
       imagen: product.imagenUrl,
     };
-
     if (!idUsuario) {
       console.log(idUsuario)
       // Usuarios no logueados: usar localStorage
