@@ -1,6 +1,6 @@
 // Importamos las herramientas necesarias de Redux Toolkit
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getviewCart } from '../models/cartModel'; // Función que llama a la API y devuelve la información del carrito
+import { fetchViewCart } from '../models/cartModel'; // Función que llama a la API y devuelve la información del carrito
 
 // Definir interfaces para el carrito y sus items
 interface DetallesCarrito {
@@ -41,7 +41,7 @@ export const fetchCarrito = createAsyncThunk<
   { rejectValue: string } // Tipo de error
 >('carrito/fetchCarrito', async (idcarrito, { rejectWithValue }) => {
   try {
-    const carritoData = await getviewCart(idcarrito); // Función que obtiene los datos de la API
+    const carritoData = await fetchViewCart(idcarrito); // Función que obtiene los datos de la API
     
     // Verificar que la estructura de datos sea la esperada
     if (carritoData && carritoData.detallesCarrito && Array.isArray(carritoData.itemsCarrito)) {
