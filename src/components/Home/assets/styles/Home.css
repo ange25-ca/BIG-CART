@@ -9,190 +9,6 @@ main {
   background-color: #F6F6F6;
   overflow-x: hidden;
 }
-/* Estilos para la sección de ofertas especiales */
-.special-offers {
-  width: 100%;
-  background-color: transparent; /* Color de fondo suave */
-  text-align: center;
-  margin-bottom: 85px !important;
-}
-
-.special-offers h2 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.special-offers img {
-  width: 100%; /* Asegura que las imágenes no se desborden */
-  height: auto;
-  max-width: 1500px; /* Maximo tamaño para pantallas grandes */
-}
-
-/* Estilos para el contenedor del carrusel */
-.offer-list {
-  position: relative;
-  overflow: hidden;
-  height: 490px;
-  width: 100%;
-  max-width: 2500px;
-  margin: 0 auto;
-  padding: 0 15px; /* Espacio para evitar que las imágenes toquen los bordes */
-}
-
-/* Ajustes para cada imagen en el carrusel */
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  max-width: 1500px; /* Asegura que las imágenes no se estiren */
-}
-
-/* Ajustes para que se vea como un carrusel horizontal */
-.carousel {
-  display: flex;
-  flex-wrap: nowrap;
-  transition: transform 0.5s ease-in-out;
-}
-
-/* Ocultar el contenido fuera del contenedor para una experiencia de carrusel */
-.carousel-item {
-  min-width: 100%;
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  opacity: 0;
-  display: inline-block;
-}
-
-.carousel-item.active {
-  opacity: 1;
-  transform: translateX(0);
-  position: relative;
-  z-index: 2;
-}
-
-/* Botones de navegación manual */
-.carousel-buttons {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%); /* Centrado horizontal */
-  display: flex;
-  gap: 10px;
-  margin-bottom: 5px;
-}
-
-.carousel-buttons button {
-  width: 12px;
-  height: 12px;
-  background-color: rgba(255, 255, 255, 0.6);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 9999;
-  transition: background-color 0.3s ease;
-}
-
-.carousel-buttons button.active {
-  background-color: rgba(255, 255, 255, 1);
-}
-
-.carousel-buttons button:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-/* Responsividad */
-
-/* Pantallas grandes */
-@media (min-width: 1201px) {
-  .special-offers h2 {
-    font-size: 2.5rem; /* Título más grande en pantallas grandes */
-  }
-
-  .offer-list {
-    padding: 0; /* Sin relleno en pantallas grandes */
-    height: 490px; /* Altura predeterminada */
-  }
-
-  .carousel-buttons button {
-    width: 15px;
-    height: 15px;
-  }
-}
-
-/* Pantallas medianas */
-@media (max-width: 1200px) {
-  .special-offers h2 {
-    font-size: 2rem; /* Título adecuado para pantallas medianas */
-  }
-
-  .offer-list {
-    padding: 10px; /* Relleno para evitar que las imágenes toquen los bordes */
-    height: 400px; /* Altura ajustada para pantallas medianas */
-  }
-
-  .carousel-buttons button {
-    width: 12px;
-    height: 12px;
-  }
-}
-
-/* Pantallas pequeñas (tablet y landscape móviles) */
-@media (max-width: 768px) {
-  .special-offers h2 {
-    font-size: 1.5rem; /* Título más pequeño en tabletas */
-  }
-
-  .offer-list {
-    padding: 5px;
-    height: 300px; /* Altura reducida para dispositivos más pequeños */
-  }
-
-  .carousel-buttons button {
-    width: 10px;
-    height: 10px;
-  }
-}
-
-/* Pantallas móviles */
-@media (max-width: 480px) {
-  .special-offers h2 {
-    font-size: 1.2rem; /* Título aún más pequeño para móviles */
-    margin-bottom: 10px; /* Menos margen en móviles */
-  }
-
-  .offer-list {
-    padding: 0;
-    height: 250px; /* Altura aún más pequeña para pantallas móviles */
-  }
-
-  .carousel-buttons button {
-    width: 8px;
-    height: 8px;
-  }
-}
-
-
-@keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 
 /* Diseño de la sección */
 .minimalist-welcome {
@@ -276,11 +92,10 @@ main {
 /* Pantallas grandes (a partir de 1200px) */
 @media (min-width: 1200px) {
   .minimalist-welcome {
-      padding: 120px 40px;
       margin-left: 50px;
-      height: auto; /* Permite altura dinámica para pantallas grandes */
-      margin-top: -50px;
-      text-align: left; /* Ajusta texto a la izquierda */
+      height: auto;
+      margin-top: 50px;
+      text-align: left; 
   }
 }
 
@@ -831,3 +646,4 @@ h3 {
     font-size: 1.2rem;
   }
 }
+
