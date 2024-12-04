@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
     <div>
       {/* Botón para alternar el footer */}
       <button className="footer-toggle" onClick={toggleFooter}>
-        {isFooterVisible ? "Ver más" : "Ver menos"}
+        {isFooterVisible ? "Menos"  : "Ver más" }
       </button>
 
       {/* Contenedor principal del footer */}

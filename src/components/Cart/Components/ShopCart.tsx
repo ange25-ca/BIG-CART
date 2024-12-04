@@ -120,7 +120,7 @@ const Cart: React.FC = () => {
 
         <aside className="cart-summary">
           <h3>Total</h3>
-          <div className="discount-section">
+          {/* <div className="discount-section">
             <input
               type="text"
               placeholder="Gift card or discount code"
@@ -128,7 +128,7 @@ const Cart: React.FC = () => {
               // onChange={(e) => setDiscountCode(e.target.value)}
               className="discount-input"
             />
-          </div>
+          </div> */}
           <div className="summary-details">
             <div className="summary-row">
               <span>Subtotal</span>
@@ -148,10 +148,10 @@ const Cart: React.FC = () => {
             <span>${totalAmount.toFixed(2)}</span>
           </div>
           <div className="summary-actions">
-            <button className="clear-cart-button">Vaciar carrito</button>
-            <button className="checkout-button" onClick={handleCheckout}>
+          <button className="checkout-button" onClick={handleCheckout}>
               Procesar pago
             </button>
+            <button className="empty-cart-button">Vaciar carrito</button>
           </div>
         </aside>
       </main>

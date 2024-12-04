@@ -120,6 +120,7 @@ main {
     padding: 40px 15px;
     height: auto;
     margin-top: -152px;
+    margin-bottom: 40px;
   }
   .headline {
     font-size: 2rem;  
@@ -547,12 +548,13 @@ h3 {
 }
 
 /* RESPONSIVIDAD */
-
+@media (min-width: 481px) and (max-width: 1200px) {
+  .customer-reviews {
+    margin-top: 230px; /* Ajusta el valor según lo que necesites */
+  }
+}
 /* Pantallas pequeñas (smartphones) */
 @media (max-width: 576px) {
-  .customer-reviews {
-    margin-top: -129px;
-  }
   .customer-reviews-title {
     font-size: 1.8rem;
     margin-bottom: 20px;
@@ -623,4 +625,3 @@ h3 {
     font-size: 1.2rem;
   }
 }
-
