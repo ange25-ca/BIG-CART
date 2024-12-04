@@ -10,7 +10,6 @@ import { useDispatch } from 'react-redux';
 //Iconos del logeo
 import userIcon from '../assets/img/user.svg';
 import passwordIcon from '../assets/img/lock.svg';
-import imgLogin from '../assets/img/BigCardLogin.png'
 
 // Definir el esquema de validación usando Zod
 const loginSchema = z.object({
@@ -61,23 +60,20 @@ function Login() {
             });
             
             const result = response.data;
-
-            if (result && result.token && result.userId) { 
-            // Supone que 'token' y 'userId' son las claves en la respuesta del backend
-            localStorage.setItem('authToken', result.token); // Guardar el token en localStorage
-            dispatch(setUserIdOnly(result.userId)); // Despachar el ID del usuario al store de Redux
-            localStorage.setItem('idUsuario', result.userId);
-
-            setLoginSuccess(true);
-            // Redirigir a la ruta almacenada en el estado, o al inicio si no hay ruta previa
-            const redirectTo = (location.state as any)?.from || '/';
-            navigate(redirectTo);
-            //navigate('/'); // Redirigir al usuario después del inicio de sesión
-        } else {
-            setServerError("La contraseña o usuario son incorrectos");
-            setLoginSuccess(false);
-        }
-
+            if (result && result.token && result.userId) {
+                // Supone que 'token' y 'userId' son las claves en la respuesta del backend
+                localStorage.setItem('authToken', result.token); // Guardar el token en localStorage
+                dispatch(setUserIdOnly(result.userId)); // Despachar el ID del usuario al store de Redux
+    
+                setLoginSuccess(true);
+                // Redirigir a la ruta almacenada en el estado, o al inicio si no hay ruta previa
+                const redirectTo = (location.state as any)?.from || '/';
+                navigate(redirectTo);
+            } else {
+                setServerError("La contraseña o usuario son incorrectos");
+                setLoginSuccess(false);
+            }
+    
         } catch (error) {
             console.error('Error en el proceso de inicio de sesión:', error);
             setServerError("Error al iniciar sesión. Inténtalo más tarde.");
@@ -133,16 +129,13 @@ function Login() {
                 {serverError && <span className="error">{serverError}</span>}
                 {loginSuccess && <span className="success">Inicio de sesión exitoso</span>}
                 <div className='buttonAction'>
-                    <button className='button_Send' type='button' onClick={handleLogin}>
+                    <button id='send-info-user' className='button_Send' type='button' onClick={handleLogin}>
                         Enviar 
                     </button>
                 </div>
                 <div className="no-account">
-                    <p>Aun no tienes una cuenta? <Link className="signup-link" to="/SignUp">Crea una cuenta aqui</Link></p>
-            </div>
-            </div>
-            <div>
-                <img src={imgLogin} className='imgLogin' alt="Decorativo"/>
+                    <p className='account'>Aun no tienes una cuenta? <Link className="signup-link" to="/SignUp">Crea una cuenta aqui</Link></p>
+                </div>
             </div>
         </form>
     );
