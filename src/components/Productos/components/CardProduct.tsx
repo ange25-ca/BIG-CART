@@ -54,7 +54,6 @@ const CardProduct: React.FC<ProductProps> = ({ product }) => {
 
   return (
     <div className="card">
-      <button className="btn-icon like">❤️</button>
       <img src={product.imagenUrl} alt={product.nombreProducto} className="product-image" />
       <h3 className="product-name">{product.nombreProducto}</h3>
       <p className="description">
@@ -69,8 +68,8 @@ const CardProduct: React.FC<ProductProps> = ({ product }) => {
         {renderStars(rating)}
         <span className="rating-number">{rating.toFixed(1)}</span>
       </div>
-      <button className="btn-icon details">🔍</button>
-      <button className="btn-icon add-to-cart" onClick={handleAddToCart}>🛒</button>
+      <button className="btn-icon details">Más</button>
+      <button className="btn-icon add-to-cart" onClick={handleAddToCart}>Agregar</button>
     </div>
   );
 };

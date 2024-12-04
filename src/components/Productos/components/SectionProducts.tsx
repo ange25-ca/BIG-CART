@@ -6,24 +6,24 @@ import CardProduct from './CardProduct';
 import SkeletonProductLoader from './SkeletonProducto';
 import '../assets/styles/SectionProduct.css';
 
-const categories = [
-  { id: 1, name: 'Electrónica' },
-  { id: 2, name: 'Hogar' },
-  { id: 3, name: 'Deportes' },
-  { id: 4, name: 'Moda' },
-  { id: 5, name: 'Alimentos' },
-  { id: 6, name: 'Juguetes' },
-  { id: 7, name: 'Salud y Belleza' },
-  { id: 8, name: 'Automotriz' },
-  { id: 9, name: 'Libros' },
-  { id: 10, name: 'Mascotas' },
-];
+// const categories = [
+//   { id: 1, name: 'Electrónica' },
+//   { id: 2, name: 'Hogar' },
+//   { id: 3, name: 'Deportes' },
+//   { id: 4, name: 'Moda' },
+//   { id: 5, name: 'Alimentos' },
+//   { id: 6, name: 'Juguetes' },
+//   { id: 7, name: 'Salud y Belleza' },
+//   { id: 8, name: 'Automotriz' },
+//   { id: 9, name: 'Libros' },
+//   { id: 10, name: 'Mascotas' },
+// ];
 
-const priceRanges = [
-  { id: 1, label: '0-50', min: 0, max: 50 },
-  { id: 2, label: '50-100', min: 50, max: 100 },
-  { id: 3, label: '100-200', min: 100, max: 200 },
-];
+// const priceRanges = [
+//   { id: 1, label: '0-50', min: 0, max: 50 },
+//   { id: 2, label: '50-100', min: 50, max: 100 },
+//   { id: 3, label: '100-200', min: 100, max: 200 },
+// ];
 
 const CatalogsProducts: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -36,15 +36,15 @@ const CatalogsProducts: React.FC = () => {
     dispatch(cargarProductos());
   }, [dispatch]);
 
-  const handleFilterCategory = (category: string) => {
-    console.log(`Filtrar por categoría: ${category}`);
-    // Lógica para filtrar por categoría
-  };
+  // const handleFilterCategory = (category: string) => {
+  //   console.log(`Filtrar por categoría: ${category}`);
+  //   aqui va lógica para filtrar por categoría cucu
+  // };
 
-  const handleFilterPrice = (min: number, max: number) => {
-    console.log(`Filtrar por precio: ${min} - ${max}`);
-    // Lógica para filtrar por rango de precios
-  };
+  // const handleFilterPrice = (min: number, max: number) => {
+  //   console.log(`Filtrar por precio: ${min} - ${max}`);
+  //   aqui va lógica para filtrar por rango de precios cucu
+  // };
 
   return (
     <div className="catalog-container">
@@ -56,7 +56,7 @@ const CatalogsProducts: React.FC = () => {
         {showFilters ? 'Ocultar filtros' : 'Mostrar filtros'}
       </button>
 
-      {/* Filtros */}
+      {/* Filtros
       <aside className={`filters ${showFilters ? 'show' : ''}`}>
         <h3>Filtrar por</h3>
         <div className="filter-group">
@@ -83,18 +83,18 @@ const CatalogsProducts: React.FC = () => {
             </button>
           ))}
         </div>
-      </aside>
+      </aside> */}
 
       {/* Productos */}
       <section className="products-section">
         <h2>Catálogo de Productos</h2>
-        <div className="search-bar">
+        {/* <div className="search-bar">
           <input
             type="text"
             placeholder="Buscar productos..."
             className="search-input"
           />
-        </div>
+        </div> */}
         {isLoading ? (
           <div className="skeleton-loader products-grid">
             {Array.from({ length: productos.length}).map((_, index) => (
