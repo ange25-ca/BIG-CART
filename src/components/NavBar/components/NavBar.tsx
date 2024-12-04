@@ -122,6 +122,9 @@ const Navbar: React.FC = () => {
       <div className={`navbar-mobile-menu ${isMobileMenuOpen ? 'active' : ''}`}>
         <div className="close-icon" onClick={toggleMobileMenu}></div>
         <ul className="navbar-nav">
+          <li className="nav-item">
+                <Link to="/" className={`nav-link ${isActive("/")}`} onClick={closeDropdown}>Inicio</Link>
+              </li>
           <li className={`nav-item ${isActive("/about-us")}`}>
             <Link to="/about-us" className="nav-link" onClick={toggleMobileMenu}>Nosotros</Link>
           </li>
