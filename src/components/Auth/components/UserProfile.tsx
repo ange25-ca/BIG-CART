@@ -5,7 +5,6 @@ import axiosInstance from '../../../Api/axiosConfig';
 import '../assets/UserProfile.css';
 import Swal from 'sweetalert2';
 
-
 const baseURL = 'http://localhost:3000';
 
 interface UserState {
@@ -254,3 +253,4 @@ const UserProfile: React.FC = () => {
 };
 
 export default UserProfile;
+
