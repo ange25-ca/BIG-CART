@@ -1,12 +1,36 @@
 import React from 'react';
 import { Product } from '../interfaces/Product';
 import '../assets/styles/CardProduct.css';
+import { handleAddToCartwithLogin } from '../../../controllers/cartController';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { agregarProductoLocal } from './addToCartOut';
 
 interface ProductProps {
   product: Product;
 }
 
 const CardProduct: React.FC<ProductProps> = ({ product }) => {
+ // const idUsuario = useSelector((state: RootState) => state.user.idUsuario);// Usamos la interfaz UserState
+  const idUsuario = localStorage.getItem('idUsuario') ?? '';
+  const handleAddToCart = () => {
+    const item = {
+      idProducto: product.idProducto,
+      cantidad: 1, // Puedes personalizar esta cantidad
+      nombreProducto: product.nombreProducto,
+      descripcion: product.descripcion,
+      precio: product.precio,
+      imagen: product.imagenUrl,
+    };
+    if (!idUsuario) {
+      console.log(idUsuario)
+      // Usuarios no logueados: usar localStorage
+      agregarProductoLocal(item);
+      alert(`Producto "${product.nombreProducto}" agregado al carrito local.`);
+    } else {alert(`Producto "${product.nombreProducto}" agregado al carrito de backend. el id usuario es: "${idUsuario}`);
+    console.log(idUsuario)};
+    handleAddToCartwithLogin(parseInt(idUsuario), product.idProducto, 1);
+  }
   // Convertir `rating` y `precio` a números si vienen como cadenas
   const rating = typeof product.rating === 'string' ? parseFloat(product.rating) : product.rating;
   const price = typeof product.precio === 'string' ? parseFloat(product.precio) : product.precio;
@@ -28,7 +52,6 @@ const CardProduct: React.FC<ProductProps> = ({ product }) => {
 
   return (
     <div className="card">
-      <button className="btn-icon like">❤️</button>
       <img src={product.imagenUrl} alt={product.nombreProducto} className="product-image" />
       <h3 className="product-name">{product.nombreProducto}</h3>
       <p className="description">
@@ -43,8 +66,8 @@ const CardProduct: React.FC<ProductProps> = ({ product }) => {
         {renderStars(rating)}
         <span className="rating-number">{rating.toFixed(1)}</span>
       </div>
-      <button className="btn-icon details">🔍</button>
-      <button className="btn-icon add-to-cart">🛒</button>
+      <button className="btn-icon details">Más</button>
+      <button className="btn-icon add-to-cart" onClick={handleAddToCart}>Agregar</button>
     </div>
   );
 };

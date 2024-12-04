@@ -10,11 +10,10 @@ import { useDispatch } from 'react-redux';
 //Iconos del logeo
 import userIcon from '../assets/img/user.svg';
 import passwordIcon from '../assets/img/lock.svg';
-import imgLogin from '../assets/img/BigCardLogin.png'
 
 // Definir el esquema de validación usando Zod
 const loginSchema = z.object({
-    username: z.string().min(1, { message: "El nombre del usuario es requerido" }),
+    email: z.string().email("Por favor ingresa un correo electrónico válido").min(1, { message: "El correo electrónico es requerido" }),
     password: z.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
 });
 
@@ -22,7 +21,7 @@ export type FormData = z.infer<typeof loginSchema>;
 
 function Login() {
     const [formData, setFormData] = useState<FormData>({
-        username: '',
+        email: '',
         password: '',
     });
 
@@ -42,47 +41,46 @@ function Login() {
         setFormData({ ...formData, [name]: value });
     };
     
-    // Función para regresar a la página principal
     const handleLogin = async () => {
         try {
             // Cifrar los datos
-            const encryptedUsername = await encryptData(formData.username);
+            const encryptedEmail = await encryptData(formData.email);
             const encryptedPassword = await encryptData(formData.password);
-    
-            if (!encryptedUsername || !encryptedPassword) {
+                    
+            if (!encryptedEmail || !encryptedPassword) {
                 throw new Error('Error de cifrado: Username o Password no definidos');
             }
-
+    
             // Enviar los datos como un objeto
             const response = await axiosInstance.post('/user/loginUsuario', {
                 dataSegura: {
-                    username: encryptedUsername,
+                    email: encryptedEmail,
                     password: encryptedPassword,
                 },
             });
-    
+            
             const result = response.data;
-
-            if (result && result.token && result.userId) { 
-            // Supone que 'token' y 'userId' son las claves en la respuesta del backend
-            localStorage.setItem('authToken', result.token); // Guardar el token en localStorage
-            dispatch(setUserIdOnly(result.userId)); // Despachar el ID del usuario al store de Redux
-
-            setLoginSuccess(true);
-            // Redirigir a la ruta almacenada en el estado, o al inicio si no hay ruta previa
-            const redirectTo = (location.state as any)?.from || '/';
-            navigate(redirectTo);
-            //navigate('/'); // Redirigir al usuario después del inicio de sesión
-        } else {
-            setServerError("La contraseña o usuario son incorrectos");
-            setLoginSuccess(false);
-        }
-
+            if (result && result.token && result.userId) {
+                // Supone que 'token' y 'userId' son las claves en la respuesta del backend
+                localStorage.setItem('authToken', result.token); // Guardar el token en localStorage
+                dispatch(setUserIdOnly(result.userId)); // Despachar el ID del usuario al store de Redux
+    
+                setLoginSuccess(true);
+                // Redirigir a la ruta almacenada en el estado, o al inicio si no hay ruta previa
+                const redirectTo = (location.state as any)?.from || '/';
+                navigate(redirectTo);
+            } else {
+                setServerError("La contraseña o usuario son incorrectos");
+                setLoginSuccess(false);
+            }
+    
         } catch (error) {
+            console.error('Error en el proceso de inicio de sesión:', error);
             setServerError("Error al iniciar sesión. Inténtalo más tarde.");
             setLoginSuccess(false);
         }
-    }; 
+    };
+    
     
     return (
         <form className='FormLogin' onSubmit={(event) => event.preventDefault()}>
@@ -91,21 +89,21 @@ function Login() {
                     <h1>Iniciar sesión</h1>
                 </div>
                 <div className='name'>
-                    <label htmlFor='username'></label>
+                    <label htmlFor='email'></label>
                     <div className='inputIcon'>
                         <img src={userIcon} alt='User Icon' className='iconUser' />
                     <input
                         type='text'
-                        id='username'
-                        name='username'
-                        value={formData.username}
+                        id='email'
+                        name='email'
+                        value={formData.email}
                         onChange={handleChange}
-                        placeholder='Usuario'
+                        placeholder='Correo electronico'
                     />
                     </div>
-                    {formErrors?.find((issue) => issue.path[0] === 'username') && (
+                    {formErrors?.find((issue) => issue.path[0] === 'email') && (
                         <span className='error'>
-                            {formErrors.find((issue) => issue.path[0] === 'username')?.message}
+                            {formErrors.find((issue) => issue.path[0] === 'email')?.message}
                         </span>
                     )}
                 </div>
@@ -131,16 +129,13 @@ function Login() {
                 {serverError && <span className="error">{serverError}</span>}
                 {loginSuccess && <span className="success">Inicio de sesión exitoso</span>}
                 <div className='buttonAction'>
-                    <button className='button_Send' type='button' onClick={handleLogin}>
+                    <button id='send-info-user' className='button_Send' type='button' onClick={handleLogin}>
                         Enviar 
                     </button>
                 </div>
                 <div className="no-account">
-                    <p>Aun no tienes una cuenta? <Link className="signup-link" to="/SignUp">Crea una cuenta aqui</Link></p>
-            </div>
-            </div>
-            <div>
-                <img src={imgLogin} className='imgLogin' alt="Decorativo"/>
+                    <p className='account'>Aun no tienes una cuenta? <Link className="signup-link" to="/SignUp">Crea una cuenta aqui</Link></p>
+                </div>
             </div>
         </form>
     );

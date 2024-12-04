@@ -20,18 +20,21 @@
 }
 
 .product-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 10px; /* Añadir un poco de espacio entre la imagen y los detalles */
+  width: 150px; 
+  height: 150px; 
+  object-fit: cover; 
+  border-radius: 8px; 
+  margin-bottom: 10px; 
+  display: block; 
 }
+
 
 .product-name {
   font-size: 1.2rem;
   font-weight: bold;
   margin: 10px 0;
   overflow: hidden;
-  text-overflow: ellipsis; /* Para cortar el texto largo */
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 

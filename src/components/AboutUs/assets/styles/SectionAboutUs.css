@@ -44,22 +44,40 @@ body, html {
 /* Sección General */
 .section {
   background-color: #ffffff;
-  border-radius: 10px;
-  padding: 30px;
-  margin-bottom: 40px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 15px; 
+  padding: 40px; 
+  margin-bottom: 30px; 
+  transition: box-shadow 0.3s ease-in-out; 
 }
+
+.section:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+}
+
 .value-item h3 {
-  padding-left: 1px;
-  margin-bottom: 24px;
+  font-size: 20px; 
+  font-weight: 600; 
+  margin-bottom: 20px; 
+  color: #333; 
+  text-transform: uppercase;
+  letter-spacing: 1px; 
+}
+
+.value-item:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
 }
 
 .section p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #555;
-  margin-top: -13px;
-  padding-left: 29px;
+  font-size: 17px; 
+  line-height: 1.8; 
+  color: #666; 
+  margin-top: 5px; 
+  padding-left: 20px; 
+  padding-right: 20px; 
+}
+
+.section p:first-child {
+  margin-top: 0; 
 }
 
 /* About Us */
@@ -67,6 +85,11 @@ body, html {
   padding: 40px 10px;
   text-align: center;
   background-color: #f4f4f9;
+}
+.about-us h2 {
+  font-size: 32px;
+  color: #333333;
+  margin-bottom: 15px;
 }
 
 /* Mission, Vision, Team, Story, About Us Final */
@@ -79,7 +102,7 @@ body, html {
   padding: 20px;
 }
 .mission p {
-  margin-top: 0px;
+  margin-top: 10px;
 }
 
 /* Sección de Historia con Imagen */
@@ -88,6 +111,10 @@ body, html {
   flex-direction: column;
   align-items: center;
   text-align: center;
+}
+
+.story h2 {
+  margin-left: 31px;
 }
 
 .story .text-content {
@@ -175,13 +202,25 @@ body, html {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   font-style: italic;
+  width: 250px;
+  height: auto; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: justify;
+  margin: 10px;
+}
+
+.testimonial p {
+  margin: 0 0 10px 0;
+  line-height: 1.6;
+  min-height: 120px; /* Establece una altura mínima para alinear */
 }
 
 .testimonial span {
-  display: block;
-  margin-top: 10px;
   font-weight: bold;
   color: #1a73e8;
+  text-align: center;
 }
 
 /* Values Section */
