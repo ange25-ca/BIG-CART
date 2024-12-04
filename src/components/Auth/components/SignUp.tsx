@@ -1,10 +1,10 @@
 import '../assets/signUp.css'
+
 import React, { useEffect, useState } from 'react';
 import { z } from 'zod';
 import axiosInstance from '../../../Api/axiosConfig';
 import { encryptData } from '../../Middlewares/encryption';
 import { Link, useNavigate} from 'react-router-dom';
-import imgSignUp from '../assets/img/imgSignUp.png'
 // Definir el esquema de validación usando Zod
 const SignUpSchema = z.object({
   username: z.string().min(1, { message: "El nombre es requerido" }),
@@ -237,17 +237,10 @@ function SignUp() {
                     <button className='button-send' type='submit'> Enviar
                     </button>
                 </div>
-                <div className="no-account">
+                <div className="no-account-SignUp">
                     <p>Ya tiene una cuenta? <Link className='linkSignUp' to="/login">Inicia sesión aqui</Link></p>
                 </div>
                 </div>
-                <div className='decorativo'>
-                <img 
-                    src={imgSignUp} 
-                    className={`imgSignUp ${formErrors ? 'error-present' : ''}`} 
-                    alt="Decorativo"
-                />
-            </div>
         </form>
     );
 }
