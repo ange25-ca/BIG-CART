@@ -35,7 +35,7 @@ const Home = () => {
   <h2 className="customer-reviews-title">Lo que opinan nuestros clientes</h2>
   <div className="customer-reviews-container">
     <div className="customer-review-card">
-      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Juan Pérez" className="customer-avatar" />
+      <img src="https://i.postimg.cc/XvK9vWhQ/juan.avif" alt="Juan Pérez" className="customer-avatar" />
       <div className="customer-review-content">
         <p className="customer-review-text">"Excelente servicio y precios competitivos. ¡Completamente recomendado!"</p>
         <span className="customer-review-author">- Juan Pérez -</span>
@@ -43,7 +43,7 @@ const Home = () => {
       </div>
     </div>
     <div className="customer-review-card">
-      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Ana Gómez" className="customer-avatar" />
+      <img src="https://i.postimg.cc/8P3RKtMB/ana.jpg" alt="Ana Gómez" className="customer-avatar" />
       <div className="customer-review-content">
         <p className="customer-review-text">"Un catálogo impresionante, siempre encuentro lo que necesito para mi negocio."</p>
         <span className="customer-review-author">- Ana Gómez -</span>
@@ -59,7 +59,7 @@ const Home = () => {
       </div>
     </div>
     <div className="customer-review-card">
-      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="María López" className="customer-avatar" />
+      <img src="https://i.postimg.cc/W3XrMnsZ/maria-2.jpg" alt="María López" className="customer-avatar" />
       <div className="customer-review-content">
         <p className="customer-review-text">"Gran variedad de productos, siempre de calidad."</p>
         <span className="customer-review-author">- María López -</span>
@@ -67,7 +67,7 @@ const Home = () => {
       </div>
     </div>
     <div className="customer-review-card">
-      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Luis Fernández" className="customer-avatar" />
+      <img src="https://i.postimg.cc/pVczrqGb/luis.webp" alt="Luis Fernández" className="customer-avatar" />
       <div className="customer-review-content">
         <p className="customer-review-text">"La atención al cliente es excelente, me ayudaron con todo lo que necesitaba."</p>
         <span className="customer-review-author">- Luis Fernández -</span>
@@ -75,10 +75,10 @@ const Home = () => {
       </div>
     </div>
     <div className="customer-review-card">
-      <img src="https://i.postimg.cc/tJhT7TYJ/persona.webp" alt="Luis Fernández" className="customer-avatar" />
+      <img src="https://i.postimg.cc/jjRLZ7g4/luis-h.jpg" alt="Luis Fernández" className="customer-avatar" />
       <div className="customer-review-content">
         <p className="customer-review-text">"La atención al cliente es excelente, me ayudaron con todo lo que necesitaba."</p>
-        <span className="customer-review-author">- Luis Fernández -</span>
+        <span className="customer-review-author">- Luis Hernandez -</span>
         <div className="customer-rating">⭐⭐⭐⭐⭐ 5.0</div>
       </div>
     </div>
