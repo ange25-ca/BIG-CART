@@ -3,9 +3,6 @@ import '../assets/styles/ShoppingCart.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../redux/store';
 import { verCart } from '../../../controllers/cartController';
- 
-
-import { useQuery, useMutation, useQueryClient ,UseMutationOptions } from "@tanstack/react-query";
 import { fetchViewCart, addToCart, updateCartQuantity } from "../../../models/cartModel";
 
 
