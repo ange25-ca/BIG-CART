@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUserId } from '../../../redux/userSlices';
 import axiosInstance from '../../../Api/axiosConfig';
 import '../assets/UserProfile.css';
+import Swal from 'sweetalert2';
+
 
 const baseURL = 'http://localhost:3000';
 
@@ -126,7 +128,12 @@ const UserProfile: React.FC = () => {
     // Verificar si se han hecho cambios
     const hasChanges = Array.from(formData.entries()).length > 0;
     if (!hasChanges) {
-      alert('No se han realizado cambios.');
+      Swal.fire({
+        icon: 'info',
+        title: 'Sin cambios',
+        text: 'No se han realizado cambios.',
+        confirmButtonText: 'Aceptar',
+      });
       return;
     }
   
@@ -162,18 +169,28 @@ const UserProfile: React.FC = () => {
   
       // Actualizar el estado local de la imagen
       setPerfilImage(imageUrl);
-  
-      alert('Datos guardados correctamente.');
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Datos guardados correctamente.',
+        confirmButtonText: 'Aceptar',
+      });
     } catch (error) {
       console.error('Error al guardar los datos:', error);
-      alert('Hubo un error al guardar los datos. Por favor, inténtalo nuevamente.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un error al guardar los datos. Por favor, inténtalo nuevamente.',
+        confirmButtonText: 'Aceptar',
+      });
     }
   };
   
   return (
     <div className="user-profile">
+      <div className='image-container'>
       <h2>Mi Perfil</h2>
-      <div className="profile-image-container">
+        <div className="profile-image-container">
         <label htmlFor="perfilImage" className="profile-image-label"> 
           <img
             src={perfilImage || 'https://via.placeholder.com/150'}  // Se usa la imagen de perfil desde el estado
@@ -189,43 +206,47 @@ const UserProfile: React.FC = () => {
           style={{ display: 'none' }}
         />
       </div>
-
+      </div> 
       <form className="user-info-form" onSubmit={handleSave}>
-        <input
-          type="text"
-          name="address"
-          placeholder="Dirección"
-          value={userData.address || ''}
-          onChange={handleInputChange}
-          className="user-input"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo Electrónico"
-          value={userData.email || ''}
-          onChange={handleInputChange}
-          className="user-input"
-        />
+        <h4>Usuario</h4>
         <input
           type="text"
           name="username"
           placeholder="Nombre de Usuario"
           value={userData.username || ''}
           onChange={handleInputChange}
-          className="user-input"
+          id='user-profile-info'
         />
+        <h4>Correo electronico</h4>
         <input
-          type="tel"
+          type="email"
+          name="email"
+          placeholder="Correo Electrónico"
+          value={userData.email || ''}
+          onChange={handleInputChange}
+          id='user-profile-info'
+        />
+        <h4>Número telefonico</h4>
+        <input
+          type="text"
           name="phonenumber"
           placeholder="Teléfono"
           value={userData.phonenumber || ''}
           onChange={handleInputChange}
-          className="user-input"
+          id='user-profile-info'
+        />
+        <h4>Dirrección</h4>
+        <input
+          type="text"
+          name="address"
+          placeholder="Dirección"
+          value={userData.address || ''}
+          onChange={handleInputChange}
+          id='user-profile-info'
         />
         <div className="buttons-container">
-          <button type="button" className="cancel-button" onClick={() => window.location.href = '/'}>Cancelar</button>
           <button type="submit" className="save-button">Guardar</button>
+          <button type="button" className="cancel-button" onClick={() => window.location.href = '/'}>Cancelar</button>
         </div>
       </form>
     </div>
