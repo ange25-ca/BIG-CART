@@ -1,7 +1,7 @@
 /* Estilo general para el nav */
 .navbar {
   width: 100%;
-  background-color: #05AAFF;
+  background-color: #0171DC;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
@@ -85,11 +85,11 @@
   border: none;
   cursor: pointer;
   font-weight: bold;
-  outline: none; /* Elimina el borde de enfoque */
+  outline: none;
 }
 
 .dropdown-toggle:focus {
-  outline: none; /* Asegura que el borde no aparezca cuando esté enfocado */
+  outline: none;
 }
 
 /* Estilos del botón del carrito */
@@ -255,11 +255,11 @@ ul {
     padding: 31px;
   }
   .navbar-middle {
-    display: none /* Oculta el navbar middle en móvil */
+    display: none;
   }
 
   .menu-toggle {
-    display: block; /* Muestra el icono de menú en móvil */
+    display: block; 
   }
 
   .navbar-mobile-menu .nav-item {
@@ -268,12 +268,12 @@ ul {
 
   /* Menú desplegable en móvil */
   .navbar-mobile-menu.active {
-    display: flex; /* Asegura que el menú móvil se muestre al activarse */
+    display: flex; 
   }
 
   /* Asegúrate de que las nav-links ocupen el 100% del ancho */
   .navbar-mobile-menu .nav-link {
     width: 100%;
-    text-align: center; /* Centra el texto en el menú móvil */
+    text-align: center;
   }
 }
