@@ -10,7 +10,7 @@ main {
   overflow-x: hidden;
 }
 
-/* Diseño de la sección */
+/* Diseño general de la sección */
 .minimalist-welcome {
   background-color: #f6f6f6;
   color: #2c3e50;
@@ -21,15 +21,14 @@ main {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin-left: 30px;
   flex-direction: column;
-  margin-top: -86px;
+  margin-top: -40px;
 }
+
 
 .content-wrapper {
   max-width: 900px;
   width: 100%;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;  
@@ -43,45 +42,43 @@ main {
   line-height: 1.8; /* Espaciado entre líneas */
 }
 
-
 .headline {
-  font-size: 3.5rem; 
+  font-size: 3rem;
   font-weight: 700;
-  line-height: 1.2;
   color: #333;
-  letter-spacing: 3px;
-  margin-top: -15px;
-  margin-bottom: 27px;
+  letter-spacing: 1px;
+  margin: 0 0 20px 0;
   animation: fadeIn 1.5s ease-out;
 }
 
-.subheadline-welcome{
-  font-size: 1.2rem !important;
-  font-weight: 400 !important;
-  color: #555 !important;
+.subheadline-welcome {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #555;
   opacity: 0;
-  letter-spacing: 3px!important;
+  letter-spacing: 0.5px;
   animation: fadeIn 1.5s ease-out 0.5s forwards;
+  margin: 0 0 30px 0;
 }
 
 .cta-button-wrapper {
   display: flex;
-  justify-content: center;  
-  width: 100%; 
-  margin-top: 30px; 
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .cta-button {
   display: inline-block;
-  padding: 15px 30px;
+  padding: 12px 25px;
   font-size: 1.1rem;
   text-decoration: none;
   color: #fff;
   background-color: #0171DC; 
   border-radius: 50px;
-  margin-top: 35px;
-  letter-spacing: 1px;
-  align-self: center;
+  margin: 0 auto;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
 }
 
 .cta-button:hover {
@@ -89,45 +86,8 @@ main {
   color: #0171DC;
   border: 1.5px solid #0171DC; 
 }
-/* Pantallas grandes (a partir de 1200px) */
-@media (min-width: 1200px) {
-  .minimalist-welcome {
-      margin-left: 50px;
-      height: auto;
-      margin-top: 50px;
-      text-align: left; 
-  }
-}
 
-/* Pantallas medianas (entre 768px y 1199px) */
-@media (min-width: 768px) and (max-width: 1199px) {
-  .minimalist-welcome {
-      padding: 80px 20px;
-      margin-left: 20px;
-      height: auto;
-      text-align: justify;
-      margin-top: -60px;
-  }
-}
-
-/* Pantallas pequeñas (hasta 767px) */
-@media (max-width: 767px) {
-  .minimalist-welcome {
-      padding: 60px 10px;
-      margin-left: 10px;
-      height: auto; /* Asegura altura dinámica */
-      text-align: center; /* Centra texto para dispositivos pequeños */
-      margin-top: 0;
-      flex-direction: column; /* Mantiene el diseño en columna */
-  }
-  .special-offers {
-    width: 100%;
-    background-color: transparent;
-    text-align: center;
-    margin-bottom: -85px !important;
-}
-}
-
+/* Animación */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -140,30 +100,44 @@ main {
 }
 
 /* Estilos responsivos */
-@media (max-width: 768px) {
+/* Pantallas medianas (entre 768px y 1199px) */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .minimalist-welcome {
+    padding: 60px 30px;
+    text-align: center;
+  }
   .headline {
-    font-size: 2.5rem; /* Ajusta el tamaño del título para pantallas más pequeñas */
+    font-size: 2.8rem;
   }
-  .offer-list {
-        height: 208px;
-        width: 537px;
-        margin-top: -10px;
-        margin-left: -8px;
-  }
-  
-  .offer-list img{
-        height: 600px;
-    }
   .subheadline-welcome {
     font-size: 1rem;
   }
-
-  .cta-button {
-    font-size: 1rem;
-    padding: 12px 25px;
-  }
 }
 
+/* Pantallas pequeñas (hasta 767px) */
+@media (max-width: 767px) {
+  .minimalist-welcome {
+    padding: 40px 15px;
+    height: auto;
+    margin-top: -152px;
+  }
+  .headline {
+    font-size: 2rem;  
+    font-weight: 700; 
+    text-align: center; 
+    line-height: 1.4; 
+    margin: 20px 10px;
+    color: #333; 
+    letter-spacing: 2px;
+}
+  .subheadline-welcome {
+    font-size: 0.9rem;
+  }
+  .cta-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
 
 /* Categorías */
 /* Estilos para la sección de categorías */
@@ -388,18 +362,18 @@ h3 {
   font-weight: bold;
   border-bottom: 2px solid #05AAFF;
   padding-bottom: 10px;
-  margin-left: -10px; /* Ajustado a 0 para que no haya margen negativo */
-  text-align: left; /* Alineación a la izquierda */
+  margin-left: -3px;
+  text-align: left;
 }
 
 /* Estilo para el texto del párrafo en la sección bienvenida */
 .welcome-section p {
   font-size: 1.15rem;
-  text-align: left; /* Alineación a la izquierda */
+  text-align: left; 
   line-height: 1.8;
   margin: 15px 0;
   color: #555;
-  margin-left: 0; /* Eliminar cualquier margen negativo */
+  margin-left: 0; 
 }
 
 
@@ -576,6 +550,9 @@ h3 {
 
 /* Pantallas pequeñas (smartphones) */
 @media (max-width: 576px) {
+  .customer-reviews {
+    margin-top: -129px;
+  }
   .customer-reviews-title {
     font-size: 1.8rem;
     margin-bottom: 20px;
