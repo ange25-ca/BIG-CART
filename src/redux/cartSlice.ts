@@ -15,6 +15,7 @@ interface ItemCarrito {
   cantidad: number;
   nombreProducto: string;
   descripcion: string;
+  rating: number, 
   precio: number;
   imagen: string ;
 }
@@ -34,15 +35,20 @@ const initialState: CarritoState = {
   error: null,
 };
 
-// Thunk para obtener los datos del carrito desde la API
 export const fetchCarrito = createAsyncThunk<
   { detallesCarrito: DetallesCarrito; itemsCarrito: ItemCarrito[] }, // Tipo de datos que devuelve
-  void, // Parámetros que recibe
+  number, // Parámetros que recibe
   { rejectValue: string } // Tipo de error
->('carrito/fetchCarrito', async (_, { rejectWithValue }) => {
+>('carrito/fetchCarrito', async (idcarrito, { rejectWithValue }) => {
   try {
-    const carritoData = await getviewCart(2); // Función que obtiene los datos de la API
-    return carritoData;
+    const carritoData = await getviewCart(idcarrito); // Función que obtiene los datos de la API
+    
+    // Verificar que la estructura de datos sea la esperada
+    if (carritoData && carritoData.detallesCarrito && Array.isArray(carritoData.itemsCarrito)) {
+      return carritoData; // Retorna la data estructurada correctamente
+    } else {
+      return rejectWithValue('Estructura de datos incorrecta');
+    }
   } catch (error) {
     if (error instanceof Error) {
       return rejectWithValue(error.message);
