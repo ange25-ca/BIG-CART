@@ -6,26 +6,29 @@ interface CartResponse {
   itemsCarrito: ItemCarrito[];
 }
 // Obtener el carrito
-export const getviewCart = async (idCarrito: number): Promise<CartResponse> => {
-  try {
-    const response = await axiosInstance.get(`carrito/viewCart/${idCarrito}`);
-    console.log('Response completa:', response.data);
-    return response.data;
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error('Error al obtener el carrito:', error.message);
-    } else {
-      console.error('Error desconocido al obtener el carrito');
-    }
-    throw error; // Re-lanzamos el error para que pueda ser manejado por el código que llama a esta función
-  }
+export const fetchViewCart = async (idCarrito: number) => {
+  const response = await axiosInstance.get(`carrito/viewCart/${idCarrito}`);
+  return response.data;
 };
 
-export const addToCart = async (idCliente: number, idProducto: number, cantidad: number) => {
-  const response = await axiosInstance.post('/carrito/addCart', {
+// Agregar producto al carrito
+export const addToCart = async (idCliente: number, idProducto: number, cantidad: number): Promise<void> => {
+  await axiosInstance.post('/carrito/addCart', {
     idCliente,
     idProducto,
-    cantidad
+    cantidad,
   });
-  console.log('Response completa:', response.data);
-}
+};
+
+// Actualizar cantidad en el carrito
+export const updateCartQuantity = async (
+  cantidad: number,
+  idCarrito: number,
+  idProducto: number
+): Promise<void> => {
+  await axiosInstance.put('/carrito/updatequantity', {
+    cantidad,
+    idCarrito,
+    idProducto,
+  });
+};
