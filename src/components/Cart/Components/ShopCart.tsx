@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import '../assets/styles/ShoppingCart.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../redux/store';
-import { verCart } from '../../../controllers/cartController';
-import { fetchViewCart, addToCart, updateCartQuantity } from "../../../models/cartModel";
+import React, { useEffect, useState } from "react";
+import "../assets/styles/ShoppingCart.css";
+import { useQuery, useMutation , useQueryClient} from "@tanstack/react-query";
+import { getviewCart, updateCartQuantity ,eliminardelCarrito} from "../../../models/cartModel";
+import { debounce } from "lodash";
 
 
+// Tipos de datos
 interface CartItem {
   idProducto: number;
   nombreProducto: string;
@@ -15,74 +15,123 @@ interface CartItem {
   imagen: string;
 }
 
+interface CartDetails {
+  idCarrito: number;
+  items: CartItem[];
+}
+
 const Cart: React.FC = () => {
- 
-   const dispatch = useDispatch<AppDispatch>();
-   const { detallesCarrito, itemsCarrito, isLoading, error } = useSelector((state: RootState) => state.carrito);
-   // const idUsuario = useSelector((state: RootState) => state.user.idUsuario); // Usamos la interfaz UserState
-   const [localCart, setLocalCart] = useState<CartItem[]>([]);
-  const idUsuario = localStorage.getItem('idUsuario');
-   // Recuperar productos del backend si el usuario está logueado
-   useEffect(() => {
-     if (idUsuario) {
-        // Enviar idCarrito a la función verCart
-         dispatch(verCart(parseInt(idUsuario))); // Ahora pasamos el idCarrito a verCart
-    
-     } else {
-       // Recuperar productos desde localStorage si no está logueado
-       const storedCart = localStorage.getItem('carrito');
-       setLocalCart(storedCart ? JSON.parse(storedCart) : []);
-     }
-   }, [idUsuario, dispatch]);
-  // Calcular el subtotal
-   const subtotal = itemsCarrito.reduce(
-     (total, item) => total + item.precio * item.cantidad,
-     0
-   );
-  // Configuración de impuestos y envío
-   const taxRate = 0.1; // 10% de impuestos
-   const shippingCost = subtotal > 100 ? 0 : 10; // Envío gratis para pedidos de más de $100
-   const tax = subtotal * taxRate;
-   const totalAmount = subtotal + tax + shippingCost;
-  const items = idUsuario ? itemsCarrito : localCart;
-  const handleCheckout = () => {
-     // Lógica para redirigir a la vista de pago
-     window.location.href = '/cartPayment';
-   };
-   // Función para actualizar la cantidad
-    const handleQuantityChange = async (idProducto: number, cantidad: number) => {
-     if (idUsuario && detallesCarrito) {
-       console.log("es el uusuario: " + idUsuario + "es el carrito: " + detallesCarrito.idCarrito);
-       await updateCartQuantity(cantidad, detallesCarrito?.idCarrito, idProducto);
-       // Actualiza la UI con el nuevo valor después de la actualización
-       dispatch(verCart(parseInt(idUsuario))); // Vuelve a obtener el carrito actualizado
-     } else {
-       // Si no está logueado, actualiza el carrito local
-       const updatedCart = localCart.map(item =>
-         item.idProducto === idProducto
-           ? { ...item, cantidad: cantidad }
-           : item
-       );
-       setLocalCart(updatedCart);
-       localStorage.setItem('carrito', JSON.stringify(updatedCart));
-     }
-   };
-  // Manejo de decremento de cantidad
+  const idUsuario = localStorage.getItem("userId");
+  console.log("este es mi usuario: " + idUsuario);
 
-
+  const queryclient = useQueryClient();
   
+  // Hook para obtener carrito desde la API
+  const {
+    data: cart, // para almacenar el carrito
+    isLoading, // el estado para ver si carga
+    isError,
+  } = useQuery({
+    queryKey: ["cart", idUsuario], // como se va identificar el usuario 
+    queryFn: async () => {
+      if (!idUsuario) {
+        // Si no hay usuario, no hacemos la llamada a la API
+        return { items: [] }; // Retornamos un carrito vacío
+      }
+      try {
+        const data = await getviewCart(parseInt(idUsuario));
+        console.log("Carrito desde la API:", data); // Verifica la respuesta de la API
+        return data;
+      } catch (error) {
+        console.error("Error al obtener carrito:", error);
+        return { items: [] }; // En caso de error, devolvemos un carrito vacío
+      }
+    },
+    enabled: !!idUsuario, // Solo ejecutar si hay un idUsuario
+  });
+
+  // Hook para actualizar cantidad
+  const {mutate, isPending: isPendingMutation} = useMutation({
+    mutationFn: updateCartQuantity,
+    onSuccess: async () => {
+      // Refresca los datos del carrito después de la eliminación
+    await   queryclient.invalidateQueries({
+      queryKey: ['cart']
+    });
+    }
+      
+  });
+  const deleteMutation = useMutation( {
+    mutationFn: eliminardelCarrito,
+    onSuccess: async () => {
+      // Refresca los datos del carrito después de la eliminación
+    await   queryclient.invalidateQueries({
+      queryKey: ['cart']
+    });
+    },
+    onError: (error) => {
+      console.error("Error al eliminar el producto del carrito:", error);
+    },
+  });
   
+  const [localCart, setLocalCart] = useState<CartItem[]>([]);
+  // Si no hay usuario, obtenemos el carrito desde localStorage
+  useEffect(() => {
+    if (!idUsuario) {
+      const storedCart = localStorage.getItem("carrito");
+      setLocalCart(storedCart ? JSON.parse(storedCart) : []);
+    }
+  }, [idUsuario]);
 
+  // El subtotal, incluyendo los productos de la API o localStorage
+  const items = idUsuario ? cart?.itemsCarrito || [] : localCart;
+  const detailCart = idUsuario ? cart?.detallesCarrito : [];
+  // calculamos el subtotal 
+  const subtotal = items.reduce(
+    (total: number, item: { precio: number; cantidad: number }) =>
+      total + item.precio * item.cantidad,
+    0
+  );
 
+  const taxRate = 0.1;
+  const shippingCost = subtotal > 100 ? 0 : 10;
+  const tax = subtotal * taxRate;
+  const totalAmount = subtotal + tax + shippingCost;
+
+  const handleQuantityChange = debounce( (idProducto: number, cantidad: number) => {
+    if(isPendingMutation) return;
+// Actualizamos la cantidad en el carrito
+    if (idUsuario && cart) {
+      mutate({
+        cantidad,
+        idCarrito: detailCart.idCarrito,
+        idProducto,
+      });
+    } else {
+      const updatedCart = localCart.map((item) =>
+        item.idProducto === idProducto ? { ...item, cantidad } : item
+      );
+      setLocalCart(updatedCart);
+      localStorage.setItem("carrito", JSON.stringify(updatedCart));
+    }
+  }, 500)
 
   const handleDecrement = (idProducto: number, cantidad: number) => {
-    if (cantidad > 1) {
-      handleQuantityChange(idProducto, cantidad - 1);
-    }
+    if (cantidad > 1) handleQuantityChange(idProducto,  - 1);
   };
 
-  const handleIncrement = (idProducto: number, cantidad: number) => {
-    handleQuantityChange(idProducto, cantidad + 1);
+  const handleIncrement = (idProducto: number) => {
+    handleQuantityChange(idProducto,  + 1);
+  };
+
+  const handleDelete = ( idProducto: number) => {
+    deleteMutation.mutate({
+      idCarrito: detailCart.idCarrito,
+      idProducto, 
+    });
+  };
+  const handleCheckout = () => {
+    window.location.href = "/cartPayment";
   };
 
   return (
@@ -90,14 +139,16 @@ const Cart: React.FC = () => {
       <main className="cart-main">
         <section className="cart-items-section">
           <h2>Carrito</h2>
-          {isLoading ? (
-            <p>Cargando productos...</p> // Mostrar mensaje de carga
-          ) : error ? (
-            <p className="error-message">{error}</p> // Mostrar mensaje de error si ocurre algún problema
-          ) : items.length > 0 ? (
-            items.map((item) => (
+          {isLoading && <p>Cargando productos...</p>}
+          {isError && <p>hubo un error</p>}
+          {!isLoading && !isError && items && items.length > 0 ? (
+            items.map((item: CartItem) => (
               <div key={item.idProducto} className="cart-item">
-                <img src={item.imagen} alt={item.nombreProducto} className="cart-item-image" />
+                <img
+                  src={item.imagen}
+                  alt={item.nombreProducto}
+                  className="cart-item-image"
+                />
                 <div className="cart-item-info">
                   <p className="cart-item-name">{item.nombreProducto}</p>
                   <p className="cart-item-variant">{item.descripcion}</p>
@@ -105,10 +156,31 @@ const Cart: React.FC = () => {
                 <div className="cart-item-controls">
                   <span className="cart-item-price">${item.precio}</span>
                   <div className="cart-item-quantity">
-                    <button className="quantity-button" onClick={() => handleDecrement(item.idProducto, item.cantidad)}>-</button>
+                    <button
+                      className="quantity-button"
+                      disabled =
+                      {item.cantidad <= 1 && isPendingMutation}
+                      onClick={() =>
+                        handleDecrement(item.idProducto, item.cantidad)
+                      }
+                    >
+                      -
+                    </button>
                     <span className="quantity-display">{item.cantidad}</span>
-                    <button className="quantity-button" onClick={() => handleIncrement(item.idProducto, item.cantidad)}>+</button>
-                    <button className="remove-item">🗑</button>
+                    <button
+                      className="quantity-button"
+                      disabled = 
+                      {item.cantidad >= 10 && isPendingMutation}
+                
+                      onClick={() =>
+                        handleIncrement(item.idProducto,)
+                      }
+                    >
+                      +
+                    </button>
+                    <button className="remove-item"
+                    onClick={() =>handleDelete(item.idProducto)}
+                    >🗑</button>
                   </div>
                 </div>
               </div>
@@ -148,7 +220,7 @@ const Cart: React.FC = () => {
             <span>${totalAmount.toFixed(2)}</span>
           </div>
           <div className="summary-actions">
-          <button className="checkout-button" onClick={handleCheckout}>
+            <button className="checkout-button" onClick={handleCheckout}>
               Procesar pago
             </button>
             <button className="empty-cart-button">Vaciar carrito</button>
