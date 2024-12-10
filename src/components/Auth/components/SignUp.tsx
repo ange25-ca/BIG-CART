@@ -153,7 +153,7 @@ function SignUp() {
                     )}
                 </div>
                 {/* Gmail */}
-                <div className='email'>
+                <div className='emailSignUp'>
                     <label htmlFor='email'></label>
                     <input
                         type='email'
@@ -198,7 +198,7 @@ function SignUp() {
                     )}
                 </div>
                 {/* Contraseña */}
-                <div className='password'>
+                <div className='passwordSignUp'>
                     <label htmlFor='password'></label>
                     <input
                         type='password'
