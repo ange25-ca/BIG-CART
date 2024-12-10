@@ -49,6 +49,7 @@
   object-fit: contain;
   border: 1px solid #ddd;
   border-radius: 5px;
+  background-color: white;
 }
 
 .cart-item-info {
@@ -148,10 +149,11 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: center; /* Asegura que los botones estén centrados */
 }
 
-.empty-cart-button,
-.checkout-button {
+/* Botones */
+.empty-cart-button  {
   width: 100%;
   padding: 10px;
   border: none;
@@ -160,14 +162,27 @@
   font-size: 1rem;
 }
 
+
+
+.checkout-button {
+  width: 100%; 
+  padding: 10px;
+  border: none;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
 .empty-cart-button {
-  background: red;
+  background: rgb(187, 11, 11);
   color: white;
 }
 
 .checkout-button {
-  background: black;
+  background: #0171DC;
   color: white;
+  margin-top: 10px; /* Añadir margen superior para separar el botón */
 }
 
 /* Responsive Design */
@@ -190,6 +205,15 @@
   .cart-summary {
     order: -1;
   }
+
+  .summary-buttons {
+    gap: 15px; /* Mayor espacio entre los botones en pantallas más pequeñas */
+  }
+
+  .empty-cart-button,
+  .checkout-button {
+    width: 90%; /* Reduce el tamaño de los botones en pantallas pequeñas */
+  }
 }
 
 @media (max-width: 480px) {
@@ -200,5 +224,17 @@
 
   .cart-item-controls {
     align-items: flex-start;
+  }
+
+  .summary-buttons {
+    gap: 20px; 
+  }
+
+  .empty-cart-button {
+    width: 90%;
+  }
+  .checkout-button {
+    width: 90%; 
+    margin-bottom: 8px;
   }
 }
