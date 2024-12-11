@@ -1,6 +1,6 @@
 // Importamos las herramientas necesarias de Redux Toolkit
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchViewCart } from '../models/cartModel'; // Función que llama a la API y devuelve la información del carrito
+import { getviewCart } from '../models/cartModel'; // Función que llama a la API y devuelve la información del carrito
 
 // Definir interfaces para el carrito y sus items
 interface DetallesCarrito {
@@ -15,7 +15,6 @@ interface ItemCarrito {
   cantidad: number;
   nombreProducto: string;
   descripcion: string;
-  rating: number, 
   precio: number;
   imagen: string ;
 }
@@ -35,20 +34,15 @@ const initialState: CarritoState = {
   error: null,
 };
 
+// Thunk para obtener los datos del carrito desde la API
 export const fetchCarrito = createAsyncThunk<
   { detallesCarrito: DetallesCarrito; itemsCarrito: ItemCarrito[] }, // Tipo de datos que devuelve
-  number, // Parámetros que recibe
-  { rejectValue: string } // Tipo de error
->('carrito/fetchCarrito', async (idcarrito, { rejectWithValue }) => {
+  any, // Parámetros que recibe
+  { rejectValue: string, idcarrito: number} // Tipo de error
+>('carrito/fetchCarrito', async (idCarrito, { rejectWithValue }) => {
   try {
-    const carritoData = await fetchViewCart(idcarrito); // Función que obtiene los datos de la API
-    
-    // Verificar que la estructura de datos sea la esperada
-    if (carritoData && carritoData.detallesCarrito && Array.isArray(carritoData.itemsCarrito)) {
-      return carritoData; // Retorna la data estructurada correctamente
-    } else {
-      return rejectWithValue('Estructura de datos incorrecta');
-    }
+    const carritoData = await getviewCart(idCarrito); // Función que obtiene los datos de la API
+    return carritoData;
   } catch (error) {
     if (error instanceof Error) {
       return rejectWithValue(error.message);

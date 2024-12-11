@@ -2,9 +2,8 @@ import React from 'react';
 import { Product } from '../interfaces/Product';
 import '../assets/styles/CardProduct.css';
 import { handleAddToCartwithLogin } from '../../../controllers/cartController';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
 import { agregarProductoLocal } from './addToCartOut';
+import Swal from 'sweetalert2';
 
 interface ProductProps {
   product: Product;
@@ -12,7 +11,7 @@ interface ProductProps {
 
 const CardProduct: React.FC<ProductProps> = ({ product }) => {
  // const idUsuario = useSelector((state: RootState) => state.user.idUsuario);// Usamos la interfaz UserState
-  const idUsuario = localStorage.getItem('idUsuario') ?? '';
+  const idUsuario = localStorage.getItem('userId') ?? '';
   const handleAddToCart = () => {
     const item = {
       idProducto: product.idProducto,
@@ -26,9 +25,21 @@ const CardProduct: React.FC<ProductProps> = ({ product }) => {
       console.log(idUsuario)
       // Usuarios no logueados: usar localStorage
       agregarProductoLocal(item);
-      alert(`Producto "${product.nombreProducto}" agregado al carrito local.`);
-    } else {alert(`Producto "${product.nombreProducto}" agregado al carrito de backend. el id usuario es: "${idUsuario}`);
-    console.log(idUsuario)};
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: `Producto Agregado Correctamente: "${product.nombreProducto} ` ,
+        confirmButtonText: 'Aceptar',
+      });
+
+    } else {
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: `Producto Agregado Correctamente: "${product.nombreProducto} ` ,
+        confirmButtonText: 'Aceptar',
+      });
+    };
     handleAddToCartwithLogin(parseInt(idUsuario), product.idProducto, 1);
   }
   // Convertir `rating` y `precio` a números si vienen como cadenas

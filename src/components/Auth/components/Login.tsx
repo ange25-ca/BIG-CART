@@ -63,6 +63,7 @@ function Login() {
             if (result && result.token && result.userId) {
                 // Supone que 'token' y 'userId' son las claves en la respuesta del backend
                 localStorage.setItem('authToken', result.token); // Guardar el token en localStorage
+                localStorage.setItem('userId', result.userId); // Guardar el id del usuario en localStorage
                 dispatch(setUserIdOnly(result.userId)); // Despachar el ID del usuario al store de Redux
     
                 setLoginSuccess(true);
