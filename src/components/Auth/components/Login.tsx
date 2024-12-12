@@ -89,7 +89,7 @@ function Login() {
                 <div className='titleLogin'>
                     <h1>Iniciar sesión</h1>
                 </div>
-                <div className='name'>
+                <div className='emailLogin'>
                     <label htmlFor='email'></label>
                     <div className='inputIcon'>
                         <img src={userIcon} alt='User Icon' className='iconUser' />
@@ -108,7 +108,7 @@ function Login() {
                         </span>
                     )}
                 </div>
-                <div className='password'>
+                <div className='passwordLogin'>
                     <label htmlFor='password'></label>
                     <div className='inputIcon'>
                         <img src={passwordIcon} alt='Pass Icon' className='iconPassword' />
@@ -129,12 +129,12 @@ function Login() {
                 </div>
                 {serverError && <span className="error">{serverError}</span>}
                 {loginSuccess && <span className="success">Inicio de sesión exitoso</span>}
-                <div className='buttonAction'>
+                <div className='buttonActionLogin'>
                     <button id='send-info-user' className='button_Send' type='button' onClick={handleLogin}>
                         Enviar 
                     </button>
                 </div>
-                <div className="no-account">
+                <div className="no-account-login">
                     <p className='account'>Aun no tienes una cuenta? <Link className="signup-link" to="/SignUp">Crea una cuenta aqui</Link></p>
                 </div>
             </div>

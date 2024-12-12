@@ -20,6 +20,7 @@ const CardProduct: React.FC<ProductProps> = ({ product }) => {
       descripcion: product.descripcion,
       precio: product.precio,
       imagen: product.imagenUrl,
+      idCategoria : product.idCategoria,
     };
     if (!idUsuario) {
       console.log(idUsuario)
@@ -68,7 +69,7 @@ const CardProduct: React.FC<ProductProps> = ({ product }) => {
       <p className="description">
         {product.descripcion ? product.descripcion.slice(0, 80) + '...' : 'Sin descripción'}
       </p>
-      <p className="category">{product.categoria}</p>
+      <p className="category">{product.idCategoria}</p>
       <div className="price-container">
         <span className="current-price">${price.toFixed(2)}</span>
       </div>

@@ -11,7 +11,7 @@ interface Producto{
     rating: number,
     imagenUrl: string,
     stock: number,
-    categoria: number
+    idCategoria: number
 }
 export const fetchProductos = createAsyncThunk<Producto[], void, {rejectValue: string}>(
     'productos/fetchProductos',
