@@ -52,3 +52,13 @@ export const eliminardelCarrito = async ({
     }
   });
 }
+
+export const vaciarcarrito = async ({
+  idCarrito,
+}:{
+  idCarrito: number;
+}): Promise<void> => {
+  await axiosInstance.put('/carrito/vaciarCarrito', {
+      idCarrito,
+  });
+}

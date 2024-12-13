@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../assets/styles/ShoppingCart.css";
 import { useQuery, useMutation , useQueryClient} from "@tanstack/react-query";
-import { getviewCart, updateCartQuantity ,eliminardelCarrito} from "../../../models/cartModel";
+import { getviewCart, updateCartQuantity ,eliminardelCarrito, vaciarcarrito} from "../../../models/cartModel";
 import { debounce } from "lodash";
 
 
@@ -58,6 +58,7 @@ const Cart: React.FC = () => {
     await   queryclient.invalidateQueries({
       queryKey: ['cart']
     });
+    setLoadingItemId(null); // Quitamos el loading al terminar
     }
       
   });
@@ -100,8 +101,9 @@ const Cart: React.FC = () => {
 
   const handleQuantityChange = debounce( (idProducto: number, cantidad: number) => {
     if(isPendingMutation) return;
+    setLoadingItemId(idProducto); // Establecer el producto que está cargando
 // Actualizamos la cantidad en el carrito
-    if (idUsuario && cart) {
+setTimeout(() =>{ if (idUsuario && cart) {
       mutate({
         cantidad,
         idCarrito: detailCart.idCarrito,
@@ -113,7 +115,7 @@ const Cart: React.FC = () => {
       );
       setLocalCart(updatedCart);
       localStorage.setItem("carrito", JSON.stringify(updatedCart));
-    }
+    }},300)
   }, 500)
 
   const handleDecrement = (idProducto: number, cantidad: number) => {
@@ -133,6 +135,27 @@ const Cart: React.FC = () => {
   const handleCheckout = () => {
     window.location.href = "/cartPayment";
   };
+
+  const vaciarCart = useMutation({
+    mutationFn: vaciarcarrito,
+    onSuccess: async () => {
+      await queryclient.invalidateQueries({
+        queryKey: ['cart']
+      })
+    },
+    onError: (error) => {
+      console.error("Error al vaciar el carrito:", error);
+    }
+  });
+  const handleVaciarCarrito = () =>{
+    vaciarCart.mutate({
+      idCarrito: detailCart.idCarrito,
+    })
+  }
+
+  // Estado para rastrear cuál producto está cargando
+  const [loadingItemId, setLoadingItemId] = useState<number | null>(null);
+  
 
   return (
     <div className="cart-container">
@@ -166,7 +189,13 @@ const Cart: React.FC = () => {
                     >
                       -
                     </button>
-                    <span className="quantity-display">{item.cantidad}</span>
+                    <span className="quantity-display">
+                      {loadingItemId === item.idProducto ? (
+                        <div className="loading-circle"></div>
+                      ) : (
+                        item.cantidad
+                      )}
+                    </span>
                     <button
                       className="quantity-button"
                       disabled = 
@@ -223,7 +252,8 @@ const Cart: React.FC = () => {
             <button className="checkout-button" onClick={handleCheckout}>
               Procesar pago
             </button>
-            <button className="empty-cart-button">Vaciar carrito</button>
+            <button className="empty-cart-button"
+            onClick={handleVaciarCarrito}>Vaciar carrito</button>
           </div>
         </aside>
       </main>
