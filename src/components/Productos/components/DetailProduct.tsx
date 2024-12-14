@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
 import '../assets/styles/DetailProduct.css';
-import { Product } from '../interfaces/Product';
 import { MdAddShoppingCart } from 'react-icons/md';
+//import { agregarProductoLocal } from './addToCartOut';
 
 const categoryMap: { [key: number]: string } = {
   1: 'Electrónica',
@@ -18,40 +20,13 @@ const categoryMap: { [key: number]: string } = {
 };
 
 const ProductDetails: React.FC = () => {
-  const { idProducto } = useParams(); // Obtén el ID del producto desde la URL
-  const navigate = useNavigate(); // Para redirigir al Home
-  const [product, setProduct] = useState<Product | null>(null); // Estado para guardar el producto
-  const [loading, setLoading] = useState(true); // Estado para manejar la carga
+  const { idProducto } = useParams<{ idProducto: string }>();
+  const navigate = useNavigate();
 
-  // Simulación de obtención de datos del producto desde una API
-  useEffect(() => {
-    // Aquí deberías hacer la llamada real a tu API para obtener los detalles del producto
-    const fetchProduct = async () => {
-      setLoading(true);
-      try {
-        // Simula un fetch
-        const fakeProduct: Product = {
-          idProducto: Number(idProducto),
-          sku: 'SKU12345',
-          nombreProducto: 'Amazing Gadget',
-          precio: 299.99,
-          rating: 4.9,
-          descripcion:
-            'Este gadget increíble simplificará tu vida y te traerá alegría en tus actividades diarias. ¡No te lo pierdas!',
-          imagenUrl: 'https://i.postimg.cc/85JHv6K5/printer.png',
-          stock: 5,
-          idCategoria: 10,
-        };
-        setProduct(fakeProduct); // Actualiza el estado con los datos del producto
-      } catch (error) {
-        console.error('Error al obtener el producto:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Selecciona los productos y busca el producto por ID
+  const { productos } = useSelector((state: RootState) => state.productos);
 
-    fetchProduct();
-  }, [idProducto]);
+  const product = productos.find((p) => p.idProducto === Number(idProducto));
 
   const handleBackToHome = () => {
     navigate('/productos'); // Redirige al Home
@@ -59,17 +34,27 @@ const ProductDetails: React.FC = () => {
 
   const handleAddToCart = () => {
     if (product) {
+      // Llama a la función para agregar el producto al carrito (directamente los valores del producto)
+      //agregarProductoLocal({
+      //  idProducto: product.idProducto,
+      //  cantidad: 1, // Establece la cantidad a 1 o el valor que prefieras
+      //  nombreProducto: product.nombreProducto,
+      //  descripcion: product.descripcion,
+      //  precio: product.precio,
+      //  imagen: product.imagenUrl,
+      //});
+      // Muestra una alerta confirmando la acción
       alert(`Producto "${product.nombreProducto}" agregado al carrito.`);
     }
-  };
-
-  if (loading) {
-    return <p>Cargando detalles del producto...</p>;
-  }
-
+  };  
   if (!product) {
-    return <p>Producto no encontrado.</p>;
+    return <p>Cargando detalles del producto o el producto no existe.</p>;
   }
+
+  // Verificación antes de mostrar el precio 
+  const price = Number(product.precio);
+  //Función de verificación y asignación
+  const displayPrice = !isNaN(price) ? price.toFixed(2) : 'Precio no disponible';
 
   return (
     <div className="product-details">
@@ -86,7 +71,7 @@ const ProductDetails: React.FC = () => {
             <strong>SKU:</strong> {product.sku}
           </p>
           <p className="product-description">{product.descripcion}</p>
-          <p className="product-price">${product.precio.toFixed(2)}</p>
+          <p className="product-price">${displayPrice}</p> //Se sustituye por la función de validación
           <p className="product-rating">
             <strong>Calificación:</strong> {product.rating} ⭐
           </p>
@@ -102,7 +87,7 @@ const ProductDetails: React.FC = () => {
               className="btn add-to-cart-btn"
               disabled={product.stock === 0}
             >
-              Agregar al carrito   <MdAddShoppingCart size={32} style={{ marginRight: '10px' }} />
+              Agregar al carrito <MdAddShoppingCart size={32} style={{ marginRight: '10px' }} />
             </button>
           </div>
         </div>
