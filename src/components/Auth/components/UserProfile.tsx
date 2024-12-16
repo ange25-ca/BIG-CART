@@ -72,6 +72,18 @@ const UserProfile: React.FC = () => {
     }
   }, [token, dispatch]);
 
+  useEffect(()=> {
+    //leer la url de la imagen del perfil al cargar el componente.
+    const storedPerfilImage = localStorage.getItem('profileImage');
+    if (storedPerfilImage) {
+      setPerfilImage(storedPerfilImage);
+    }
+    }, []);
+
+    useEffect(()=> {
+    }, [perfilImage]);
+
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
