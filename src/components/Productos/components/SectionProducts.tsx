@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../redux/store';
 import { cargarProductos } from '../../../controllers/productoController';
 import CardProduct from './CardProduct';
-//import SkeletonProductLoader from './SkeletonProducto';
+import SkeletonProductLoader from './SkeletonProducto';
 import '../assets/styles/SectionProduct.css';
 
 const categories = [
@@ -33,32 +33,57 @@ const CatalogsProducts: React.FC = () => {
 
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [selectedPriceRange, setSelectedPriceRange] = useState<{ min: number; max: number } | null>(null);
+  const [filterName, setFilterName] = useState<string>(''); 
+  const [isFiltering, setIsFiltering] = useState(false);
+  const [showFilters, setShowFilters] = useState(false); 
+  
 
   useEffect(() => {
     dispatch(cargarProductos());
   }, [dispatch]);
 
   const handleFilterCategory = (categoryId: number) => {
+    setIsFiltering(true);
     setSelectedCategory(categoryId);
+
+    setTimeout(() => {
+      setIsFiltering(false);
+    }, 500);
   };
 
   const handleFilterPrice = (min: number, max: number) => {
+    setIsFiltering(true);
     setSelectedPriceRange({ min, max });
+
+    setTimeout(() => {
+      setIsFiltering(false);
+    }, 500);
   };
 
   const filteredProducts = productos.filter((product) => {
     const matchesCategory = selectedCategory ? product.idCategoria === selectedCategory : true;
     const matchesPrice =
-    selectedPriceRange
-      ? product.precio >= selectedPriceRange.min && product.precio <= selectedPriceRange.max
-      : true;
-    return matchesCategory && matchesPrice ;
+      selectedPriceRange
+        ? product.precio >= selectedPriceRange.min && product.precio <= selectedPriceRange.max
+        : true;
+        const normalizeText = (text: string): string => 
+          text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        
+        const matchesName = normalizeText(product.nombreProducto.toLowerCase())
+          .includes(normalizeText(filterName.toLowerCase()));
+    return matchesCategory && matchesPrice && matchesName && normalizeText;
   });
 
   return (
     <div className="catalog-container">
+      <button
+        className="filter-toggler"
+        onClick={() => setShowFilters(!showFilters)}
+      >
+        {showFilters ? 'Ocultar filtros' : 'Mostrar filtros'}
+      </button>
       {/* Filtros */}
-      <aside className="filters">
+      <aside className={`filters ${showFilters ? 'show' : ''}`}>
         <h3>Filtrar por</h3>
         <div className="filter-group">
           <h4>Categorías</h4>
@@ -84,7 +109,16 @@ const CatalogsProducts: React.FC = () => {
             </button>
           ))}
         </div>
-        <button onClick={() => { setSelectedCategory(null); setSelectedPriceRange(null); }}>
+        <button
+          className="clear-filters-btn"
+          onClick={() => {
+            setSelectedCategory(null);
+            setSelectedPriceRange(null);
+            setFilterName(''); 
+            setIsFiltering(true);
+            setTimeout(() => setIsFiltering(false), 500);
+          }}
+        >
           Limpiar filtros
         </button>
       </aside>
@@ -92,8 +126,20 @@ const CatalogsProducts: React.FC = () => {
       {/* Productos */}
       <section className="products-section">
         <h2>Catálogo de Productos</h2>
-        {isLoading ? (
-          <p>Cargando productos...</p>
+        {/* Input para filtrar por nombre */}
+        <input
+          type="text"
+          placeholder="Buscar por nombre..."
+          className="filter-input"
+          value={filterName}
+          onChange={(e) => setFilterName(e.target.value)}
+        />
+        {isLoading || isFiltering ? (
+          <div className="skeleton-loader products-grid">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <SkeletonProductLoader key={index} />
+            ))}
+          </div>
         ) : error ? (
           <p>Error al cargar productos: {error}</p>
         ) : filteredProducts.length > 0 ? (
@@ -103,7 +149,10 @@ const CatalogsProducts: React.FC = () => {
             ))}
           </div>
         ) : (
-          <p className="no-products">No hay productos disponibles.</p>
+          <p className="no-products">
+            <span className="no-products-icon">📦</span>
+            No hay productos disponibles.
+          </p>
         )}
       </section>
     </div>
