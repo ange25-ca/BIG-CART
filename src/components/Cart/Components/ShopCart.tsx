@@ -133,6 +133,7 @@ setTimeout(() =>{ if (idUsuario && cart) {
     });
   };
   const handleCheckout = () => {
+    localStorage.setItem("idCart", detailCart.idCarrito);
     window.location.href = "/cartPayment";
   };
 
