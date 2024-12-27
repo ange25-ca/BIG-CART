@@ -3,7 +3,8 @@ import "../assets/styles/ShoppingCart.css";
 import { useQuery, useMutation , useQueryClient} from "@tanstack/react-query";
 import { getviewCart, updateCartQuantity ,eliminardelCarrito, vaciarcarrito} from "../../../models/cartModel";
 import { debounce } from "lodash";
-
+import { FaTrash, FaMinus, FaPlus, FaCreditCard  } from 'react-icons/fa';
+import { Snackbar, Alert, AlertTitle} from '@mui/material';
 
 // Tipos de datos
 interface CartItem {
@@ -23,9 +24,16 @@ interface CartDetails {
 const Cart: React.FC = () => {
   const idUsuario = localStorage.getItem("userId");
   console.log("este es mi usuario: " + idUsuario);
-
   const queryclient = useQueryClient();
-  
+  // variables para el manejo del carrito
+  const [discountCode, setDiscountCode] = useState<string>(""); // Código de descuento ingresado
+  const [discountValue, setDiscountValue] = useState<number>(0); // Valor del descuento
+  const [discountApplied, setDiscountApplied] = useState<boolean>(false); // Estado del descuento aplicado
+  //para los snacksbar
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success');
+  const [snackbarTitle, setSnackbarTitle] = useState('');
   // Hook para obtener carrito desde la API
   const {
     data: cart, // para almacenar el carrito
@@ -97,7 +105,7 @@ const Cart: React.FC = () => {
   const taxRate = 0.1;
   const shippingCost = subtotal > 100 ? 0 : 10;
   const tax = subtotal * taxRate;
-  const totalAmount = subtotal + tax + shippingCost;
+  const totalAmount = subtotal + tax + shippingCost - discountValue;
 
   const handleQuantityChange = debounce( (idProducto: number, cantidad: number) => {
     if(isPendingMutation) return;
@@ -157,6 +165,27 @@ setTimeout(() =>{ if (idUsuario && cart) {
   // Estado para rastrear cuál producto está cargando
   const [loadingItemId, setLoadingItemId] = useState<number | null>(null);
   
+// Aplicar descuento con validación
+const handleApplyDiscount = () => {
+  if (discountCode === "DESCUENTO10") {
+    const calculatedDiscount = subtotal * 0.1; // 10% del subtotal
+    setDiscountValue(calculatedDiscount);
+    setDiscountApplied(true);
+    setSnackbarMessage('Descuento aplicado correctamente');
+    setSnackbarSeverity('success');
+    setSnackbarTitle('¡Éxito!');
+  } else {
+    setSnackbarMessage('Código de descuento no válido.');
+    setSnackbarSeverity('error');
+    setSnackbarTitle('Error');
+  }
+  setSnackbarOpen(true); // Mostrar el Snackbar
+};
+  
+  //cerra el snackbar
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
+  };
 
   return (
     <div className="cart-container">
@@ -188,7 +217,7 @@ setTimeout(() =>{ if (idUsuario && cart) {
                         handleDecrement(item.idProducto, item.cantidad)
                       }
                     >
-                      -
+                      <FaMinus/>
                     </button>
                     <span className="quantity-display">
                       {loadingItemId === item.idProducto ? (
@@ -206,11 +235,11 @@ setTimeout(() =>{ if (idUsuario && cart) {
                         handleIncrement(item.idProducto,)
                       }
                     >
-                      +
+                      <FaPlus/>
                     </button>
                     <button className="remove-item"
                     onClick={() =>handleDelete(item.idProducto)}
-                    >🗑</button>
+                    ><FaTrash /></button>
                   </div>
                 </div>
               </div>
@@ -218,19 +247,30 @@ setTimeout(() =>{ if (idUsuario && cart) {
           ) : (
             <p>No hay productos en el carrito.</p>
           )}
+          <div className="button-container">
+            <button className="empty-cart-button" onClick={handleVaciarCarrito}><FaTrash/>Vaciar carrito</button>
+          </div>
         </section>
 
         <aside className="cart-summary">
           <h3>Total</h3>
-          {/* <div className="discount-section">
+          <div className="discount-section">
             <input
               type="text"
-              placeholder="Gift card or discount code"
-              defaultValue="10"
-              // onChange={(e) => setDiscountCode(e.target.value)}
+              placeholder="Código de descuento"
+              value={discountCode}
+              onChange={(e) => setDiscountCode(e.target.value)}
               className="discount-input"
             />
-          </div> */}
+            <button className="apply-discount-button" onClick={handleApplyDiscount} disabled={discountApplied}>
+              Aplicar descuento
+            </button>
+          </div>
+          {discountApplied && (
+            <p className="discount-applied">
+              Descuento aplicado: -${discountValue.toFixed(2)}
+            </p>
+          )}
           <div className="summary-details">
             <div className="summary-row">
               <span>Subtotal</span>
@@ -251,13 +291,23 @@ setTimeout(() =>{ if (idUsuario && cart) {
           </div>
           <div className="summary-actions">
             <button className="checkout-button" onClick={handleCheckout}>
-              Procesar pago
+             <FaCreditCard /> Procesar pago
             </button>
-            <button className="empty-cart-button"
-            onClick={handleVaciarCarrito}>Vaciar carrito</button>
           </div>
         </aside>
       </main>
+      {/* Snackbar de Material UI */}
+      <Snackbar
+        open={snackbarOpen}
+        onClose={handleCloseSnackbar}
+        autoHideDuration={4000} // Se cierra automáticamente después de 4 segundos
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }} // Posición superior derecha
+      >
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          <AlertTitle>{snackbarTitle}</AlertTitle>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
