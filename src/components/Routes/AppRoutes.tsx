@@ -41,7 +41,7 @@ const routes = [
     { path: "/contactus", element: <ContactUs/> },
     { path: "/SignUp", element: <SignUp/> },
     {path: "/account", element: <UserProfile/>},
-    {path: "/detailProd", element: <ProductDetails/>}
+    { path: "/detailProd/:idProducto", element: <ProductDetails /> }
   ];
 
 export default routes;
