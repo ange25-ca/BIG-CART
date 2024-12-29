@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../redux/store';
 import { cargarProductos } from '../../../controllers/productoController';
 import CardProduct from './CardProduct';
-//import SkeletonProductLoader from './SkeletonProducto';
+import SkeletonProductLoader from './SkeletonProducto';
 import '../assets/styles/SectionProduct.css';
 
 const categories = [
