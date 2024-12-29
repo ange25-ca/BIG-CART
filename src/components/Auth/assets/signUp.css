@@ -21,7 +21,7 @@ ya le quite la imagen eli :root {
   border-width: 1.5px;
   display: flex;
   flex-direction: row;
-  align-items: stretch; /* Hace que los hijos coincidan en altura */
+  align-items: stretch; 
 }
 
 .ContentFormSignUp {
@@ -30,14 +30,13 @@ ya le quite la imagen eli :root {
   background-color: transparent;
   color: var(--font-color);
   margin-top: 4px;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Define dos columnas */
-  align-items: stretch; /* Hace que los hijos coincidan en altura */
+  padding: 10px 50px;
 }
 
 .ContentFormSignUp h1{
-  font-size: 29px;
+  justify-content: center;
+
+  align-items: center;
 }
 
 .name, .confirmPassword,.phonenumber, .emailSignUp,
@@ -46,8 +45,8 @@ ya le quite la imagen eli :root {
   align-items: center;
   margin: 0 30px;
   outline: none; 
-  align-items: center;
   margin-bottom: 2px;
+  padding-left: 3rem;
 } 
 
 input[type="text"], input[type="email"],
@@ -160,13 +159,6 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
 @media (max-width: 500px) {
 .FormSignUp {
   max-width: 100%;
-  padding: 10px;
-  display: block;
-}
-
-.ContentFormSignUp {
-  grid-template-columns: 1fr; 
-  border-right: none;
 }
 
 .titleSignUp {
@@ -200,13 +192,7 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
 @media (min-width: 500px) and (max-width: 767px) {
 .FormSignUp {
   max-width: 100%; 
-  margin: 2rem auto;
-  padding: 15px;
-}
-
-.ContentFormSignUp {
-  grid-template-columns: 1fr 1fr; 
-  border-right: none;
+  /*margin: 2rem auto;*/
 }
 
 .name, .password, .email, .phonenumber,
@@ -216,6 +202,9 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
 
 .button-send {
   font-size: 15px;
+  justify-content: center;
+  text-align: center;
+  margin-left: 2rem;
 }
 
 .buttonAction{
@@ -227,12 +216,13 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
   font-size: 10px;
 }
 
-.imgSignUp {
-  display: none; /* Oculta la imagen en pantallas pequeñas */
-}
 
-.no-account-SignUpt{
+.no-account-SignUp{
   margin-left: 10rem;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+
 }
 }
 
@@ -240,13 +230,12 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
 @media (min-width: 768px) {
 .FormSignUp {
   max-width: 900px;
-  padding: 10px;
+  /*padding: 10px;*/
 }
-
-.ContentFormSignUp {
-  grid-template-columns: 1fr 1rf;
+.ContentFormSignUp{
+  padding-left: 6rem;
+  
 }
-
 .name, .password, .email, .phonenumber,
 .lastname, .age, .address {
   font-size: 12px;
@@ -273,6 +262,6 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
 .no-account-SignUp p{
   text-align: center;
   align-items: center;
-  padding-left: 20rem;
+  justify-content: center;
 }
 }
