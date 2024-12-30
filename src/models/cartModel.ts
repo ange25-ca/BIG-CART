@@ -72,3 +72,9 @@ export const CompraCarrito = async ({
     idCarrito
   });
 }
+
+// Obtener el carrito
+export const getviewShop = async (idCliente: number) => {
+  const response = await axiosInstance.get(`shopping/${idCliente}`);
+  return response.data;
+};

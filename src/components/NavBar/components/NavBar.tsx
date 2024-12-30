@@ -94,6 +94,9 @@ const Navbar: React.FC = () => {
                     <Link to="/account" className={`nav-link ${isActive("/account")}`} onClick={closeDropdown}>Mi cuenta</Link>
                   </li>
                   <li className="nav-item">
+                    <Link to="/shopping" className={`nav-link ${isActive("/shopping")}`} onClick={closeDropdown}>Mis compras</Link>
+                  </li>
+                  <li className="nav-item">
                   <Link to="" className={`nav-link`} onClick={handleLogout}>Cerrar sesión</Link>
                   </li>
                 </>
@@ -140,6 +143,9 @@ const Navbar: React.FC = () => {
             <>
               <li className="nav-item">
                 <Link to="/account" className="nav-link" onClick={toggleMobileMenu}>Mi cuenta</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/shopping" className="nav-link" onClick={toggleMobileMenu}>Mis compras</Link>
               </li>
               <li className="nav-item">
                 <button className="nav-link" onClick={() => { handleLogout(); toggleMobileMenu(); }}>Cerrar sesión</button>
