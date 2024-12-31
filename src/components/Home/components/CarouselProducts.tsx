@@ -1,91 +1,49 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import "../assets/styles/CarouselProducts.css";
 
-interface TopProduct {
-  id: number;
-  name: string;
-  image: string;
-  price: number;
-  rating: number;
-}
-
-const topProducts: TopProduct[] = [
-  { id: 1, name: "Smartphone", image: "https://i.postimg.cc/NjBpnLMJ/pngtree-black-mobile-phone-png-image-7097040.png", price: 699, rating: 4.8 },
-  { id: 2, name: "Laptop", image: "https://i.postimg.cc/Y0Fb5WYV/modern-laptop-3d-illustration-png.webp", price: 1200, rating: 4.7 },
-  { id: 3, name: "Headphones", image: "https://i.postimg.cc/G3T78ZVQ/headphonepng-parspng-com-6.png", price: 150, rating: 4.9 },
-  { id: 4, name: "Smartwatch", image: "https://i.postimg.cc/HLPzj2tR/pngtree-the-smartwatch-banner-png-image-11919210.png", price: 199, rating: 4.6 },
-  { id: 5, name: "Tablet", image: "https://i.postimg.cc/x8L3xSSV/realistic-tablet-pc-computer-with-blank-screen-png.webp", price: 499, rating: 4.7 },
-  { id: 6, name: "Camera", image: "https://i.postimg.cc/5ttpxG88/plain-black-dslr-camera-free-png.webp", price: 850, rating: 4.8 },
-  { id: 7, name: "Gaming Console", image: "https://i.postimg.cc/rFSfg58R/Microsoft-Xbox-One-X-Console.png", price: 400, rating: 4.9 },
-  { id: 8, name: "Monitor", image: "https://i.postimg.cc/d1b9jVp9/pngtree-monitor-display-screen-png-image-13098167.png", price: 300, rating: 4.7 },
-  { id: 9, name: "Speaker", image: "https://i.postimg.cc/ZRCfLgRJ/e0cb70107befb80ffcca5d396ea34486.png", price: 120, rating: 4.8 },
-  { id: 10, name: "Printer", image: "https://i.postimg.cc/85JHv6K5/printer.png", price: 250, rating: 4.7 },
-  { id: 11, name: "Keyboard", image: "https://i.postimg.cc/hj62ZrzT/Gaming-Keyboard-Free-PNG-Image.png", price: 80, rating: 4.6 },
-  { id: 12, name: "Mouse", image: "https://i.postimg.cc/y8yr6ctC/black-gaming-mouse-with-a-rainbow-light-isolated-from-background-free-png.webp", price: 40, rating: 4.8 },
-  { id: 13, name: "Desk Lamp", image: "https://i.postimg.cc/zG70Y5HJ/pngtree-3d-desk-lamp-png-illustration-png-image-11595799.png", price: 60, rating: 4.7 },
-  { id: 14, name: "Router", image: "https://i.postimg.cc/YqcX1dww/kv-router.png", price: 120, rating: 4.6 },
-  { id: 15, name: "Smart Home Hub", image: "https://i.postimg.cc/LsyCLRmy/01.png", price: 180, rating: 4.7 },
-  { id: 16, name: "Gaming Chair", image: "https://i.postimg.cc/5t9KXjWY/chairpng-parspng-com.png", price: 250, rating: 4.9 },
+const productImages = [
+  "https://i.postimg.cc/J46THxkV/altavoz-inteligente.png",
+  "https://i.postimg.cc/tJDB5tv6/camara-digital.png",
+  "https://i.postimg.cc/hj1sD1BY/router.png",
+  "https://i.postimg.cc/htX2LmLJ/mouse-gamer.png",
+  "https://i.postimg.cc/D0fg84fw/teclado.webp",
+  "https://i.postimg.cc/Y9Qn1Fh4/arena-ecologica-gatos.png",
+  "https://i.postimg.cc/zDjp88W1/croquetas.png",
+  "https://i.postimg.cc/7hGLsxrT/cortaun-as.png"
 ];
 
-
-const AUTO_PLAY_DELAY = 5000; // 5 segundos
-
-const TopProductsCarousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const next = () => {
-    setCurrentIndex((prev) => (prev + 4) % topProducts.length);
-  };
-
-  const prev = () => {
-    setCurrentIndex((prev) => (prev - 4 + topProducts.length) % topProducts.length);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(next, AUTO_PLAY_DELAY);
-    return () => clearInterval(interval); // Limpia el intervalo
-  }, []);
-
+const IntroProducts: React.FC = () => {
   return (
-    <div className="unique-carousel-container">
-      <button className="unique-carousel-control unique-carousel-prev" onClick={prev}>
-        &#8249;
-      </button>
-      <div className="unique-carousel-items">
-        {topProducts.map((product, index) => (
-          <div
-            key={product.id}
-            className={`unique-carousel-item ${
-              index >= currentIndex && index < currentIndex + 4 ? "unique-visible" : "unique-hidden"
-            }`}
-          >
-            <img
-              src={product.image}
-              alt={product.name}
-              style={{ height: "200px", width: "200px" }}
-            />
-            <div className="unique-product-details">
-              <h3>{product.name}</h3>
-              <p>${product.price.toFixed(2)}</p>
-              <div className="unique-product-rating">
-                {"⭐".repeat(Math.floor(product.rating))} {product.rating.toFixed(1)}
-              </div>
-            </div>
+    <div className="intro-products">
+      <h1 className="section-title">Conoce Nuestros Productos</h1>
+      <div className="intro-content">
+        <div className="slider-container">
+          <div className="slider-track">
+            {productImages.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`Producto ${index + 1}`}
+                className="slider-image-prod"
+              />
+            ))}
           </div>
-        ))}
-      </div>
-      <button className="unique-carousel-control unique-carousel-next" onClick={next}>
-        &#8250;
-      </button>
-      <div className="unique-view-all">
-        <Link to="/productos" className="unique-view-all-btn">
-          Ver todos los productos
-        </Link>
+        </div>
+        <div className="text-content">
+          <h2 className="intro-title">Calidad y Variedad</h2>
+          <p className="intro-description">
+          Descubre productos diseñados para superar tus expectativas. Calidad premium, diseño innovador y funcionalidad práctica se unen para ofrecerte soluciones que realmente hacen la diferencia. Eleva tu experiencia y encuentra justo lo que necesitas con nosotros.
+          </p>
+          <button
+            className="explore-button"
+            onClick={() => (window.location.href = "/productos")}
+          >
+            Ver Productos
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default TopProductsCarousel;
+export default IntroProducts;

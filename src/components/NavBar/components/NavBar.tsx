@@ -132,6 +132,9 @@ const Navbar: React.FC = () => {
           <li className={`nav-item ${isActive("/products")}`}>
             <Link to="/productos" className="nav-link" onClick={toggleMobileMenu}>Productos</Link>
           </li>
+          <li className={`nav-item ${isActive("/Cart")}`}>
+            <Link to="/Cart" className="nav-link" onClick={toggleMobileMenu}>Carrito</Link>
+          </li>
           <li className={`nav-item ${isActive("/contactus")}`}>
             <Link to="/contactus" className="nav-link" onClick={toggleMobileMenu}>Contáctenos</Link>
           </li>

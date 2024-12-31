@@ -1,141 +1,79 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaStar, FaRegStar } from "react-icons/fa";
-import "../assets/styles/CarouselCategoires.css";
+import "../assets/styles/CarouselCategories.css";
 
-type Category = {
-  name: string;
-  image: string;
-  rating: number;
-  link: string;
-};
+const CategoriesSection = () => {
+  const images = [
+    "https://i.postimg.cc/BbtkzbnP/cats-and-dog-friends-isolated-on-transparent-background-png.webp",
+    "https://i.postimg.cc/rsb32TDn/categoria-componentes-electronicos.png",
+    "https://i.postimg.cc/J02SMz2L/deporte.webp",
+    "https://i.postimg.cc/mgyfFBcQ/moda.avif",
+    "https://i.postimg.cc/LXhr7PxT/alimentos.jpg",
+    "https://i.postimg.cc/B6ydGvyG/juguetes.jpg",
+    "https://i.postimg.cc/nLh5j7fJ/salud.jpg",
+    "https://i.postimg.cc/YqBsNTB8/automotriz.webp",
+    "https://i.postimg.cc/FH9C8cRL/libros.jpg",
+    "https://i.postimg.cc/vmTqHs58/hogar.jpg"
+  ];
 
-const categories: Category[] = [
-  {
-    name: "Tecnología",
-    image: "https://i.postimg.cc/rsb32TDn/categoria-componentes-electronicos.png",
-    rating: 4.5,
-    link: "/productos",
-  },
-  {
-    name: "Moda",
-    image: "https://i.postimg.cc/3J4zCkqP/modern-girl-fashion-shopping-32bd4f.png",
-    rating: 4.7,
-    link: "/productos",
-  },
-  {
-    name: "Hogar",
-    image: "https://i.postimg.cc/brGVT5mQ/utensilios-cocina-utensilios-metal-estante-colgante-primer-plano-realista-cuchara-espatula-skimmer-t.avif",
-    rating: 4.2,
-    link: "/productos",
-  },
-  {
-    name: "Juguetes",
-    image: "https://i.postimg.cc/cHFPTw0N/coleccion-juguetes-coloridos-escritorio-488220-3796.avif",
-    rating: 4.6,
-    link: "/productos",
-  },
-  {
-    name: "Automóviles",
-    image: "https://i.postimg.cc/bJVF1P9y/productos-de-limpieza-para-coches-manten-tu-vehiculo-impecable.jpg",
-    rating: 4.8,
-    link: "/productos",
-  },
-  {
-    name: "Salud",
-    image: "https://i.postimg.cc/X7Rm2VSX/Menta-3-4-b50374ae4caa4e5107b62459c0563798.png",
-    rating: 4.3,
-    link: "/productos",
-  },
-  {
-    name: "Mascotas",
-    image: "https://i.postimg.cc/BbtkzbnP/cats-and-dog-friends-isolated-on-transparent-background-png.webp",
-    rating: 4.1,
-    link: "/productos",
-  },
-];
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-const CategoriesCarousel: React.FC = () => {
-  const carouselRef = useRef<HTMLDivElement | null>(null);
-  const [scrollMessage, setScrollMessage] = useState<string>("Ver más →");
+  // Cambio automático de imágenes cada 3 segundos
+  useEffect(() => {
+    const timer = setInterval(() => {
+      handleNext();
+    }, 3000);
+    return () => clearInterval(timer); // Limpieza del temporizador
+  }, [currentIndex]);
 
-  const handleScroll = () => {
-    const carousel = carouselRef.current;
-
-    if (carousel) {
-      const { scrollLeft, scrollWidth, clientWidth } = carousel;
-
-      if (scrollLeft + clientWidth >= scrollWidth) {
-        setScrollMessage("← Regresar");
-      } else if (scrollLeft === 0) {
-        setScrollMessage("Ver más →");
-      } else {
-        setScrollMessage(null);
-      }
-    }
+  const handlePrevious = () => {
+    const index = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+    setCurrentIndex(index);
   };
 
-  useEffect(() => {
-    const carousel = carouselRef.current;
-
-    if (carousel) {
-      carousel.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      if (carousel) {
-        carousel.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
+  const handleNext = () => {
+    const index = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+    setCurrentIndex(index);
+  };
 
   return (
-    <div className="carousel-container">
-      <section className="welcome-section">
-        <h2>El Top de los Top</h2>
-        <p>
-          Descubre nuestras categorías más destacadas, seleccionadas con base en la
-          preferencia de nuestros clientes. Desde lo más innovador en tecnología
-          hasta las tendencias más populares en moda y hogar. Cada categoría ha sido
-          elegida por su calidad, relevancia y demanda. ¡Encuentra tu favorita y
-          explora lo mejor que tenemos para ofrecer!
+    <section className="categories-section">
+      <div className="categories-container">
+        {/* Div izquierdo: Texto */}
+        <div className="categories-text">
+        <h1 className="categories-title">
+          ¡Explora nuestras categorías y encuentra lo que buscas!
+        </h1>
+        <p className="categories-subtitle">
+          Desde productos únicos hasta lo último en tendencias, tenemos algo para cada ocasión.
         </p>
-      </section>
-
-      <div className="carousel-categories" ref={carouselRef}>
-        {categories.map((category, index) => (
-          <div className="carousel-card" key={index}>
-            <div className="carousel-image">
-              <img src={category.image} alt={category.name} />
-            </div>
-            <div className="carousel-content">
-              <h3>{category.name}</h3>
-              <div className="stars">
-                {Array.from({ length: 5 }, (_, i) =>
-                  i < Math.round(category.rating) ? (
-                    <FaStar key={i} className="star-filled" />
-                  ) : (
-                    <FaRegStar key={i} className="star-empty" />
-                  )
-                )}
-                <span className="rating">{category.rating.toFixed(1)}</span>
-              </div>
-              <Link to={category.link} className="btn">
-                Ver más
-              </Link>
-            </div>
+        <p className="categories-description">
+          Nuestra tienda en línea ofrece una extensa variedad de categorías, cuidadosamente seleccionadas para satisfacer todas tus necesidades. Ya sea que busques algo especial para ti, o un regalo perfecto para un ser querido, aquí encontrarás opciones para todos los gustos. Explora nuestras categorías, descubre lo mejor de cada una y vive una experiencia de compra inigualable. ¡No esperes más para encontrar lo que te hará feliz!
+        </p>
+        </div>
+        {/* Div derecho: Slider */}
+        <div className="categories-images">
+          <div className="slider-container">
+            <button className="slider-button left" onClick={handlePrevious}>
+              &#8249;
+            </button>
+            <img
+              src={images[currentIndex]}
+              alt={`Categoría ${currentIndex + 1}`}
+              className="slider-image"
+            />
+            <button className="slider-button right" onClick={handleNext}>
+              &#8250;
+            </button>
           </div>
-        ))}
-      </div>
-
-      <div className="scroll-message-container">
-        <div className={`scroll-message ${scrollMessage ? "" : "hidden"}`}>
-          {scrollMessage}
         </div>
       </div>
-    </div>
+      {/* Botón para ir a productos */}
+      <Link to="/productos" className="categories-button">
+        Ver categorías
+      </Link>
+    </section>
   );
 };
 
-export default CategoriesCarousel;
-
+export default CategoriesSection;

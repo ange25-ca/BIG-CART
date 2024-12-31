@@ -1,0 +1,194 @@
+/* Estilo general de la sección */
+.categories-section {
+  width: 100%;
+  height: auto;
+  background: #F6F6F6;
+  text-align: center;
+  margin-bottom: 80px;
+  padding: 20px; /* Añade un poco de espacio para móviles */
+}
+
+/* Contenedor principal */
+.categories-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas */
+  margin-bottom: 30px;
+  margin-left: auto; /* Centra automáticamente en móviles */
+  margin-right: auto;
+  max-width: 1200px; /* Máximo ancho para pantallas grandes */
+  padding: 0 20px; /* Espaciado lateral */
+  margin-bottom: 50px;
+}
+
+/* Texto descriptivo */
+.categories-text {
+  flex: 1;
+  text-align: left;
+}
+
+.categories-title {
+  font-size: 2rem; /* Tamaño ajustado */
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.categories-subtitle {
+  font-size: 1.25rem; /* Tamaño ajustado */
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #0171DC;
+}
+
+.categories-description {
+  font-size: 1rem; /* Tamaño ajustado */
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Estilo del slider */
+.categories-images {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%; /* Ajustable */
+  max-width: 400px; /* Máximo ancho */
+  height: auto; /* Ajusta altura automáticamente */
+  aspect-ratio: 1; /* Mantiene el cuadrado en cualquier pantalla */
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.slider-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slider-button.left {
+  left: 10px;
+}
+
+.slider-button.right {
+  right: 10px;
+}
+
+/* Botón debajo */
+.categories-button {
+  margin-top: 20px;
+  text-decoration: none;
+  color: #ec8304;
+  border: 2px solid #ec8304;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.categories-button:hover {
+  transform: scale(1.05);
+  border: 2px solid #0171DC;
+  color: #0171DC;
+}
+
+/* Media Queries para Responsividad */
+
+/* Pantallas grandes */
+@media (min-width: 1024px) {
+  .categories-container {
+    flex-wrap: nowrap; /* Mantiene una sola fila */
+    gap: 30px; /* Mayor espacio entre elementos */
+    margin-bottom: 100px;
+    margin-top: 65px;
+  }
+
+  .categories-text {
+    text-align: left;
+  }
+
+  .categories-title {
+    font-size: 2.5rem; /* Más grande en pantallas grandes */
+  }
+
+  .categories-subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* Pantallas medianas */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .categories-container {
+    flex-direction: column; /* Cambia a columna para más espacio */
+    align-items: center; /* Centra elementos */
+  }
+
+  .slider-container {
+    max-width: 300px;
+  }
+
+  .categories-title {
+    font-size: 2rem;
+  }
+
+  .categories-subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 768px) {
+  .categories-container {
+    flex-direction: column;
+    padding: 0 10px; /* Espaciado más ajustado */
+  }
+
+  .categories-title {
+    font-size: 1.75rem; /* Tamaño más pequeño */
+  }
+
+  .categories-subtitle {
+    font-size: 1rem;
+  }
+
+  .slider-container {
+    max-width: 250px; /* Menor tamaño en móviles */
+  }
+
+  .categories-button {
+    padding: 10px 20px;
+    font-size: 0.9rem; /* Botón más pequeño */
+  }
+}

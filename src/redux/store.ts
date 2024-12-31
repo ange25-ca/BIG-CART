@@ -4,6 +4,7 @@ import userReducer from "./userSlices";
 import cartReducer from "./cartSlice";
 import paymentReducer from "./paymentSlice";
 import productDetailsReducer from './productDetailsSlice';
+import randomProductsReducer from './carouselSlice';
 
 
 const store = configureStore({
@@ -13,6 +14,7 @@ const store = configureStore({
         carrito: cartReducer,
         payment: paymentReducer,
         productDetails: productDetailsReducer,
+        randomProducts: randomProductsReducer,
     }
 });
 
