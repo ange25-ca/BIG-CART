@@ -3,19 +3,19 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/f
 import "../assets/styles/Footer.css";
 
 const Footer: React.FC = () => {
-  const [isFooterVisible, setIsFooterVisible] = useState<boolean>(false);
+  const [isFooterVisible] = useState<boolean>(true);
 
-  // Alternar la visibilidad del footer
-  const toggleFooter = (): void => {
-    setIsFooterVisible((prev) => !prev);
-  };
+  // // Alternar la visibilidad del footer
+  // const toggleFooter = (): void => {
+  //   setIsFooterVisible((prev) => !prev);
+  // };
 
   return (
     <div>
-      {/* Botón para alternar el footer */}
+      {/* Botón para alternar el footer
       <button className="footer-toggle" onClick={toggleFooter}>
         {isFooterVisible ? "Menos"  : "Ver más" }
-      </button>
+      </button> */}
 
       {/* Contenedor principal del footer */}
       <footer className={`footer ${isFooterVisible ? "show" : ""}`}>
