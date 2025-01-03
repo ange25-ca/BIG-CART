@@ -1,266 +1,252 @@
 :root {
-    --primary-color: #F6BD3B;
-    --second-color: #0c3762;
-    --third-color: #222020a2;
-    --font-color: #080808;
-    --error-color: #e8f885;
-    --bacground-color: #100f0b;
-    --bacground-color1: #FFF;
-    --background-color: var(--bacground-color);
-  }
-  
-  .FormLogin {
-    width: 100%;
-    border-radius: 8px;
-    background-color:transparent;
-    color: black;
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-  }
-  
-  .ContentFormLogin {
-    width: 100%;
-    border-color: var(--second-color);
-    color: black;
-    border-width: 1.5px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  --primary-color: #F6BD3B;
+  --second-color: #0c3762;
+  --third-color: #222020a2;
+  --font-color: #080808;
+  --error-color: #e8f885;
+  --bacground-color: #100f0b;
+  --bacground-color1: #FFF;
+  --background-color: var(--bacground-color);
+}
 
-  .imgLogin{
-    width: 40rem;
-    height: 40rem;
-    margin-left: 10px;
-    border: solid red;
-  }
+.FormLogin {
+  width: 100%;
+  border-radius: 8px;
+  background-color:transparent;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
 
-  .inputIcon{
-    display: flex;
-    align-items: right;
-    text-align: right;
-    /*line-height: 2px;*/
-    gap: 1px;
-  }
+.ContentFormLogin {
+  width: 100%;
+  border-color: var(--second-color);
+  color: black;
+  border-width: 1.5px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .iconUser, .iconPassword{
-      margin-top: -1rem;
-      margin-right: -1rem;
-      margin-left: 3rem;
-  }
-  
-  .encabezado-login {
-    display: flex;
-    justify-content: space-between;
-    gap: 5rem;
-  }
+.imgLogin{
+  width: 40rem;
+  height: 40rem;
+  margin-left: 10px;
+  border: solid red;
+}
+
+.inputIcon{
+  display: flex;
+  align-items: right;
+  text-align: right;
+  /*line-height: 2px;*/
+  gap: 1px;
+}
+
+.iconUser, .iconPassword{
+    margin-top: -1rem;
+    margin-right: 2px;
+}
+
+.encabezado-login {
+  display: flex;
+  justify-content: space-between;
+  gap: 5rem;
+}
 
 
-  input[type="text"], input[type="password"]{
-    padding: 20px;
-    background-color: #ffffff90;
-    border: 1px solid #cccccc7f;
-    border-radius: 10px;
-    box-sizing: border-box;
-    color: var(--bacground-color);
-    outline: none; 
-    display: flex;
-  }
-  
-  input::placeholder{
-    color: #4d4d4e;
-    opacity: 0.9;
-  }
-  
-  .titleLogin{
-    padding: 5px;
-    margin-bottom: 25px;
-    text-align: center;
-    color: #081057;
-  }
+input[type="text"], input[type="password"]{
+  padding: 20px;
+  background-color: #ffffff90;
+  border: 1px solid #de32327f;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: var(--bacground-color);
+  outline: none; 
+  display: flex;
+}
 
-  #email{
-    width: 80%;
-    align-items: center;
-    font-size: 16px;
-    margin: 0 30px;
-    margin-bottom: 15px;
-  }
+input::placeholder{
+  color: #4d4d4e;
+  opacity: 0.9;
+}
 
-  #password{
-    width: 80%;
-    margin: 0 30px;
-    margin-bottom: 2px;
-    font-size: 16px;
-    margin-bottom: 15px;
-  }
+.titleLogin{
+  padding: 5px;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #081057;
+} 
 
-  #send-info-user {
-    width: 50%;
-    font-size: 12px;
-    text-align: center;
-    padding: 10px;
-    border-radius: 60px;
-    cursor: pointer;
-    outline: none;
-    color: #081057;
-  }
+#send-info-user {
+  font-size: 12px;
+  text-align: center;
+  padding: 10px;
+  border-radius: 60px;
+  cursor: pointer;
+  outline: none;
+  color: #081057;
+}
 
-  .button_Send:hover{
-    background-color: var(--primary-color);
-    color: #2c2c2c;
-  }
+.button_Send:hover{
+  background-color: var(--primary-color);
+  color: #2c2c2c;
+}
 
-  .buttonAction{
-    display: flex;
-    flex-direction: initial;
-    margin-right: 21rem;
-    padding-right: 3rem;
-    gap: 2rem;
-  }
-  
-  .error {
-    margin: 2rem;
-    font-size: 2px;
-    text-align: center;
-    color: var(--error-color);
-    font-style: bold;
-  }
-  .signup-link {
-    color: #e48811; /* Color del texto */
-  }
+.buttonActionLogin{
+  display: flex;
+  flex-direction: initial;
+  gap: 2rem;
+}
 
-  .signup-link:hover{
-    color: #0c3762;
-  }
+.error {
+  margin: 2rem;
+  font-size: 2px;
+  text-align: center;
+  color: var(--error-color);
+  font-style: bold;
+}
+.signup-link {
+  color: #e48811; /* Color del texto */
+}
 
-  .no-account{
-    text-align: center;
-    align-items: center;
-    width: 300px;
-  }
+.signup-link:hover{
+  color: #0c3762;
+}
 
-  .account{
-    font-size: 10px;
-  }
+.account{
+  font-size: 10px;
+}
 
 /* Media query para pantallas medianas (401px - 767px) */
 @media (min-width: 400px) and (max-width: 768px) {
-  .FormLogin {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 20px;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-  }
+.FormLogin {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 20px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
 
-  .ContentFormLogin {
-    width: 100%;
-    padding: 15px;
-    text-align: center;
-  }
+.ContentFormLogin {
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+}
 
-  .imgLogin {
-    display: none; /* Mantén oculta la imagen en pantallas medianas */
-  }
+.imgLogin {
+  display: none; /* Mantén oculta la imagen en pantallas medianas */
+}
 
-  input[type="text"], input[type="password"] {
-    width: 85%;
-    font-size: 16px;
-  }
+input[type="text"], input[type="password"] {
+  width: 85%;
+  font-size: 16px;
+}
 
-  #send-info-user {
-    width: 80%;
-    font-size: 14px;
-    padding: 12px;
-    margin: 1rem auto;
-  }
+#send-info-user-login {
+  width: 80%;
+  font-size: 14px;
+  padding: 12px;
+  margin: 1rem auto;
+}
 
-  .buttonAction {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
+.buttonActionLogin {
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
 
-  .no-account {
-    font-size: 14px;
-    text-align: center;
-  }
+.no-account-login {
+  font-size: 14px;
+  text-align: center;
+}
 }
 
 @media (min-width: 768px) {
-  .FormLogin {
-      width: 100%;
-      margin: 2rem auto; /* Ajusta el margen superior/inferior y centra horizontalmente */
-      padding: 0;
-      text-align: center;
-      align-items: center;
-      height: 80vh;
-  }
+.FormLogin {
+  width: 100%;
+  margin: 1rem auto; /* Ajusta el margen superior/inferior y centra horizontalmente */
+  padding: 0;
+  text-align: center;
+  align-items: center;
+  height: 80vh;
+}
 
-  .ContentFormLogin {
-    max-width: 50%;
-    padding: 0 2rem;
-    margin: 0 auto;
-    text-align: center;
-    align-items: center;
-    gap: 2px;
-  }
+.ContentFormLogin {
+  max-width: 60%;
+  padding: 0 0rem;
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+  gap: 2px;
+}
 
+.FormLogin h1 {
+  font-size: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+}
 
-  .FormLogin h1 {
-    font-size: 30px;
-    overflow: hidden;
-    white-space: nowrap;
-  }
+.emailLogin{
+  width: 50%;
+}
 
-  .buttonAction {
-    gap: 1rem;
-    flex-direction: row;
-  }
+.passwordLogin{
+  width: 50%;
+}
 
-  .no-account{
-    width: 100%;
-    font-size: 2px;
-    margin-left: 5rem;
-    padding-left:0.5rem ;
-  }
+.buttonActionLogin {
+  gap: 1rem;
+  flex-direction: row;
+  width: 60%;
+}
 
-  .account{
-    margin-left: 7rem;
-  }
+#send-info-user{
+  margin-left: 5.5rem;
+  width: 20%;
+}
+
+.no-account-login{
+  width: 60%;
+  font-size: 2px;
+}
+
+.account{
+  text-align: center;
+  margin-left: 25px;
+}
 }
 
 /* Media query para pantallas pequeñas (máximo 400px) */
 @media (max-width: 400px) {
-  .FormLogin {
-    max-width: 500px; /* Limita el ancho máximo */
-    width: 100%;
-    margin: 3rem auto;
-    padding: 10px;
-    display: block;
-    height: auto;
-  }
+.FormLogin {
+  max-width: 500px; /* Limita el ancho máximo */
+  width: 100%;
+  margin: 3rem auto;
+  padding: 10px;
+  display: block;
+  height: auto;
+}
 
-  .FormLogin h1 {
-    font-size: 18px;
-    overflow: hidden;
-    text-align: center;
-    white-space: nowrap;
-  }
+.FormLogin h1 {
+  font-size: 18px;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+}
 
-  .button_Send {
-    font-size: 12px;
-    padding: 8px;
-  }
+#send-info-user {
+  font-size: 12px;
+  margin-left: -2rem;
+  padding: 8px;
+}
 
-  .buttonAction {
-    flex-direction: column;
-    gap: 1rem;
-  }
+.buttonAction-login {
+  flex-direction: column;
+  gap: 1rem;
+}
 
-  
 }

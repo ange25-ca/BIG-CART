@@ -14,13 +14,12 @@ main {
 .minimalist-welcome {
   background-color: #f6f6f6;
   color: #2c3e50;
-  padding: 100px 20px;
   text-align: justify; 
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
   flex-direction: column;
   margin-top: -40px;
 }
@@ -84,7 +83,7 @@ main {
 .cta-button:hover {
   background-color: #ffffff; 
   color: #0171DC;
-  border: 1.5px solid #0171DC; 
+  border: 1.5px solid #0171DC;
 }
 
 /* Animación */
@@ -145,22 +144,25 @@ main {
 .categories {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra el contenido horizontalmente */
-  justify-content: center; /* Alinea el contenido verticalmente */
+  align-items: center;
+  justify-content: center;
   text-align: center;
   background-color: #F6F6F6;
-  padding: 40px 20px;
-   /* Línea de separación sutil */
+  padding: 20px; /* Añade espacio de 20px alrededor de todo el contenido */
+  margin: 0 20px; /* Añade margen en los lados izquierdo y derecho para dar más espacio alrededor */
   animation: fadeInRight 1.5s ease-in-out;
 }
+
 .categories-cli {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra el contenido horizontalmente */
-  justify-content: center; /* Alinea el contenido verticalmente */
+  align-items: center;
+  height: 550px;
+  justify-content: center;
   text-align: center;
   background-color: #F6F6F6;
   padding: 16px 20px;
+  margin-top: 95px;
   animation: fadeInRight 1.5s ease-in-out;
 }
 
@@ -265,7 +267,6 @@ main {
 
 /* Productos destacados */
 .featured-products {
-  padding: 60px 20px;
   text-align: center;
   animation: fadeInLeft 1.5s ease-in-out;
 }
@@ -299,7 +300,7 @@ main {
 }
 
 h2 {
-  font-size: 32px;
+  font-size: 3rem;
   color: #333333;
   margin-bottom: 30px;
 }
@@ -552,12 +553,20 @@ h3 {
   .customer-reviews {
     margin-top: 230px; /* Ajusta el valor según lo que necesites */
   }
+  .categories-cli {
+    margin-top: 250px;
+    margin-bottom: 290px;
+  }
 }
 /* Pantallas pequeñas (smartphones) */
 @media (max-width: 576px) {
   .customer-reviews-title {
     font-size: 1.8rem;
     margin-bottom: 20px;
+  }
+  .categories-cli {
+    margin-top: 250px;
+    margin-bottom: 290px;
   }
   .customer-reviews-container {
     gap: 15px;
@@ -586,6 +595,10 @@ h3 {
 @media (min-width: 577px) and (max-width: 992px) {
   .customer-reviews-title {
     font-size: 2rem;
+  }
+  .categories-cli {
+    margin-top: 250px;
+    margin-bottom: 290px;
   }
 
   .customer-reviews-container {

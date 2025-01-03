@@ -10,6 +10,7 @@ import SignUp from '../Auth/components/SignUp.tsx';
 import CartPayment from '../PaymentMethod/components/CartPayment.tsx';
 import ProtectedRoute from '../Middlewares/authTokenMiddlewar.tsx';
 import ProductDetails from '../Productos/components/DetailProduct.tsx';
+import Shopping from '../Compras/components/shopping_section.tsx';
 
 
 
@@ -41,7 +42,15 @@ const routes = [
     { path: "/contactus", element: <ContactUs/> },
     { path: "/SignUp", element: <SignUp/> },
     {path: "/account", element: <UserProfile/>},
-    {path: "/detailProd", element: <ProductDetails/>}
+    { path: "/detailProd/:idProducto", element: <ProductDetails /> },
+    {
+      path: "/shopping",
+      element: (
+        <ProtectedRoute>
+          <Shopping/>
+        </ProtectedRoute>
+      ),
+    }
   ];
 
 export default routes;

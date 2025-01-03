@@ -2,7 +2,7 @@
 import  {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { obtenerProductos } from '../models/productModel';
 
-interface Producto{
+export interface Producto{
     idProducto: number,
     sku: string,
     nombreProducto: string,
@@ -11,7 +11,7 @@ interface Producto{
     rating: number,
     imagenUrl: string,
     stock: number,
-    categoria: number
+    idCategoria: number
 }
 export const fetchProductos = createAsyncThunk<Producto[], void, {rejectValue: string}>(
     'productos/fetchProductos',

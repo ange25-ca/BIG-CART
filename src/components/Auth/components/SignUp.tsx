@@ -95,7 +95,7 @@ function SignUp() {
     if (signupSuccess) {
       const timer = setTimeout(() => {
         navigate('/login');
-      }, 5000); // Redirigir después de 2 segundos
+      }, 2000); // Redirigir después de 2 segundos
       return () => clearTimeout(timer); // Limpiar el temporizador al desmontar
     }
     }, [signupSuccess, navigate]);
@@ -116,7 +116,7 @@ function SignUp() {
                         name='username'
                         value={formData.username}
                         onChange={handleChange}
-                        placeholder='Usuario'
+                        placeholder='Primer nombre'
                     />
                     {formErrors?.find((issue) => issue.path[0] === 'username') && (
                         <span className='error'>{formErrors.find((issue) => issue.path[0] === 'username')?.message}</span>
@@ -153,7 +153,7 @@ function SignUp() {
                     )}
                 </div>
                 {/* Gmail */}
-                <div className='email'>
+                <div className='emailSignUp'>
                     <label htmlFor='email'></label>
                     <input
                         type='email'
@@ -198,7 +198,7 @@ function SignUp() {
                     )}
                 </div>
                 {/* Contraseña */}
-                <div className='password'>
+                <div className='passwordSignUp'>
                     <label htmlFor='password'></label>
                     <input
                         type='password'

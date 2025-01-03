@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
 
   const handleLogout = (): void => {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('idUsuario');
+    localStorage.removeItem('userId');
     localStorage.removeItem('profileImage');  // Eliminar imagen de perfil al cerrar sesión
     navigate('/'); // Redirige al home después de cerrar sesión
     dispatch(logout()); // Actualiza el estado global
@@ -94,6 +94,9 @@ const Navbar: React.FC = () => {
                     <Link to="/account" className={`nav-link ${isActive("/account")}`} onClick={closeDropdown}>Mi cuenta</Link>
                   </li>
                   <li className="nav-item">
+                    <Link to="/shopping" className={`nav-link ${isActive("/shopping")}`} onClick={closeDropdown}>Mis compras</Link>
+                  </li>
+                  <li className="nav-item">
                   <Link to="" className={`nav-link`} onClick={handleLogout}>Cerrar sesión</Link>
                   </li>
                 </>
@@ -130,7 +133,10 @@ const Navbar: React.FC = () => {
             <Link to="/about-us" className="nav-link" onClick={toggleMobileMenu}>Nosotros</Link>
           </li>
           <li className={`nav-item ${isActive("/products")}`}>
-            <Link to="/products" className="nav-link" onClick={toggleMobileMenu}>Productos</Link>
+            <Link to="/productos" className="nav-link" onClick={toggleMobileMenu}>Productos</Link>
+          </li>
+          <li className={`nav-item ${isActive("/Cart")}`}>
+            <Link to="/Cart" className="nav-link" onClick={toggleMobileMenu}>Carrito</Link>
           </li>
           <li className={`nav-item ${isActive("/contactus")}`}>
             <Link to="/contactus" className="nav-link" onClick={toggleMobileMenu}>Contáctenos</Link>
@@ -140,6 +146,9 @@ const Navbar: React.FC = () => {
             <>
               <li className="nav-item">
                 <Link to="/account" className="nav-link" onClick={toggleMobileMenu}>Mi cuenta</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/shopping" className="nav-link" onClick={toggleMobileMenu}>Mis compras</Link>
               </li>
               <li className="nav-item">
                 <button className="nav-link" onClick={() => { handleLogout(); toggleMobileMenu(); }}>Cerrar sesión</button>
@@ -157,4 +166,3 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
-

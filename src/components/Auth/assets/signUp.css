@@ -21,7 +21,7 @@ ya le quite la imagen eli :root {
   border-width: 1.5px;
   display: flex;
   flex-direction: row;
-  align-items: stretch; /* Hace que los hijos coincidan en altura */
+  align-items: stretch; 
 }
 
 .ContentFormSignUp {
@@ -30,24 +30,23 @@ ya le quite la imagen eli :root {
   background-color: transparent;
   color: var(--font-color);
   margin-top: 4px;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Define dos columnas */
-  align-items: stretch; /* Hace que los hijos coincidan en altura */
+  padding: 10px 50px;
 }
 
 .ContentFormSignUp h1{
-  font-size: 29px;
+  justify-content: center;
+
+  align-items: center;
 }
 
-.name, .confirmPassword,.phonenumber,
-.lastname, .age, .address, .terms{
+.name, .confirmPassword,.phonenumber, .emailSignUp,
+.lastname, .age, .address, .passwordSignUp, .terms{
   width: 85%;
   align-items: center;
   margin: 0 30px;
   outline: none; 
-  align-items: center;
   margin-bottom: 2px;
+  padding-left: 3rem;
 } 
 
 input[type="text"], input[type="email"],
@@ -108,6 +107,7 @@ input[type="number"]::-webkit-inner-spin-button
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin: 1rem;
   grid-column: 1 / -1;
 }
 
@@ -134,35 +134,31 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
 }
 
 .no-account-SignUp{
+  grid-column: 1 / -1; /* Ocupa toda la fila */
+
+}
+.no-account-SignUp p{
+  width: 100%;
   align-items: center;
   text-align: center;
-  text-align: 9px;
+  display: flex;
+  flex-direction: row;
+  font-size: 10px;
   grid-column: 1 / -1; /* Ocupa toda la fila */
 }
 
 .linkSignUp{
-  color: rgba(145, 95, 4, 0.938);
-  font-weight: bold;
-  font-size: 14px;
+  color: rgba(232, 162, 34, 0.938);
 }
 
 .linkSignUp:hover{
-  color: rgba(20, 89, 219, 0.938);
-  font-weight: bold;
-  font-size: 14px;
+  color: rgba(12, 14, 146, 0.938);
 }
 
 /* Media query para pantallas pequeñas */
 @media (max-width: 500px) {
 .FormSignUp {
   max-width: 100%;
-  padding: 10px;
-  display: block;
-}
-
-.ContentFormSignUp {
-  grid-template-columns: 1fr; 
-  border-right: none;
 }
 
 .titleSignUp {
@@ -178,8 +174,8 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
   margin: 0 5rem;
 }
 
-.name, .phonenumber,
-.lastname, .age, .address {
+.name, .phonenumber, .emailSignUp,
+.lastname, .age, .address, .passwordSignUp {
   font-size: 12px;
 }
 
@@ -196,13 +192,7 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
 @media (min-width: 500px) and (max-width: 767px) {
 .FormSignUp {
   max-width: 100%; 
-  margin: 2rem auto;
-  padding: 15px;
-}
-
-.ContentFormSignUp {
-  grid-template-columns: 1fr 1fr; 
-  border-right: none;
+  /*margin: 2rem auto;*/
 }
 
 .name, .password, .email, .phonenumber,
@@ -212,6 +202,9 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
 
 .button-send {
   font-size: 15px;
+  justify-content: center;
+  text-align: center;
+  margin-left: 2rem;
 }
 
 .buttonAction{
@@ -223,12 +216,13 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
   font-size: 10px;
 }
 
-.imgSignUp {
-  display: none; /* Oculta la imagen en pantallas pequeñas */
-}
 
-.no-account-SignUpt{
+.no-account-SignUp{
   margin-left: 10rem;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+
 }
 }
 
@@ -236,37 +230,38 @@ grid-column: 1 / -1; /* Ocupa toda la fila */
 @media (min-width: 768px) {
 .FormSignUp {
   max-width: 900px;
-  padding: 10px;
+  /*padding: 10px;*/
 }
-
-.ContentFormSignUp {
-  grid-template-columns: 1fr 1rf;
+.ContentFormSignUp{
+  padding-left: 6rem;
+  
 }
-
 .name, .password, .email, .phonenumber,
 .lastname, .age, .address {
   font-size: 12px;
 }
 
 .button-send {
-  width: 80%;
-  border-width: 2px;
-  margin-left: -12rem;
+  width: 20%;
   font-size: 15px;
+  text-align: center;
+  align-items: center;
+  margin-left: -3rem;
 }
 
 .buttonAction{
-  width: 40%;
-  margin-left: 6rem;
+  width: 100%; 
 }
+
 .titleSignUp {
-  font-size: 12px;
+  font-size: 11px;
 }
 .success{
   margin-left: 17rem;
 }
-.no-account-SignUp{
-  padding-left: 18rem;
-  font-size: 8px;
+.no-account-SignUp p{
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 }

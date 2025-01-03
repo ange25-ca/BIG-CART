@@ -9,5 +9,5 @@ export interface Product {
         rating: number,
         imagenUrl: string,
         stock: number,
-        categoria: number,
+        idCategoria: number,
 }
