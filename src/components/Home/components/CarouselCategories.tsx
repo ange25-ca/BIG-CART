@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
-import "../assets/styles/Footer.css";
+import "../../Control/assets/styles/Footer.css";
 
 const Footer: React.FC = () => {
   const [isFooterVisible] = useState<boolean>(true);

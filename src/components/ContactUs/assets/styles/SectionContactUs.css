@@ -3,6 +3,7 @@ main {
   height: 100vh; /* O la altura de la pantalla */
   overflow-y: scroll; /* Siempre permitir el scroll vertical */
 }
+
 html {
   scroll-behavior: smooth;
 }
@@ -28,7 +29,7 @@ body {
   padding: 20px;
 }
 
-.contact_inner h1{
+.contact_inner h1 {
   color: #000;
 }
 
@@ -196,7 +197,6 @@ button.contact_form_submit {
   }
 }
 
-
 /* Media Queries */
 
 /* Pantallas grandes (Desktop) */
@@ -276,6 +276,6 @@ button.contact_form_submit {
 
   button.contact_form_submit {
     margin-left: 0;
-    width: 100%;
+    width: 100%; 
   }
 }
