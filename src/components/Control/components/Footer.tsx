@@ -72,19 +72,19 @@ const Footer: React.FC = () => {
           <div className="footer__section">
             <h4>Categorías</h4>
             <ul>
-              <li><a href="/products/angular">Electrónica</a></li>
-              <li><a href="/products/react">Hogar</a></li>
-              <li><a href="/products/vue">Escolar</a></li>
-              <li><a href="/products/laravel">Electrodomésticos</a></li>
+              <li><a href="/productos?name=Electrónica">Electrónica</a></li>
+              <li><a href="/productos?name=Hogar">Hogar</a></li>
+              <li><a href="/productos?name=Libros">Libros</a></li>
+              <li><a href="/productos?name=Mascotas">Mascotas</a></li>
             </ul>
           </div>
           <div className="footer__section">
             <h4>Enlaces Útiles</h4>
             <ul>
-              <li><a href="/pricing">Productos</a></li>
-              <li><a href="/settings">Contáctanos</a></li>
-              <li><a href="/orders">Comprar ahora</a></li>
-              <li><a href="/help">Ayuda</a></li>
+              <li><a href="/productos">Productos</a></li>
+              <li><a href="/contactus">Contáctanos</a></li>
+              <li><a href="/productos">Comprar ahora</a></li>
+              <li><a href="/about-us">Nosotros</a></li>
             </ul>
           </div>
           <div className="footer__section">

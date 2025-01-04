@@ -245,7 +245,10 @@ const handleApplyDiscount = () => {
               </div>
             ))
           ) : (
-            <p>No hay productos en el carrito.</p>
+            <p className="no-items">
+            <span className="no-products-icon">📦</span>
+            No hay productos disponibles.
+            </p>
           )}
           <div className="button-container">
             <button className="empty-cart-button" onClick={handleVaciarCarrito}><FaTrash/>Vaciar carrito</button>

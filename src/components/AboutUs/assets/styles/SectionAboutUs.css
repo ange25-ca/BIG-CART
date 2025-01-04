@@ -20,9 +20,9 @@ body, html {
 
 /* Contenedor General */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
 }
 
 /* Títulos y Cabeceras */

@@ -28,6 +28,7 @@
   max-width: 400px;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: none !important;
 }
 
 .slider-track {
@@ -37,7 +38,6 @@
 
 .slider-image-prod {
   width: 100%;
-  height: 90%;
   object-fit: contain;
   transition: transform 0.5s ease-in-out;
 }
