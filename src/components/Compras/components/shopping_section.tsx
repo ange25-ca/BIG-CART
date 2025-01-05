@@ -44,11 +44,12 @@ const Shopping = () => {
   if (isLoading) return <p>Cargando compras...</p>;
   if (isError) return <p>Error al cargar las compras</p>;
   if (!compras || compras.length === 0)
-    return 
-          <p className="no-shopings">
-            <span className="no-products-icon">📦</span>
-            No tienes compras aún
-          </p>;
+    return (
+      <p className="no-shopings">
+        <span className="no-products-icon">📦</span>
+        No tienes compras aún
+      </p>
+    );
 
   return (
     <div className="container-shopping">
