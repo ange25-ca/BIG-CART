@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { RootState, AppDispatch } from '../../../redux/store';
 import { cargarProductos } from '../../../controllers/productoController';
 import CardProduct from './CardProduct';
@@ -30,14 +31,28 @@ const CatalogsProducts: React.FC = () => {
   const { productos, isLoading, error } = useSelector(
     (state: RootState) => state.productos
   );
-
+  // Obtiene los parámetros de búsqueda de la URL
+  const [searchParams] = useSearchParams();
+  // Llama al método `get` en el objeto `URLSearchParams`
+  const categoryQuery = searchParams.get('name'); // Leer el parámetro 'category' que paso desde el link de la Url
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [selectedPriceRange, setSelectedPriceRange] = useState<{ min: number; max: number } | null>(null);
   const [filterName, setFilterName] = useState<string>(''); 
   const [isFiltering, setIsFiltering] = useState(false);
   const [showFilters, setShowFilters] = useState(false); 
-  
 
+  //useEffect para la parte de los productos filtrados por categoria
+  useEffect(() => {
+    if (categoryQuery) {
+      // Encontrar el ID correspondiente a la categoría
+      const name = categories.find((cat) => cat.name === categoryQuery);
+      if (name) {
+        setSelectedCategory(name.id);
+      }
+    }
+  }, [categoryQuery]);
+  
+  //Este es para cargar los productos
   useEffect(() => {
     dispatch(cargarProductos());
   }, [dispatch]);

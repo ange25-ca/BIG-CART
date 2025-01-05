@@ -1,105 +1,67 @@
-import React, { useState } from "react";
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
-import "../../Control/assets/styles/Footer.css";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { FaLaptop, FaHome, FaDumbbell, FaTshirt, FaAppleAlt, FaGamepad, FaHeartbeat, FaCar, FaBook, FaDog } from "react-icons/fa";
+import "../assets/styles/CarouselCategories.css";
 
-const Footer: React.FC = () => {
-  const [isFooterVisible] = useState<boolean>(true);
+const CategoriesSection = () => {
+  const categories = [
+    { id: 1, name: "Electrónica", icon: <FaLaptop style={{ color: "#1E90FF" }} /> }, // Azul intenso
+    { id: 2, name: "Hogar", icon: <FaHome style={{ color: "#FF6F61" }} /> },        // Rojo coral
+    { id: 3, name: "Deportes", icon: <FaDumbbell style={{ color: "#FF6347" }} /> }, // Naranja intenso
+    { id: 4, name: "Moda", icon: <FaTshirt style={{ color: "#32CD32" }} /> },       // Verde lima
+    { id: 5, name: "Alimentos", icon: <FaAppleAlt style={{ color: "#FF4500" }} /> }, // Rojo brillante
+    { id: 6, name: "Juguetes", icon: <FaGamepad style={{ color: "#8A2BE2" }} /> },  // Morado vibrante
+    { id: 7, name: "Salud y Belleza", icon: <FaHeartbeat style={{ color: "#FF1493" }} /> }, // Rosa intenso
+    { id: 8, name: "Automotriz", icon: <FaCar style={{ color: "#228B22" }} /> },    // Verde bosque
+    { id: 9, name: "Libros", icon: <FaBook style={{ color: "#FFD700" }} /> },       // Dorado brillante
+    { id: 10, name: "Mascotas", icon: <FaDog style={{ color: "#00BFFF" }} /> },     // Azul celeste intenso
+  ];
 
-  // // Alternar la visibilidad del footer
-  // const toggleFooter = (): void => {
-  //   setIsFooterVisible((prev) => !prev);
-  // };
+  const [showIndicator, setShowIndicator] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setShowIndicator(false), 4000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
-    <div>
-      {/* Botón para alternar el footer
-      <button className="footer-toggle" onClick={toggleFooter}>
-        {isFooterVisible ? "Menos"  : "Ver más" }
-      </button> */}
+    <section className="categories-section">
+      <div className="categories-container">
+        {/* Texto descriptivo */}
+        <div className="categories-text">
+          <h1 className="categories-title">
+            ¡Explora nuestras categorías y encuentra lo que buscas!
+          </h1>
+          <p className="categories-subtitle">
+            Desde productos únicos hasta lo último en tendencias, tenemos algo para cada ocasión.
+          </p>
+        </div>
 
-      {/* Contenedor principal del footer */}
-      <footer className={`footer ${isFooterVisible ? "show" : ""}`}>
-        <div className="footer__top">
-          <p>Conéctate con nosotros en redes sociales:</p>
-          <ul className="social-icon">
-            <li className="social-icon__item">
-              <a
-                className="social-icon__link"
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaFacebookF />
-              </a>
-            </li>
-            <li className="social-icon__item">
-              <a
-                className="social-icon__link"
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaTwitter />
-              </a>
-            </li>
-            <li className="social-icon__item">
-              <a
-                className="social-icon__link"
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedinIn />
-              </a>
-            </li>
-            <li className="social-icon__item">
-              <a
-                className="social-icon__link"
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram />
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="footer__content">
-          <div className="footer__section">
-            <h3>BigCart</h3>
-            <p>Explora nuestras secciones y conoce más sobre nosotros y nuestros productos.</p>
-          </div>
-          <div className="footer__section">
-            <h4>Categorías</h4>
-            <ul>
-              <li><a href="/products/angular">Electrónica</a></li>
-              <li><a href="/products/react">Hogar</a></li>
-              <li><a href="/products/vue">Escolar</a></li>
-              <li><a href="/products/laravel">Electrodomésticos</a></li>
-            </ul>
-          </div>
-          <div className="footer__section">
-            <h4>Enlaces Útiles</h4>
-            <ul>
-              <li><a href="/pricing">Productos</a></li>
-              <li><a href="/settings">Contáctanos</a></li>
-              <li><a href="/orders">Comprar ahora</a></li>
-              <li><a href="/help">Ayuda</a></li>
-            </ul>
-          </div>
-          <div className="footer__section">
-            <h4>Contacto</h4>
-            <p>Calle 60 No. 488, Centro, 97000 Mérida, Yucatán, MX</p>
-            <p>bigcart213@bigcart.com.mx</p>
-            <p>+52 8009 054294</p>
+        {/* Carrusel de tarjetas */}
+        <div className="categories-carousel">
+          {showIndicator && <div className="scroll-indicator">Desliza para explorar →</div>}
+          <div className="carousel-wrapper">
+            {categories.map((category) => (
+              <div className="carousel-card" key={category.id}>
+                <div className="card-icon">{category.icon}</div>
+                <h3 className="card-title">{category.name}</h3>
+                <p className="card-description">
+                  Explora lo mejor de la categoría {category.name}.
+                </p>
+                <ul className="card-links">
+                  <li>
+                    <a href={`/productos?name=${category.name}`}>
+                      Ver más
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="footer__bottom">
-          <p>&copy;2024 BigCart | Todos los derechos reservados</p>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </section>
   );
 };
 
-export default Footer;
+export default CategoriesSection;

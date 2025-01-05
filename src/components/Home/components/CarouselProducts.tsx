@@ -9,7 +9,7 @@ const productImages = [
   "https://i.postimg.cc/D0fg84fw/teclado.webp",
   "https://i.postimg.cc/Y9Qn1Fh4/arena-ecologica-gatos.png",
   "https://i.postimg.cc/zDjp88W1/croquetas.png",
-  "https://i.postimg.cc/7hGLsxrT/cortaun-as.png"
+  "https://i.postimg.cc/7hGLsxrT/cortaun-as.png",
 ];
 
 const IntroProducts: React.FC = () => {
@@ -17,9 +17,10 @@ const IntroProducts: React.FC = () => {
     <div className="intro-products">
       <h1 className="section-title">Conoce Nuestros Productos</h1>
       <div className="intro-content">
-        <div className="slider-container">
+      <div className="slider-container">
           <div className="slider-track">
-            {productImages.map((image, index) => (
+            {[...productImages, ...productImages].map((image, index) => (
+              /* Duplicamos las imágenes para simular la continuidad */
               <img
                 key={index}
                 src={image}

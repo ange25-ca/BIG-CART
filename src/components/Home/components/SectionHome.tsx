@@ -50,7 +50,6 @@ const Home = () => {
 
       {/* Productos Destacados */}
       <section className="featured-products">
-
         <div className="product-list">
           <IntroProducts />
         </div>
