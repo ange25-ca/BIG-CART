@@ -9,6 +9,12 @@ main {
   background-color: #F6F6F6;
   overflow-x: hidden;
 }
+.section-title-cli {
+    font-size: 4rem;
+    color: #333333;
+    margin-bottom: 30px;
+    animation: fadeIn 1.5s ease-in-out;
+}
 
 /* Diseño general de la sección */
 .minimalist-welcome {

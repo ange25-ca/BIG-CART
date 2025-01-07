@@ -14,14 +14,14 @@ const AboutUs = () => {
         <div className="section mission">
           <h2>Misión</h2>
           <p>
-            En BigCart, nuestra misión es ofrecer productos de alta calidad al mejor precio para ayudar a nuestros clientes a alcanzar el éxito en su negocio. Nos comprometemos a brindar un servicio excepcional y a garantizar la satisfacción del cliente en cada etapa del proceso.
+          Brindar una experiencia de compra online excepcional, ofreciendo una amplia variedad de productos a precios competitivos, garantizando eficiencia, comodidad, seguridad y la máxima satisfacción de nuestros clientes. 
           </p>
         </div>
 
         <div className="section vision">
           <h2>Visión</h2>
           <p>
-            Queremos ser líderes en el sector de ventas al por mayor, conocidos por nuestra innovación, integridad y dedicación a la excelencia. Buscamos crear un futuro sostenible y continuar expandiendo nuestras operaciones para llegar a más mercados.
+          Convertirnos en una empresa líder en ventas al por mayor, reconocida por nuestra innovación, integridad y compromiso con la excelencia en cada aspecto de nuestro servicio.
           </p>
         </div>
 

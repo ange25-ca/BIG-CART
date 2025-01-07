@@ -103,7 +103,7 @@ const Cart: React.FC = () => {
   );
 
   const taxRate = 0.1;
-  const shippingCost = subtotal > 100 ? 0 : 10;
+  const shippingCost = items.length === 0 ? 0 : subtotal > 100 ? 0 : 10;
   const tax = subtotal * taxRate;
   const totalAmount = subtotal + tax + shippingCost - discountValue;
 
@@ -118,11 +118,19 @@ setTimeout(() =>{ if (idUsuario && cart) {
         idProducto,
       });
     } else {
-      const updatedCart = localCart.map((item) =>
-        item.idProducto === idProducto ? { ...item, cantidad } : item
-      );
-      setLocalCart(updatedCart);
-      localStorage.setItem("carrito", JSON.stringify(updatedCart));
+     // Lógica para usuarios no logueados (carrito local)
+     const updatedCart = localCart.map((item) =>
+      item.idProducto === idProducto
+        ? { ...item, cantidad: item.cantidad + cantidad }
+        : item
+    );
+
+    // Filtrar productos con cantidad <= 0 (removerlos del carrito)
+    const filteredCart = updatedCart.filter((item) => item.cantidad > 0);
+
+    setLocalCart(filteredCart);
+    localStorage.setItem("carrito", JSON.stringify(filteredCart));
+    setLoadingItemId(null); // Terminar el loading
     }},300)
   }, 500)
 
@@ -135,10 +143,16 @@ setTimeout(() =>{ if (idUsuario && cart) {
   };
 
   const handleDelete = ( idProducto: number) => {
-    deleteMutation.mutate({
+    if(idUsuario){deleteMutation.mutate({
       idCarrito: detailCart.idCarrito,
       idProducto, 
-    });
+    });} 
+    else{
+       // Lógica para carrito local
+    const updatedCart = localCart.filter((item) => item.idProducto !== idProducto);
+    setLocalCart(updatedCart);
+    localStorage.setItem("carrito", JSON.stringify(updatedCart));
+    }
   };
   const handleCheckout = () => {
     localStorage.setItem("idCart", detailCart.idCarrito);
@@ -156,12 +170,31 @@ setTimeout(() =>{ if (idUsuario && cart) {
       console.error("Error al vaciar el carrito:", error);
     }
   });
-  const handleVaciarCarrito = () =>{
-    vaciarCart.mutate({
-      idCarrito: detailCart.idCarrito,
-    })
-  }
 
+  const handleVaciarCarrito = debounce(() => {
+    setTimeout(() => {
+      if (idUsuario) {
+        vaciarCart.mutate(
+          { idCarrito: detailCart.idCarrito },
+          {
+            onSuccess: async () => {
+              await queryclient.invalidateQueries({
+                queryKey: ["cart"],
+              });
+            },
+            onError: (error) => {
+              console.error("Error al vaciar el carrito:", error);
+            },
+          }
+        );
+      } else {
+        // Lógica para carrito local
+        setLocalCart([]); // Limpia el estado local
+        localStorage.removeItem("carrito"); // Limpia el almacenamiento local
+      }
+    }, 300); // Tiempo de espera antes de ejecutar la acción
+  }, 500); // Tiempo de debounce
+  
   // Estado para rastrear cuál producto está cargando
   const [loadingItemId, setLoadingItemId] = useState<number | null>(null);
   
@@ -245,7 +278,10 @@ const handleApplyDiscount = () => {
               </div>
             ))
           ) : (
-            <p>No hay productos en el carrito.</p>
+            <p className="no-items">
+            <span className="no-products-icon">📦</span>
+            No hay productos disponibles.
+            </p>
           )}
           <div className="button-container">
             <button className="empty-cart-button" onClick={handleVaciarCarrito}><FaTrash/>Vaciar carrito</button>
