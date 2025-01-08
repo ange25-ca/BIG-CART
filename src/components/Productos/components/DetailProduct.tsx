@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import '../assets/styles/DetailProduct.css';
 import { MdAddShoppingCart } from 'react-icons/md';
+import { agregarProductoLocal } from './addToCartOut';
+import { handleAddToCartwithLogin } from '../../../controllers/cartController';
 //import { agregarProductoLocal } from './addToCartOut';
+import { Snackbar, Alert } from '@mui/material'; 
 
 const categoryMap: { [key: number]: string } = {
   1: 'Electrónica',
@@ -27,24 +30,42 @@ const ProductDetails: React.FC = () => {
   const { productos } = useSelector((state: RootState) => state.productos);
 
   const product = productos.find((p) => p.idProducto === Number(idProducto));
-
+  const idUsuario = localStorage.getItem('userId') ?? '';
+  const handleSnackbarClose = () => {
+    setSnackbar({ ...snackbar, open: false });
+  };
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
   const handleBackToHome = () => {
     navigate('/productos'); // Redirige al Home
   };
 
   const handleAddToCart = () => {
     if (product) {
-      // Llama a la función para agregar el producto al carrito (directamente los valores del producto)
-      //agregarProductoLocal({
-      //  idProducto: product.idProducto,
-      //  cantidad: 1, // Establece la cantidad a 1 o el valor que prefieras
-      //  nombreProducto: product.nombreProducto,
-      //  descripcion: product.descripcion,
-      //  precio: product.precio,
-      //  imagen: product.imagenUrl,
-      //});
-      // Muestra una alerta confirmando la acción
-      alert(`Producto "${product.nombreProducto}" agregado al carrito.`);
+ const item = {
+      idProducto: product.idProducto,
+      cantidad: 1,
+      nombreProducto: product.nombreProducto,
+      descripcion: product.descripcion,
+      precio: product.precio,
+      imagen: product.imagenUrl,
+      idCategoria: product.idCategoria,
+    };
+
+    if (!idUsuario) {
+      agregarProductoLocal(item);
+      setSnackbar({
+        open: true,
+        message: `Producto Agregado Correctamente: "${product.nombreProducto}"`,
+        severity: 'success',
+      });
+    } else {
+      setSnackbar({
+        open: true,
+        message: `Producto Agregado Correctamente: "${product.nombreProducto}"`,
+        severity: 'success',
+      });
+    }
+    handleAddToCartwithLogin(parseInt(idUsuario), product.idProducto, 1);
     }
   };  
   if (!product) {
@@ -57,6 +78,7 @@ const ProductDetails: React.FC = () => {
   const displayPrice = !isNaN(price) ? price.toFixed(2) : 'Precio no disponible';
 
   return (
+    <>
     <div className="product-details">
       <div className="product-container">
         <div className="product-image-de">
@@ -93,6 +115,19 @@ const ProductDetails: React.FC = () => {
         </div>
       </div>
     </div>
+ {/* Snackbar para notificaciones */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }} // Superior derecho
+      >
+        <Alert onClose={handleSnackbarClose} severity={snackbar.severity as 'success' | 'error'}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+
+    </>
   );
 };
 
