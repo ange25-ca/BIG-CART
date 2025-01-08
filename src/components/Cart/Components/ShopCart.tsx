@@ -35,28 +35,7 @@ const Cart: React.FC = () => {
   const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'error'>('success');
   const [snackbarTitle, setSnackbarTitle] = useState('');
   // Hook para obtener carrito desde la API
-  const {
-    data: cart, // para almacenar el carrito
-    isLoading, // el estado para ver si carga
-    isError,
-  } = useQuery({
-    queryKey: ["cart", idUsuario], // como se va identificar el usuario 
-    queryFn: async () => {
-      if (!idUsuario) {
-        // Si no hay usuario, no hacemos la llamada a la API
-        return { items: [] }; // Retornamos un carrito vacío
-      }
-      try {
-        const data = await getviewCart(parseInt(idUsuario));
-        console.log("Carrito desde la API:", data); // Verifica la respuesta de la API
-        return data;
-      } catch (error) {
-        console.error("Error al obtener carrito:", error);
-        return { items: [] }; // En caso de error, devolvemos un carrito vacío
-      }
-    },
-    enabled: !!idUsuario, // Solo ejecutar si hay un idUsuario
-  });
+
 
   // Hook para actualizar cantidad
   const {mutate, isPending: isPendingMutation} = useMutation({
@@ -91,6 +70,29 @@ const Cart: React.FC = () => {
       setLocalCart(storedCart ? JSON.parse(storedCart) : []);
     }
   }, [idUsuario]);
+
+  const {
+    data: cart = {itemsCarrito: [], detallesCarrito: {}}, // para almacenar el carrito
+    isLoading, // el estado para ver si carga
+    isError,
+  } = useQuery({
+    queryKey: ["cart", idUsuario], // como se va identificar el usuario 
+    queryFn: async () => {
+      if (!idUsuario) {
+        // Si no hay usuario, no hacemos la llamada a la API
+        return { items: [], detallesCarrito: {} }; // Retornamos un carrito vacío
+      }
+      try {
+        const data = await getviewCart(parseInt(idUsuario));
+        console.log("Carrito desde la API:", data); // Verifica la respuesta de la API
+        return data || {items: [], detallesCarrito: {} };
+      } catch (error) {
+        console.error("Error al obtener carrito:", error);
+        return { items: [] }; // En caso de error, devolvemos un carrito vacío
+      }
+    },
+    enabled: !!idUsuario, // Solo ejecutar si hay un idUsuario
+  });
 
   // El subtotal, incluyendo los productos de la API o localStorage
   const items = idUsuario ? cart?.itemsCarrito || [] : localCart;
@@ -158,42 +160,38 @@ setTimeout(() =>{ if (idUsuario && cart) {
     localStorage.setItem("idCart", detailCart.idCarrito);
     window.location.href = "/cartPayment";
   };
-
+  const [carritoVacio, setCarritoVacio] = useState(false);
   const vaciarCart = useMutation({
     mutationFn: vaciarcarrito,
     onSuccess: async () => {
       await queryclient.invalidateQueries({
         queryKey: ['cart']
-      })
+      });
+      queryclient.setQueryData(["cart", idUsuario], {
+        itemsCarrito: [],
+        detallesCarrito: {},
+      });// Limpia los datos localmente
+      setCarritoVacio(true); // Forzar re-render
     },
     onError: (error) => {
       console.error("Error al vaciar el carrito:", error);
     }
   });
 
-  const handleVaciarCarrito = debounce(() => {
-    setTimeout(() => {
+  const handleVaciarCarrito = () => {
+    if(vaciarCart.isPending) return;
       if (idUsuario) {
         vaciarCart.mutate(
-          { idCarrito: detailCart.idCarrito },
-          {
-            onSuccess: async () => {
-              await queryclient.invalidateQueries({
-                queryKey: ["cart"],
-              });
-            },
-            onError: (error) => {
-              console.error("Error al vaciar el carrito:", error);
-            },
-          }
+          { idCarrito: detailCart.idCarrito }
         );
       } else {
         // Lógica para carrito local
         setLocalCart([]); // Limpia el estado local
-        localStorage.removeItem("carrito"); // Limpia el almacenamiento local
+        localStorage.removeItem("carrito");
+        setCarritoVacio(true); // Forzar re-render // Limpia el almacenamiento local
       }
-    }, 300); // Tiempo de espera antes de ejecutar la acción
-  }, 500); // Tiempo de debounce
+   
+  }; // Tiempo de debounce
   
   // Estado para rastrear cuál producto está cargando
   const [loadingItemId, setLoadingItemId] = useState<number | null>(null);
@@ -219,6 +217,8 @@ const handleApplyDiscount = () => {
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };
+  console.log("Datos del carrito:", cart);
+  console.log("Estado local del carrito:", localCart);
 
   return (
     <div className="cart-container">
@@ -227,7 +227,7 @@ const handleApplyDiscount = () => {
           <h2>Carrito</h2>
           {isLoading && <p>Cargando productos...</p>}
           {isError && <p>hubo un error</p>}
-          {!isLoading && !isError && items && items.length > 0 ? (
+          {!isLoading && !isError && !carritoVacio && items && items.length > 0 ? (
             items.map((item: CartItem) => (
               <div key={item.idProducto} className="cart-item">
                 <img
@@ -280,14 +280,16 @@ const handleApplyDiscount = () => {
           ) : (
             <p className="no-items">
             <span className="no-products-icon">📦</span>
-            No hay productos disponibles.
+            Aun no hay productos en el carrito 🛒😔
             </p>
           )}
+          {items.length > 0 &&(
           <div className="button-container">
             <button className="empty-cart-button" onClick={handleVaciarCarrito}><FaTrash/>Vaciar carrito</button>
           </div>
+              )}
         </section>
-
+        {items.length > 0 &&(
         <aside className="cart-summary">
           <h3>Total</h3>
           <div className="discount-section">
@@ -331,6 +333,7 @@ const handleApplyDiscount = () => {
             </button>
           </div>
         </aside>
+        )}
       </main>
       {/* Snackbar de Material UI */}
       <Snackbar
