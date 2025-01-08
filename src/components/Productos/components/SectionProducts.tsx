@@ -104,6 +104,7 @@ const CatalogsProducts: React.FC = () => {
           <h4>Categorías</h4>
           {categories.map((category) => (
             <button
+              
               key={category.id}
               className="filter-button"
               onClick={() => handleFilterCategory(category.id)}

@@ -22,7 +22,9 @@ const Home = () => {
         <div className="content-wrapper">
           <h1 className="headline">Donde la variedad y los precios al por mayor se encuentran.</h1>
           <p className="subheadline-welcome">¡Explora nuestras secciones ahora mismo y conoce todo lo que tenemos para ti! Descubre más sobre nuestra historia, lo que nos impulsa, y los productos únicos que hemos creado pensando en ti. ¡Estás a solo un clic de encontrar lo que necesitas!</p>
-          <a href="/productos" className="cta-button">Explorar ahora</a>
+          <Link to="/productos" className="cta-button">
+            Explorar ahora
+          </Link>
         </div>
       </section>
 
@@ -58,11 +60,11 @@ const Home = () => {
 
       {/* Llamada a la acción */}
       <section className="call-to-action">
-        <h2>Únete a Nuestra Comunidad</h2>
-        <p>Regístrate para recibir ofertas exclusivas y descuentos especiales.</p>
-        <Link to="contactus" className="sign-up-btn">
-          Registrarse ahora
-        </Link>
+      <h2>Estamos aquí para ti</h2>
+      <p>¿Tienes preguntas o necesitas asistencia? Ponte en contacto con nosotros y resolveremos tus dudas.</p>
+      <Link to="contactus" className="sign-up-btn">
+        Contáctanos ahora
+      </Link>
       </section>
     </div>
   );

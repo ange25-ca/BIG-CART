@@ -50,9 +50,9 @@ const CategoriesSection = () => {
                 </p>
                 <ul className="card-links">
                   <li>
-                    <a href={`/productos?name=${category.name}`}>
-                      Ver más
-                    </a>
+                  <Link to={`/productos?name=${category.name}`}>
+                    Ver más
+                  </Link>
                   </li>
                 </ul>
               </div>

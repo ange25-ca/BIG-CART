@@ -198,8 +198,14 @@ setTimeout(() =>{ if (idUsuario && cart) {
   
 // Aplicar descuento con validación
 const handleApplyDiscount = () => {
-  if (discountCode === "DESCUENTO10") {
-    const calculatedDiscount = subtotal * 0.1; // 10% del subtotal
+  let calculatedDiscount = 0;
+  if (discountCode === "BIENVENIDO10") {
+    calculatedDiscount = subtotal * 0.1; // 10% de descuento
+  } else if (discountCode === "VIBRA") {
+    calculatedDiscount = subtotal * 0.35; // 35% de descuento
+  }
+
+  if (calculatedDiscount > 0) {
     setDiscountValue(calculatedDiscount);
     setDiscountApplied(true);
     setSnackbarMessage('Descuento aplicado correctamente');
@@ -210,6 +216,7 @@ const handleApplyDiscount = () => {
     setSnackbarSeverity('error');
     setSnackbarTitle('Error');
   }
+
   setSnackbarOpen(true); // Mostrar el Snackbar
 };
   
@@ -306,7 +313,7 @@ const handleApplyDiscount = () => {
           </div>
           {discountApplied && (
             <p className="discount-applied">
-              Descuento aplicado: -${discountValue.toFixed(2)}
+               Descuento aplicado: <span style={{ color: 'red', fontWeight: 'bold' }}>-${discountValue.toFixed(2)}</span>
             </p>
           )}
           <div className="summary-details">

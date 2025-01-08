@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 interface ItemShop {
     idProducto: number;
     cantidad: number;
@@ -26,9 +27,13 @@ interface ItemShop {
             <span className="card-media-body-supporting-bottom-text subtle">
               Cantidad: {producto.cantidad}
             </span>
-            <button className="card-media-body-supporting-bottom-text card-media-link u-float-right">
+            <Link
+              to="/productos"
+              className="card-media-body-supporting-bottom-text card-media-link u-float-right"
+            >
               Volver a comprar
-            </button>
+            </Link>
+
           </div>
         </div>
       </div>

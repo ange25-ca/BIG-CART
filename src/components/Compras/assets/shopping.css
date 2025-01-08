@@ -71,6 +71,7 @@
     background-size: cover;
     height: 100%;
     width: 45%;
+    background: currentColor;
   }
   
   .card-media-body {

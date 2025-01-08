@@ -36,8 +36,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f9f9f9; /* Fondo neutro para el contenedor */
+  background: currentColor;
   overflow: hidden;
+}
+.product-rating {
+  color: #000;
 }
 
 .product-image-de img {

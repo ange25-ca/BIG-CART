@@ -42,11 +42,12 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  margin-left: 0;
 }
 
 .benefits-list li {
   font-size: 1rem;
-  color: #6a1b9a;
+  color: #0171DC;
   margin-bottom: 10px;
   padding-left: 20px;
   position: relative;
@@ -54,10 +55,11 @@
 
 .benefits-list li::before {
   content: "✔";
-  color: #6a1b9a;
+  font-weight: bold;
+  color: #0171DC;
   position: absolute;
   left: 0;
-  font-size: 16px;
+  font-size: 20px;
 }
 
 /* Visual de logotipos */
@@ -153,7 +155,6 @@
     flex-direction: column; /* Elementos apilados */
     padding: 0 10px; /* Ajusta el padding */
   }
-
   .benefits-text {
     text-align: center;
   }
@@ -165,11 +166,9 @@
   .benefits-description {
     font-size: 0.95rem; /* Descripción más pequeña */
   }
-
   .benefits-list li {
-    padding-left: 0;
+    margin-left: 20px; /* Ajusta el valor según sea necesario */
   }
-
   .logo-container {
     width: 100px;
     height: 80px; /* Logotipos más pequeños */

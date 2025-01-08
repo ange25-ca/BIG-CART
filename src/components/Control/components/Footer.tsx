@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import "../assets/styles/Footer.css";
 
@@ -23,44 +24,24 @@ const Footer: React.FC = () => {
           <p>Conéctate con nosotros en redes sociales:</p>
           <ul className="social-icon">
             <li className="social-icon__item">
-              <a
-                className="social-icon__link"
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaFacebookF />
-              </a>
+              <Link to="https://facebook.com" className="social-icon__link">
+              <FaFacebookF />
+              </Link>
             </li>
             <li className="social-icon__item">
-              <a
-                className="social-icon__link"
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaTwitter />
-              </a>
+              <Link to="https://twitter.com" className="social-icon__link">
+              <FaTwitter />
+              </Link>
             </li>
             <li className="social-icon__item">
-              <a
-                className="social-icon__link"
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedinIn />
-              </a>
+              <Link to="https://linkedin.com" className="social-icon__link">
+              <FaLinkedinIn />
+              </Link>
             </li>
             <li className="social-icon__item">
-              <a
-                className="social-icon__link"
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Link to="https://instagram.com" className="social-icon__link">
                 <FaInstagram />
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -72,19 +53,20 @@ const Footer: React.FC = () => {
           <div className="footer__section">
             <h4>Categorías</h4>
             <ul>
-              <li><a href="/productos?name=Electrónica">Electrónica</a></li>
-              <li><a href="/productos?name=Hogar">Hogar</a></li>
-              <li><a href="/productos?name=Libros">Libros</a></li>
-              <li><a href="/productos?name=Mascotas">Mascotas</a></li>
+              <li><Link to="/productos?name=Electrónica">Electrónica</Link></li>
+              <li><Link to="/productos?name=Hogar">Hogar</Link></li>
+              <li><Link to="/productos?name=Libros">Libros</Link></li>
+              <li><Link to="/productos?name=Mascotas">Mascotas</Link></li>
             </ul>
           </div>
+
           <div className="footer__section">
             <h4>Enlaces Útiles</h4>
             <ul>
-              <li><a href="/productos">Productos</a></li>
-              <li><a href="/contactus">Contáctanos</a></li>
-              <li><a href="/productos">Comprar ahora</a></li>
-              <li><a href="/about-us">Nosotros</a></li>
+              <li><Link to="/productos">Productos</Link></li>
+              <li><Link to="/contactus">Contáctanos</Link></li>
+              <li><Link to="/productos">Comprar ahora</Link></li>
+              <li><Link to="/about-us">Nosotros</Link></li>
             </ul>
           </div>
           <div className="footer__section">

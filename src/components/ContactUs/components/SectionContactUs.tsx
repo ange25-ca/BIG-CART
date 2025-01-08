@@ -148,7 +148,7 @@ const ContactSection = () => {
             <section className="map_sec">
                 <div className="container">
                     <div className="map_inner">
-                        <h2>Encuéntranos en Google Maps</h2>
+                        <h2>Ahora en Google Maps</h2>
                         <p>
                             En el corazón de Mérida, justo en el Parque Santa Lucía, una de las zonas más emblemáticas de la ciudad. Estamos ubicados en la Calle 60, a pocos pasos de la plaza principal.
                         </p>

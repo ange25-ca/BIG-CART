@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import "../assets/styles/CarouselProducts.css";
 
 const productImages = [
@@ -35,12 +36,9 @@ const IntroProducts: React.FC = () => {
           <p className="intro-description">
           Descubre productos diseñados para superar tus expectativas. Calidad premium, diseño innovador y funcionalidad práctica se unen para ofrecerte soluciones que realmente hacen la diferencia. Eleva tu experiencia y encuentra justo lo que necesitas con nosotros.
           </p>
-          <button
-            className="explore-button"
-            onClick={() => (window.location.href = "/productos")}
-          >
-            Ver Productos
-          </button>
+          <Link to="/productos" className="explore-button">
+          Comprar ahora!
+        </Link>
         </div>
       </div>
     </div>

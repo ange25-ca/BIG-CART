@@ -258,7 +258,11 @@
   display: flex; /* Usamos flexbox para alinear contenido */
   justify-content: center; /* Centra el contenido horizontalmente */
   align-items: center; /* Alinea el contenido verticalmente */
-  gap: 8px; /* Espacio entre el texto y el ícono (si los usas) */
+  gap: 8px;
+}
+.discount-applied {
+  color: #000;
+  margin-bottom: 7px;
 }
 
 
